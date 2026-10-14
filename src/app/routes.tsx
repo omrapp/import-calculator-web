@@ -9,11 +9,11 @@ export const routes: RouteObject[] = [
   {
     element: <AppLayout />,
     children: [
-      ...navItems.map(({ path, title }) => ({
+      ...navItems.map(({ path, titleKey }) => ({
         path,
-        element: <PlaceholderPage title={title} />,
+        element: <PlaceholderPage titleKey={titleKey} />,
       })),
-      { path: '/result', element: <PlaceholderPage title="Result" /> },
+      { path: '/result', element: <PlaceholderPage titleKey="nav.result" /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   },
