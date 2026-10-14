@@ -12,7 +12,9 @@ export function loadDraft(mode: CalculationInput['mode']): Draft | null {
       localStorage.getItem(keyFor(mode)) ?? 'null',
     ) as Partial<Draft> | null;
     const values = parsed?.values;
-    const expected = Object.keys(emptyFormValues());
+    const empty = emptyFormValues();
+    // Drafts from before titles existed have no `meta`.
+    const expected = Object.keys(empty).filter(key => key !== 'meta');
     if (
       !values ||
       typeof values !== 'object' ||
@@ -20,7 +22,10 @@ export function loadDraft(mode: CalculationInput['mode']): Draft | null {
     ) {
       return null;
     }
-    return { values, manualRates: parsed.manualRates === true };
+    return {
+      values: { ...values, meta: values.meta ?? empty.meta },
+      manualRates: parsed.manualRates === true,
+    };
   } catch {
     return null;
   }

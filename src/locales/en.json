@@ -379,5 +379,14 @@
       "about": "About Import Calculator: a free tool that estimates the landed cost of importing goods into Israel, in English, Hebrew and Arabic.",
       "contact": "Contact the Import Calculator team with questions, ideas or a correction."
     }
+  },
+  "calculation_meta": {
+    "default_title": "Calculation {{n}}",
+    "untitled": "Untitled calculation",
+    "edit": "Edit title and description",
+    "title": "Title",
+    "description": "Description",
+    "description_placeholder": "Add a note: supplier, product, order number…",
+    "add_description": "Add a description"
   }
 }

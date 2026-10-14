@@ -8,14 +8,20 @@ import {
 } from 'lucide-react';
 import { type ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 
 import { ExportBrandHeader } from '@/components/brand';
-import { EmptyState, ModeBadge, PageHeader } from '@/components/page';
+import {
+  CalculationMetaEditor,
+  EmptyState,
+  ModeBadge,
+  PageHeader,
+} from '@/components/page';
 import { Button } from '@/components/ui/button';
-import type {
-  CalculationLink,
-  CalculationResult,
+import {
+  type CalculationLink,
+  type CalculationResult,
+  encodeCalculation,
 } from '@/features/calc-engine';
 import { calculatorPath, useOpenInCalculator } from '@/features/calculator-ui';
 import { formatDate, formatNumber, useLanguage } from '@/features/i18n';
@@ -55,7 +61,13 @@ export type ResultActions = (args: {
   content: HTMLElement | null;
 }) => ReactNode;
 
-function Actions({ children }: { children?: ReactNode }) {
+function Actions({
+  shareTitle,
+  children,
+}: {
+  shareTitle: string;
+  children?: ReactNode;
+}) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const canShare = typeof navigator.share === 'function';
@@ -85,7 +97,7 @@ function Actions({ children }: { children?: ReactNode }) {
           variant="outline"
           onClick={() =>
             void navigator
-              .share({ title: t('result.title'), url: window.location.href })
+              .share({ title: shareTitle, url: window.location.href })
               .catch(() => undefined)
           }
         >
@@ -129,6 +141,7 @@ function BackBar({ link }: { link: CalculationLink }) {
 export function ResultView({ actions }: { actions?: ResultActions }) {
   const { t } = useTranslation();
   const calculation = useCalculationFromUrl();
+  const [, setSearchParams] = useSearchParams();
   const [content, setContent] = useState<HTMLElement | null>(null);
 
   if (calculation.status === 'invalid') {
@@ -166,7 +179,21 @@ export function ResultView({ actions }: { actions?: ResultActions }) {
           </>
         }
       />
-      <Actions>{actions?.({ link, result, content })}</Actions>
+      <CalculationMetaEditor
+        meta={link.meta}
+        fallbackTitle={t('calculation_meta.untitled')}
+        onSave={meta =>
+          // The title travels in the link, so editing it updates the URL.
+          setSearchParams(
+            { c: encodeCalculation({ ...link, meta }) },
+            { replace: true },
+          )
+        }
+        className="rounded-2xl border bg-card px-5 py-4 shadow-xs sm:px-6"
+      />
+      <Actions shareTitle={link.meta?.title ?? t('result.title')}>
+        {actions?.({ link, result, content })}
+      </Actions>
       <SummaryCards totals={result.totals} />
       <Breakdown steps={result.steps} />
     </article>

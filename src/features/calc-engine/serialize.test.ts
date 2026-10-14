@@ -67,4 +67,25 @@ describe('calculation link codec', () => {
     };
     expect(decodeCalculation(encodeCalculation(broken as never))).toBeNull();
   });
+
+  it('round-trips a title and description, and accepts links without them', () => {
+    const named = {
+      ...link,
+      meta: { title: 'Shoes — order 42', description: 'שורה\nسطر' },
+    };
+    expect(decodeCalculation(encodeCalculation(named))).toEqual(named);
+    expect(decodeCalculation(encodeCalculation(link))?.meta).toBeUndefined();
+  });
+
+  it('rejects a malformed or oversized title', () => {
+    for (const meta of [
+      { title: 42 },
+      { title: 'x'.repeat(81) },
+      { title: 'ok', description: 'x'.repeat(501) },
+    ]) {
+      expect(
+        decodeCalculation(encodeCalculation({ ...link, meta } as never)),
+      ).toBeNull();
+    }
+  });
 });

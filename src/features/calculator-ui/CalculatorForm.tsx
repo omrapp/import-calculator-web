@@ -1,10 +1,16 @@
 import { Trash2 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { FormProvider, useForm, useWatch } from 'react-hook-form';
+import {
+  FormProvider,
+  useForm,
+  useFormContext,
+  useWatch,
+} from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 
 import { AnimatedNumber } from '@/components/motion';
+import { CalculationMetaEditor } from '@/components/page';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,6 +23,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import {
   type CalculationInput,
   encodeCalculation,
@@ -33,6 +40,7 @@ import {
   type FormValues,
   formPathFor,
   toCalculationInput,
+  toCalculationMeta,
 } from './formValues';
 import { Hero } from './hero';
 import { AirShipmentSection } from './sections/AirShipmentSection';
@@ -120,6 +128,26 @@ function CifPreview({ mode }: { mode: Mode }) {
   );
 }
 
+/** The Calculation's title and description, edited in place. */
+function MetaCard({ defaultTitle }: { defaultTitle: string }) {
+  const { setValue } = useFormContext<FormValues>();
+  const meta = useWatch<FormValues, 'meta'>({ name: 'meta' });
+  return (
+    <Card className="px-5 py-4 sm:px-6">
+      <CalculationMetaEditor
+        meta={meta.title ? toCalculationMeta(meta, defaultTitle) : undefined}
+        fallbackTitle={defaultTitle}
+        onSave={next =>
+          setValue('meta', {
+            title: next.title,
+            description: next.description ?? '',
+          })
+        }
+      />
+    </Card>
+  );
+}
+
 /** Saves the form as a draft while the user types (debounced). */
 function DraftSaver({
   mode,
@@ -139,7 +167,16 @@ function DraftSaver({
   return null;
 }
 
-export function CalculatorForm({ mode, title }: { mode: Mode; title: string }) {
+export function CalculatorForm({
+  mode,
+  title,
+  defaultTitle,
+}: {
+  mode: Mode;
+  title: string;
+  /** Title a Calculation gets when the user doesn't name it, e.g. "Calculation 3". */
+  defaultTitle: string;
+}) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [initialDraft] = useState(() => loadDraft(mode));
@@ -208,6 +245,7 @@ export function CalculatorForm({ mode, title }: { mode: Mode; title: string }) {
       v: 1,
       input,
       rates: lastUpdate ? { source, lastUpdate } : { source },
+      meta: toCalculationMeta(values.meta, defaultTitle),
     });
     void navigate(`/result?c=${encoded}`);
   };
@@ -235,6 +273,7 @@ export function CalculatorForm({ mode, title }: { mode: Mode; title: string }) {
         />
 
         <DraftSaver mode={mode} manualRates={manualRates} />
+        <MetaCard defaultTitle={defaultTitle} />
         <p className="text-xs text-muted-foreground">
           {t('calculator.hints.required_legend')}
         </p>

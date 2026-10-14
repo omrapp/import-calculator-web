@@ -25,6 +25,8 @@ export type PdfModel = {
   /** Site name beside the logo in the header. */
   brand: string;
   title: string;
+  /** The user's note for the Calculation, if any. */
+  description?: string;
   subtitle: string;
   ratesNote: string;
   createdOn: string;
@@ -95,7 +97,8 @@ export function buildPdfModel(
     language,
     dir: directionOf(language),
     brand: t('home.title'),
-    title: t('result.title'),
+    title: link.meta?.title ?? t('result.title'),
+    ...(link.meta?.description ? { description: link.meta.description } : {}),
     subtitle: t(
       link.input.mode === 'standard' ? 'nav.standard' : 'nav.air_shipment',
     ),
