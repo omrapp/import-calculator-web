@@ -164,7 +164,17 @@
       "factors": "מקדמי יבוא",
       "import_factor": "מקדם יבוא",
       "shekel_per_unit_factor": "מקדם שקל ליחידת מטבע"
-    }
+    },
+    "rates_manual": "שערים שהוזנו ידנית",
+    "rates_used": "USD {{usd}} · EUR {{eur}}",
+    "invalid_link": "קישור החישוב אינו תקין או חסר.",
+    "copy_link": "העתק קישור",
+    "link_copied": "הקישור הועתק",
+    "edit": "עריכה",
+    "new_calculation": "חישוב חדש",
+    "page_title": "תוצאה — מחשבון יבוא",
+    "summary": "סיכום",
+    "breakdown": "פירוט שלב אחר שלב"
   },
   "settings": {
     "title": "הגדרות",

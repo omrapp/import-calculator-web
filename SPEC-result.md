@@ -35,18 +35,18 @@ No new dependencies.
 
 ## Success Criteria
 
-- [ ] `Formula.test.tsx`: renders each token kind (money in ₪/$/€, factor, percent, kg, operators, nested group, max) with Latin digits in en/he/ar.
-- [ ] `ResultView.test.tsx`:
+- [x] `Formula.test.tsx`: renders each token kind (money in ₪/$/€, factor, percent, kg, operators, nested group, max) with Latin digits in en/he/ar.
+- [x] `ResultView.test.tsx`:
   - golden fixture "everything combined" link shows Landed Cost ₪111,999.89 and Total Including VAT ₪132,159.87, and all section headers in order;
   - Air Shipment link shows Chargeable Weight and air Freight cards and per-Carton rows;
   - Custom Expense shows its own name;
   - factors hidden when Cost is 0;
   - rates note for live / cached / manual;
   - missing / garbage / invalid-input link shows the error state and a working back link.
-- [ ] Copy link writes `location.href` to the clipboard (mocked) and shows confirmation; Share hidden when `navigator.share` is absent.
-- [ ] Edit pre-fills the calculator: round-trip test from link → `openInCalculator` → form shows the same values.
-- [ ] Hebrew renders RTL with numbers readable (direction test passes).
-- [ ] `npm test`, `npm run lint`, `npm run build` pass.
+- [x] Copy link writes `location.href` to the clipboard (mocked) and shows confirmation; Share hidden when `navigator.share` is absent.
+- [x] Edit pre-fills the calculator: round-trip test from link → `openInCalculator` → form shows the same values.
+- [x] Hebrew renders RTL with numbers readable (direction test passes).
+- [x] `npm test`, `npm run lint`, `npm run build` pass.
 
 ## Open Questions
 

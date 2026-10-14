@@ -164,7 +164,17 @@
       "factors": "Import Factors",
       "import_factor": "Import Factor",
       "shekel_per_unit_factor": "Shekel-per-Unit Factor"
-    }
+    },
+    "rates_manual": "Rates entered manually",
+    "rates_used": "USD {{usd}} · EUR {{eur}}",
+    "invalid_link": "This calculation link is invalid or incomplete.",
+    "copy_link": "Copy link",
+    "link_copied": "Link copied",
+    "edit": "Edit",
+    "new_calculation": "New calculation",
+    "page_title": "Result — Import Calculator",
+    "summary": "Summary",
+    "breakdown": "Step-by-step breakdown"
   },
   "settings": {
     "title": "Settings",

@@ -15,9 +15,9 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] IMCL-3 i18n: en/he/ar locales restructured to CONTEXT.md terms, instant RTL switch, Latin-digit formatting, locale/engine-key/direction tests
 - [x] IMCL-4 fx-rates: self-contained api/rates.ts (BOI proxy, 1h CDN cache), Vite dev/preview middleware, useExchangeRates (live/cached/unavailable)
 - [x] IMCL-5 calculator-ui: Standard + Air Shipment forms, live rates w/ manual override, safe expression parser, multi-Carton, drafts, link codec → /result?c=
+- [x] IMCL-6 result: summary cards, step breakdown with formulas, rates note, copy/share link, Edit back into calculator, invalid-link state
 
 ## Pending
-- [ ] Spec + build result (/result currently placeholder; Calculate already navigates there)
 - [ ] Code-split routes (bundle 566 kB > Vite 500 kB warning)
 - [ ] Spec + build history
 - [ ] Spec + build export
