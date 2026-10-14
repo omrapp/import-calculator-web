@@ -68,7 +68,7 @@ function Actions({
   };
 
   return (
-    <div className="flex flex-wrap gap-2" data-export-ignore>
+    <div className="flex flex-wrap gap-2 print:hidden" data-export-ignore>
       {children}
       <Button type="button" variant="outline" onClick={() => void copyLink()}>
         {copied ? <Check /> : <Copy />}

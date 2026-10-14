@@ -4,7 +4,8 @@ import { afterEach } from 'vitest';
 
 import { initI18n } from '@/features/i18n';
 
-void initI18n('en');
+// Node-environment tests (e.g. PDF rendering) have no document.
+if (typeof document !== 'undefined') void initI18n('en');
 
 afterEach(() => {
   cleanup();

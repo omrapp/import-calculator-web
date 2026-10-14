@@ -93,7 +93,7 @@ Download a Result as a PNG image or as a PDF that renders Hebrew and Arabic corr
 - **PDF:** `@react-pdf/renderer`, imported lazily through a dynamic `import('./pdf/renderPdf')`.
   - The document contains: title, mode, date, rates note, the summary totals, and every Breakdown section with label, value and formula.
   - Text is built from the same `formatStepValue` / `formatFormula` and translated labels as the screen. To allow that, `result` exports a pure helper, `toBreakdownSections(steps, label)`, together with those formatters.
-  - Fonts are registered from `@fontsource/noto-sans` (Latin), `@fontsource/noto-sans-hebrew` and `@fontsource/noto-sans-arabic` `.woff` files via `?url`, so they are bundled, self-hosted and only fetched when a PDF is made.
+  - Fonts are registered from `@fontsource/noto-sans` (Latin), `@fontsource/noto-sans-hebrew` and `@fontsource/ibm-plex-sans-arabic`. Noto Sans Arabic was dropped because react-pdf misplaced its separately positioned dot marks, while IBM Plex Sans Arabic uses precomposed letters `.woff` files via `?url`, so they are bundled, self-hosted and only fetched when a PDF is made.
   - In he/ar the page direction is RTL (aligned to the right edge), and numbers and formulas stay LTR.
   - The filename is `import-calculation-YYYY-MM-DD.pdf`.
 - **Print:** `window.print()`, with `@media print` CSS that hides the header, nav, footer and actions, removes the sticky bar and avoids page breaks inside sections.
@@ -107,13 +107,13 @@ src/features/result/ (export toBreakdownSections + formatters from index.ts)
 src/index.css (print styles), src/pages/ResultPage.tsx, src/locales/*.json
 ```
 
-New runtime dependencies: `html-to-image`, `@react-pdf/renderer`, `@fontsource/noto-sans`, `@fontsource/noto-sans-hebrew`, `@fontsource/noto-sans-arabic`.
+New runtime dependencies: `html-to-image`, `@react-pdf/renderer`, `@fontsource/noto-sans`, `@fontsource/noto-sans-hebrew`, `@fontsource/ibm-plex-sans-arabic`.
 
 ### Success Criteria
 
-- [ ] `ExportMenu.test.tsx` (libs mocked): PNG calls `toPng` with the result node and downloads a `.png` with a dated name; PDF downloads a `.pdf`; a failure shows the inline error; Print calls `window.print`.
-- [ ] `renderPdf.test.ts` (node environment, real react-pdf and fonts): en, he and ar documents for the "everything combined" fixture each produce a non-empty blob starting with `%PDF`.
-- [ ] Neither `html-to-image` nor `@react-pdf/renderer` is in the main chunk (build output check).
+- [x] `ExportMenu.test.tsx` (libs mocked): PNG calls `toPng` with the result node and downloads a `.png` with a dated name; PDF downloads a `.pdf`; a failure shows the inline error; Print calls `window.print`.
+- [x] `renderPdf.test.ts` (node environment, real react-pdf and fonts): en, he and ar documents for the "everything combined" fixture each produce a non-empty blob starting with `%PDF`.
+- [x] Neither `html-to-image` nor `@react-pdf/renderer` is in the main chunk (build output check).
 - [ ] Manual (owner): open the PDF in he and ar and check that letters connect and text runs right to left.
 
 ---
