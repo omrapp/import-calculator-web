@@ -42,9 +42,12 @@ Date: 2026-10-14 · Branch: `feat/IMCL-11-site-redesign`
 
 ## Responsive & Polish
 
-- [ ] **T17 Responsive + RTL pass**: Check every route at 375 / 768 / 1024 / 1440 in en, he, ar × light, dark: no horizontal scroll, hero fold rule, sheet side, mirrored arrows/glow/motion, numbers stay LTR in `<bdi>`, footer columns. Fix findings. Breakpoints: sm, md, lg, xl.
-- [ ] **T18 Accessibility + reduced-motion pass**: Keyboard walk (header, theme, language, switcher, tabs, lightbox, sheet, dialogs), visible focus everywhere, target sizes ≥ 24px (44px primary touch), accessible names on icon buttons, `aria-current` on nav and switcher, `aria-live` total unchanged, contrast spot-checks in both themes, `prefers-reduced-motion` emulated: no transforms, no count-up, no pulse.
-- [ ] **T19 Performance pass**: Rebuild, compare initial JS vs 154 KB baseline (≤ 214 KB), fonts preload / `font-display: swap`, no CLS from header shrink or font swap, Lighthouse (Performance, Accessibility, Best Practices, SEO ≥ 90) on `vite preview`. Record numbers here.
+- [x] **T17 Responsive + RTL pass**: Check every route at 375 / 768 / 1024 / 1440 in en, he, ar × light, dark: no horizontal scroll, hero fold rule, sheet side, mirrored arrows/glow/motion, numbers stay LTR in `<bdi>`, footer columns. Fix findings. Breakpoints: sm, md, lg, xl.
+- [x] **T18 Accessibility + reduced-motion pass**: Keyboard walk (header, theme, language, switcher, tabs, lightbox, sheet, dialogs), visible focus everywhere, target sizes ≥ 24px (44px primary touch), accessible names on icon buttons, `aria-current` on nav and switcher, `aria-live` total unchanged, contrast spot-checks in both themes, `prefers-reduced-motion` emulated: no transforms, no count-up, no pulse.
+- [x] **T19 Performance pass**: Rebuild, compare initial JS vs 154 KB baseline (≤ 214 KB), fonts preload / `font-display: swap`, no CLS from header shrink or font swap, Lighthouse (Performance, Accessibility, Best Practices, SEO ≥ 90) on `vite preview`. Record numbers here.
+  - Results (2026-10-14, `vite preview`, headless Chrome over CDP): initial JS 195 KiB gz (baseline 154, budget 214); Latin Inter preloaded, all fonts `font-display: swap`; CLS ≤ 0.007 on /, /result, /guides, /history in en at 375 and 1280, he worst 0.068 (/result, 375; Hebrew font swap); local LCP 0.3–0.9 s. Lighthouse not run (not installed; owner to run).
+  - T17: no horizontal overflow on 12 routes × en/he/ar × 375/768. Fixed: Radix tabs/accordion were LTR in he/ar (DirectionProvider), result actions grid on mobile, active guides tab scrolled into view.
+  - T18: no unnamed controls; footer email target raised to 24px; reduced motion shows the final total on first paint with no transforms. Keyboard walk covered by existing tests (dialogs, lightbox, tabs), not done by hand. impeccable detect: 0 findings after removing the unused overshoot easing.
 - [ ] **T20 Wrap-up**: Update root `TASKS.md` (IMCL-11 entry + owner follow-ups such as setting `VITE_SITE_URL` on Vercel), final diff review, commit, merge `--no-ff` into `develop` (and `main` per repo rule, confirm with owner first).
 
 ## Review

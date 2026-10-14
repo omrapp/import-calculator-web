@@ -71,7 +71,7 @@ function Actions({ children }: { children?: ReactNode }) {
 
   return (
     <div
-      className="flex flex-wrap gap-2 print:hidden [&>*]:grow sm:[&>*]:grow-0"
+      className="grid grid-cols-2 gap-2 print:hidden sm:flex sm:flex-wrap"
       data-export-ignore
     >
       {children}

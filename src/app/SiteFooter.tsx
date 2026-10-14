@@ -43,7 +43,7 @@ export function SiteFooter() {
           <p className="max-w-xs text-footer-muted">{t('footer.tagline')}</p>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className={`${LINK} inline-flex w-fit items-center gap-2`}
+            className={`${LINK} inline-flex min-h-6 w-fit items-center gap-2`}
           >
             <Mail className="size-4" aria-hidden />
             <bdi dir="ltr">{CONTACT_EMAIL}</bdi>

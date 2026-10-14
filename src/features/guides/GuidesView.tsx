@@ -9,7 +9,7 @@ import {
   Search,
 } from 'lucide-react';
 import * as m from 'motion/react-m';
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router';
 
@@ -72,6 +72,14 @@ export function GuidesView() {
   const param = params.get('tab');
   const tab: Tab = isTab(param) ? param : 'guides';
   const [query, setQuery] = useState('');
+  const tabList = useRef<HTMLDivElement>(null);
+
+  // On narrow screens the tab row scrolls; keep the active tab in view.
+  useEffect(() => {
+    tabList.current
+      ?.querySelector<HTMLElement>('[role="tab"][data-state="active"]')
+      ?.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
+  }, [tab]);
 
   const changeTab = (value: string) => {
     setQuery('');
@@ -102,7 +110,10 @@ export function GuidesView() {
       />
       <Tabs value={tab} onValueChange={changeTab} className="gap-6">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <TabsList className="h-auto w-full justify-start overflow-x-auto rounded-xl p-1 [scrollbar-width:none] lg:w-fit">
+          <TabsList
+            ref={tabList}
+            className="h-auto w-full justify-start overflow-x-auto rounded-xl p-1 [scrollbar-width:none] lg:w-fit"
+          >
             {TABS.map(value => {
               const Icon = ICONS[value];
               return (

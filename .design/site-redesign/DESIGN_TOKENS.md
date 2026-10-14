@@ -144,7 +144,6 @@ CSS tokens (`--duration-*`) plus Tailwind easings; Motion (JS) mirrors them in `
 | `ease-out-expo` | (0.16, 1, 0.3, 1) | Large entries (hero, sheet) |
 | `ease-in-quart` | (0.5, 0, 0.75, 0) | Exits |
 | `ease-in-out-quart` | (0.76, 0, 0.24, 1) | Theme cross-fade |
-| `ease-spring` | (0.34, 1.56, 0.64, 1) | Small UI only (toggle thumb); never on data |
 | Motion springs (JS) | `{ stiffness: 500, damping: 40 }` nav pill; `{ stiffness: 300, damping: 30 }` layout | Shared-layout indicators |
 
 Rules: exits faster than enters; stagger 40ms (max 8 items, then batch); translate ≤ 8px; no overshoot on numbers or data. Keyframes: `animate-live-dot` (rates freshness), `animate-highlight-flash` (total updated).

@@ -73,6 +73,36 @@ function seo(): Plugin {
   };
 }
 
+/**
+ * Preloads the Latin Inter file, which every page needs for its first text,
+ * so it does not wait for the CSS to be parsed (other scripts load on demand).
+ */
+function preloadLatinFont(): Plugin {
+  return {
+    name: 'preload-latin-font',
+    apply: 'build',
+    transformIndexHtml: (_html, context) => {
+      const file = Object.keys(context.bundle ?? {}).find(name =>
+        /inter-latin-opsz-normal-[\w-]+\.woff2$/.test(name),
+      );
+      if (!file) return [];
+      return [
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'preload',
+            href: `/${file}`,
+            as: 'font',
+            type: 'font/woff2',
+            crossorigin: '',
+          },
+          injectTo: 'head-prepend',
+        },
+      ];
+    },
+  };
+}
+
 // https://vite.dev/config/
 const { version } = JSON.parse(
   readFileSync(new URL('./package.json', import.meta.url), 'utf8'),
@@ -86,6 +116,7 @@ export default defineConfig({
     tailwindcss(),
     ratesApi(),
     seo(),
+    preloadLatinFont(),
   ],
   resolve: {
     alias: {
