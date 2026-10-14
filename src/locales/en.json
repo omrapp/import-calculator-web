@@ -194,9 +194,21 @@
   "history": {
     "title": "History",
     "history_subtitle": "Calculations List",
-    "no_history": "No history yet",
+    "no_history": "No Saved Calculations yet",
     "clear_history": "Clear History",
-    "clear_confirmation": "Are you sure you want to clear all history?"
+    "clear_confirmation": "Are you sure you want to clear all history?",
+    "save": "Save",
+    "saved": "Saved",
+    "open": "Open",
+    "recalculate": "Recalculate with today's rates",
+    "delete_item": "Delete this Saved Calculation",
+    "page_title": "History — Import Calculator",
+    "export": "Export",
+    "import": "Import",
+    "imported": "Imported {{added}}, skipped {{skipped}}",
+    "import_failed": "This file is not an Import Calculator History export.",
+    "backup_hint": "History is stored only in this browser. Use Export to keep a backup.",
+    "rates_unavailable": "Today's Bank of Israel rates are unavailable, so Recalculate is disabled."
   },
   "guides": {
     "title_guides": "Import/Export Guide",

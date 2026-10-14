@@ -16,4 +16,6 @@ Index of modules. Each module has its own `SPEC-<id>.md` at the repo root. Terms
 
 Build order: i18n, calc-engine, fx-rates → calculator-ui → result → history, export → guides, site-pages
 
+Specs: history, export, guides and site-pages share [SPEC-final-modules.md](./SPEC-final-modules.md).
+
 Review gate: owner approves each module spec; plan, tasks and implementation run autonomously with a report after each module merge.
