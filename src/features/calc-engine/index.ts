@@ -6,5 +6,10 @@ export {
   InvalidCalculationError,
 } from './calculate';
 export { round2, round4 } from './rounding';
+export {
+  type CalculationLink,
+  decodeCalculation,
+  encodeCalculation,
+} from './serialize';
 export type * from './types';
 export { validate } from './validate';

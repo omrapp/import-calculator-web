@@ -205,5 +205,41 @@
     "download": "הורד",
     "share": "שתף",
     "no_terms_found": "לא נמצאו מונחים"
+  },
+  "calculator": {
+    "rates": {
+      "loading": "טוען שערים מבנק ישראל…",
+      "status_live": "שער בנק ישראל, {{date}}",
+      "status_cached": "שער בנק ישראל האחרון הידוע מ-{{date}}",
+      "status_unavailable": "לא ניתן להתחבר לבנק ישראל — הזינו שערים",
+      "status_manual": "הוזן ידנית",
+      "use_bank_rate": "השתמש בשער בנק ישראל",
+      "refresh": "רענן שערים"
+    },
+    "validation": {
+      "required": "שדה חובה",
+      "positive": "חייב להיות גדול מ-0",
+      "non-negative": "לא יכול להיות שלילי",
+      "duty-options-required": "הזינו את שתי חלופות המכס",
+      "invalid-expression": "מספר או ביטוי לא תקין"
+    },
+    "hints": {
+      "insurance_derived": "השאירו ריק לחישוב לפי הפרמיה: (עלות + הובלה) × 110% × פרמיה",
+      "percent_expense": "% מתוך הסכום המצטבר",
+      "vat_default": "ריק = 18%",
+      "expression_result": "= {{value}}"
+    },
+    "actions": {
+      "clear_form": "נקה טופס",
+      "clear_confirm_title": "לנקות את כל השדות?",
+      "clear_confirm_body": "פעולה זו תמחק את כל מה שהזנתם בדף זה.",
+      "add_carton": "הוסף קרטון",
+      "remove": "הסר"
+    },
+    "labels": {
+      "duty_mode": "מכס",
+      "percent": "אחוז",
+      "cif_preview": "CIF"
+    }
   }
 }

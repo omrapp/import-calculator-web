@@ -14,11 +14,11 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] IMCL-2 calc-engine: pure engine, 20 RN golden fixtures, 4 deviations tested, purity lint rule
 - [x] IMCL-3 i18n: en/he/ar locales restructured to CONTEXT.md terms, instant RTL switch, Latin-digit formatting, locale/engine-key/direction tests
 - [x] IMCL-4 fx-rates: self-contained api/rates.ts (BOI proxy, 1h CDN cache), Vite dev/preview middleware, useExchangeRates (live/cached/unavailable)
+- [x] IMCL-5 calculator-ui: Standard + Air Shipment forms, live rates w/ manual override, safe expression parser, multi-Carton, drafts, link codec → /result?c=
 
 ## Pending
-- [ ] Spec calculator-ui (needs owner review)
-- [ ] Build calculator-ui
-- [ ] Spec + build result
+- [ ] Spec + build result (/result currently placeholder; Calculate already navigates there)
+- [ ] Code-split routes (bundle 566 kB > Vite 500 kB warning)
 - [ ] Spec + build history
 - [ ] Spec + build export
 - [ ] Spec + build guides
@@ -26,6 +26,7 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [ ] Owner: local browser test, then Vercel deploy
 
 ## Blockers
+- Browser check of calculator pages (en/he) not done — Chrome extension not connected
 - Vercel deploy of api/rates.ts untested until owner deploys (works on Vite dev/preview)
 - Owner review of he/ar wording (renamed terms, new pages)
 - Legal review of Privacy / Terms drafts (after drafting)
