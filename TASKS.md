@@ -12,9 +12,9 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] Capability map approved (9 modules)
 - [x] Draft SPEC.md, SPEC-calc-engine.md, SPEC-i18n.md, SPEC-fx-rates.md — approved
 - [x] IMCL-2 calc-engine: pure engine, 20 RN golden fixtures, 4 deviations tested, purity lint rule
+- [x] IMCL-3 i18n: en/he/ar locales restructured to CONTEXT.md terms, instant RTL switch, Latin-digit formatting, locale/engine-key/direction tests
 
 ## Pending
-- [ ] Build i18n
 - [ ] Build fx-rates
 - [ ] Spec + build calculator-ui
 - [ ] Spec + build result

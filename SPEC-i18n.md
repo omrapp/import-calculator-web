@@ -37,14 +37,14 @@ New runtime deps: `i18next`, `react-i18next`.
 
 ## Success Criteria
 
-- [ ] Fresh visit with browser language `he-IL` renders Hebrew with `<html dir="rtl" lang="he">`; `ar-EG` → Arabic RTL; `fr-FR` → English LTR.
-- [ ] Choosing a language updates text and `dir` without reload and survives a page refresh.
-- [ ] Test asserts en, he, ar have identical key sets.
-- [ ] Test asserts no locale value contains the old terms (`pivot`, `Tama I`, `Bookmarks`, `Tax Employees`, `Final Total`, and their he/ar equivalents listed in the test).
-- [ ] `formatMoney(1234.5, 'ILS')` returns Latin digits in all three languages.
-- [ ] ESLint rule (`no-restricted-syntax` on className strings, or a test grep) blocks physical-direction Tailwind classes in `src/app`, `src/features`, `src/pages`.
-- [ ] Placeholder pages and nav use translated titles.
-- [ ] `npm test`, `npm run lint`, `npm run build` pass.
+- [x] Fresh visit with browser language `he-IL` renders Hebrew with `<html dir="rtl" lang="he">`; `ar-EG` → Arabic RTL; `fr-FR` → English LTR.
+- [x] Choosing a language updates text and `dir` without reload and survives a page refresh.
+- [x] Test asserts en, he, ar have identical key sets.
+- [x] Test asserts no locale value contains the old terms (`pivot`, `Tama I`, `Bookmarks`, `Tax Employees`, `Final Total`, and their he/ar equivalents listed in the test).
+- [x] `formatMoney(1234.5, 'ILS')` returns Latin digits in all three languages.
+- [x] ESLint rule (`no-restricted-syntax` on className strings, or a test grep) blocks physical-direction Tailwind classes in `src/app`, `src/features`, `src/pages`.
+- [x] Placeholder pages and nav use translated titles.
+- [x] `npm test`, `npm run lint`, `npm run build` pass.
 
 ## Open Questions
 
