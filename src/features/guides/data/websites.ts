@@ -1,8 +1,21 @@
-// Ported verbatim from the React Native app's guide data.
+// Entries 1–15 ported from the React Native app's guide data; categories added on the web.
 import type { LocalizedString } from './types';
+
+export const WEBSITE_CATEGORIES = [
+  'government',
+  'sourcing',
+  'trade_fairs',
+  'shipping',
+  'research',
+  'payments',
+  'tools',
+] as const;
+
+export type WebsiteCategory = (typeof WEBSITE_CATEGORIES)[number];
 
 export interface TradingWebsite {
   id: string;
+  category: WebsiteCategory;
   title: LocalizedString; // Often just the URL or a specific name
   description: LocalizedString;
   url: string;
@@ -11,6 +24,7 @@ export interface TradingWebsite {
 export const tradingWebsites: TradingWebsite[] = [
   {
     id: '1',
+    category: 'trade_fairs',
     title: {
       en: 'ExpoExpo',
       he: 'ExpoExpo',
@@ -25,6 +39,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '2',
+    category: 'tools',
     title: {
       en: 'WeChat',
       he: 'WeChat',
@@ -39,6 +54,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '3',
+    category: 'research',
     title: {
       en: 'Tel Aviv Chamber of Commerce',
       he: 'לשכת המסחר תל-אביב והמרכז',
@@ -53,6 +69,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '4',
+    category: 'government',
     title: {
       en: 'Bilateral Agreements Search',
       he: 'חיפוש הסכמים בילטרליים',
@@ -67,6 +84,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '5',
+    category: 'government',
     title: {
       en: 'Import Guide for Beginners',
       he: 'מדריך יבוא למתחילים',
@@ -81,6 +99,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '6',
+    category: 'government',
     title: {
       en: 'Personal Import Guide',
       he: 'מדריך יבוא אישי',
@@ -95,6 +114,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '7',
+    category: 'government',
     title: {
       en: 'Personal Import Status',
       he: 'סטטוס יבוא אישי',
@@ -109,6 +129,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '8',
+    category: 'government',
     title: {
       en: 'Israel Tax Authority',
       he: 'רשות המסים בישראל',
@@ -123,6 +144,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '9',
+    category: 'government',
     title: {
       en: 'Path System',
       he: 'מערכת מסלול',
@@ -137,6 +159,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '10',
+    category: 'shipping',
     title: {
       en: 'Yam Yabasha',
       he: 'ים יבשה',
@@ -151,6 +174,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '11',
+    category: 'shipping',
     title: {
       en: 'Tevel Logistics',
       he: 'תבל לוגיסטיקה',
@@ -165,6 +189,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '12',
+    category: 'trade_fairs',
     title: {
       en: 'Canton Fair',
       he: 'יריד קנטון',
@@ -179,6 +204,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '13',
+    category: 'research',
     title: {
       en: 'Google Trends',
       he: 'Google Trends',
@@ -193,6 +219,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '14',
+    category: 'research',
     title: {
       en: 'ZIK Analytics',
       he: 'ZIK Analytics',
@@ -207,6 +234,7 @@ export const tradingWebsites: TradingWebsite[] = [
   },
   {
     id: '15',
+    category: 'sourcing',
     title: {
       en: 'Wholesale2B',
       he: 'Wholesale2B',

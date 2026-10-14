@@ -278,7 +278,29 @@
     "previous": "Previous",
     "next": "Next",
     "close": "Close",
-    "lead": "Rules, documents, trade terms and trusted suppliers for importing into Israel, in one place."
+    "lead": "Rules, documents, trade terms and trusted suppliers for importing into Israel, in one place.",
+    "websites": {
+      "categories": "Website categories",
+      "category": {
+        "all": "All",
+        "government": "Government & Customs",
+        "sourcing": "Sourcing & Marketplaces",
+        "trade_fairs": "Trade Fairs",
+        "shipping": "Shipping & Logistics",
+        "research": "Research & Learning",
+        "payments": "Payments & FX",
+        "tools": "Tools & Communication"
+      },
+      "category_lead": {
+        "government": "Official Israeli rules, tariffs, licenses and approvals.",
+        "sourcing": "Find suppliers and wholesale products.",
+        "trade_fairs": "Meet suppliers in person and discover new products.",
+        "shipping": "Move goods by sea and air, track shipments, compare rates.",
+        "research": "Learn the trade and check demand before you buy.",
+        "payments": "Pay suppliers abroad and manage currency costs.",
+        "tools": "Everyday helpers for talking to suppliers and doing the math."
+      }
+    }
   },
   "calculator": {
     "rates": {
