@@ -37,12 +37,38 @@
     "contact": "Contact Us",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
-    "result": "Result"
+    "result": "Result",
+    "menu": "Menu",
+    "main": "Main",
+    "footer": "Site information"
   },
   "pages": {
-    "coming_soon": "Coming soon.",
     "not_found": "Page not found",
-    "back_to_calculator": "Back to calculator"
+    "back_to_calculator": "Back to calculator",
+    "estimate_only": "Estimates only — not customs advice.",
+    "effective_date": "Effective {{date}}",
+    "draft_notice": "Draft — pending legal review (shown in development only).",
+    "contact": {
+      "intro": "Questions, ideas or a mistake in a calculation? Email us and we'll get back to you.",
+      "subject": "Import Calculator",
+      "send_email": "Send email"
+    },
+    "about": {
+      "features": "What you can do",
+      "feature_standard": "Standard Calculation: freight entered directly, for sea or any shipment",
+      "feature_air": "Air Shipment Calculation: freight from carton sizes and weights",
+      "feature_rates": "Live Bank of Israel exchange rates, or enter your own",
+      "feature_history": "Save calculations to History and back them up to a file",
+      "feature_export": "Share a link, download an image or PDF, or print",
+      "feature_guides": "Import and export guides, Incoterms and document examples",
+      "feature_languages": "English, Hebrew and Arabic",
+      "who": "Who built it and why",
+      "who_body": "Import Calculator started as a mobile app built by an independent developer to help importers estimate costs before they order. This website brings the same calculator to any browser. (Draft: owner to replace with their own words.)",
+      "version": "Version {{version}}"
+    },
+    "settings": {
+      "share_hint": "Send the calculator to a colleague."
+    }
   },
   "home": {
     "title": "Import Calculator",
@@ -172,7 +198,6 @@
     "link_copied": "Link copied",
     "edit": "Edit",
     "new_calculation": "New calculation",
-    "page_title": "Result — Import Calculator",
     "summary": "Summary",
     "breakdown": "Step-by-step breakdown"
   },
@@ -202,7 +227,6 @@
     "open": "Open",
     "recalculate": "Recalculate with today's rates",
     "delete_item": "Delete this Saved Calculation",
-    "page_title": "History — Import Calculator",
     "export": "Export",
     "import": "Import",
     "imported": "Imported {{added}}, skipped {{skipped}}",
@@ -227,7 +251,6 @@
     "download": "Download",
     "share": "Share",
     "no_terms_found": "No terms found",
-    "page_title": "Guides — Import Calculator",
     "search_label": "Search guides",
     "no_results": "Nothing matches your search.",
     "position": "{{n}} / {{total}}",

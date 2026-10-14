@@ -1,5 +1,5 @@
 import { Download, Trash2, Upload } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router';
 
@@ -48,10 +48,6 @@ export function HistoryView() {
   const rates = useExchangeRates();
   const fileInput = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState<ImportMessage>(null);
-
-  useEffect(() => {
-    document.title = t('history.page_title');
-  }, [t]);
 
   const recalculate =
     rates.status === 'live' || rates.status === 'cached'

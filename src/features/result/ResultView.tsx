@@ -1,5 +1,5 @@
 import { Check, Copy, Pencil, Plus, Share2 } from 'lucide-react';
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
@@ -110,10 +110,6 @@ export function ResultView({ actions }: { actions?: ResultActions }) {
   const { t } = useTranslation();
   const calculation = useCalculationFromUrl();
   const [content, setContent] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    document.title = t('result.page_title');
-  }, [t]);
 
   if (calculation.status === 'invalid') {
     return (

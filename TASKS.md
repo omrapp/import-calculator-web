@@ -20,11 +20,12 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] IMCL-7 history: Save on Result, History page (open, recalculate with today's rates, delete, clear), JSON export/import with merge by id
 - [x] IMCL-8 export: PNG (html-to-image), PDF (react-pdf, embedded Noto Sans / Noto Sans Hebrew / IBM Plex Sans Arabic, RTL), Print; both libs lazy-loaded
 - [x] IMCL-9 guides: 5 tabs (modules, presentation, terms, gallery, websites) with URL tab + search, lightbox with zoom and RTL-aware arrows; 22 slides + 6 documents converted to AVIF/WebP (45 MB → 7.5 MB)
+- [x] IMCL-10 site-pages: header + mobile menu + footer, lazy route per page (main chunk 682 → 273 kB), page titles per route, Settings, About Us, Contact Us (mailto), Privacy/Terms drafts in en/he/ar, OG/Twitter meta + og-image.png, Vercel Analytics, version 1.0.0
 
 ## Pending
 
-- [ ] Code-split routes (bundle 566 kB > Vite 500 kB warning)
-- [ ] Spec + build site-pages
+- [ ] Owner: replace the About Us "who built it" draft paragraph (src/locales/*.json `pages.about.who_body`)
+- [ ] Owner: after first deploy, make og:image absolute and add og:url in index.html
 - [ ] Owner: local browser test, then Vercel deploy
 
 ## Blockers
@@ -33,4 +34,4 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - Browser check of calculator pages (en/he) not done — Chrome extension not connected
 - Vercel deploy of api/rates.ts untested until owner deploys (works on Vite dev/preview)
 - Owner review of he/ar wording (renamed terms, new pages)
-- Legal review of Privacy / Terms drafts (after drafting)
+- Legal review of Privacy / Terms drafts (src/features/site-pages/content)
