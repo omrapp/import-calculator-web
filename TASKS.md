@@ -30,6 +30,7 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] IMCL-14 info popups for Customs Duty, Duty Option I, Duty Option II (drafted examples en/he/ar — owner review)
 - [x] IMCL-15 editable calculation title + description ("Calculation N"): form header, Result, History cards, PDF/PNG/share link
 - [x] IMCL-16 Websites tab: 7 categories with filter + sections, generated hero cards, 22 new sites (37 total; fetched 2026-10-14). Not added (blocked to fetch, need manual check): Bank of Israel rates, Israel Ports, Export Institute, Ministry of Health import
+- [x] IMCL-19 bugfix: website card monogram was half clipped by the hero's overflow-hidden; moved outside the clipped art layer
 - [x] IMCL-18 required CIF fields: Cost (> 0), Freight (Standard only, 0 allowed), Insurance or Premium; form-level check so old links with Cost 0 still open
 - [x] IMCL-17 Guides as documentation: sticky TOC + scroll-spy + #module-N anchors, import-flow diagram, personal-import table, chargeable-weight SVG, tax cascade, engine-computed sample cost chart, document thumbnails, tip/note/warning callouts with links, category badges
 
