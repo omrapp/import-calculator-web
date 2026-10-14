@@ -431,14 +431,17 @@
       "positive": "Must be more than 0",
       "non-negative": "Can't be negative",
       "duty-options-required": "Enter both Duty Options",
-      "invalid-expression": "Not a valid number or expression"
+      "invalid-expression": "Not a valid number or expression",
+      "insurance-or-premium": "Enter Insurance or Premium"
     },
     "hints": {
-      "insurance_derived": "Leave empty to calculate from the Premium: (Cost + Freight) × 110% × Premium",
+      "insurance_derived": "Or leave empty and fill Premium: (Cost + Freight) × 110% × Premium",
       "percent_expense": "% is of the running total",
       "vat_default": "Empty = 18%",
       "expression_result": "= {{value}}",
-      "required_legend": "Fields marked * are required"
+      "required_legend": "Fields marked * are required",
+      "freight_zero": "Enter 0 if shipping is free or included",
+      "premium_alternative": "Needed only if Insurance is empty"
     },
     "actions": {
       "clear_form": "Clear form",

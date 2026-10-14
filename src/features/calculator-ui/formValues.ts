@@ -210,6 +210,36 @@ export function toCalculationInput(
   return { input, invalidExpressions };
 }
 
+/**
+ * Form-only rules the engine can't see, because an empty field reaches it as 0:
+ * Cost (> 0) and, in Standard mode, Freight (0 allowed) must be filled, and
+ * Insurance needs either an amount or a Premium to derive it from.
+ */
+export function requiredFieldErrors(
+  values: FormValues,
+  mode: CalculationInput['mode'],
+): { path: string; code: string }[] {
+  const errors: { path: string; code: string }[] = [];
+  const blank = (text: string) => text.trim() === '';
+  const { cost, freight, insurance, premiumPercent } = values.cif;
+
+  const costValue = evaluateExpression(cost.amount);
+  if (costValue === null) {
+    errors.push({ path: 'cif.cost.amount', code: 'required' });
+  } else if (costValue <= 0) {
+    // NaN (a broken expression) fails this test and is reported as invalid instead.
+    errors.push({ path: 'cif.cost.amount', code: 'positive' });
+  }
+  if (mode === 'standard' && blank(freight.amount)) {
+    errors.push({ path: 'cif.freight.amount', code: 'required' });
+  }
+  if (blank(insurance.amount) && blank(premiumPercent)) {
+    errors.push({ path: 'cif.insurance.amount', code: 'insurance-or-premium' });
+    errors.push({ path: 'cif.premiumPercent', code: 'insurance-or-premium' });
+  }
+  return errors;
+}
+
 /** The form's title/description as link meta; an empty title uses `fallbackTitle`. */
 export function toCalculationMeta(
   meta: FormValues['meta'],

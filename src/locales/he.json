@@ -431,14 +431,17 @@
       "positive": "חייב להיות גדול מ-0",
       "non-negative": "לא יכול להיות שלילי",
       "duty-options-required": "הזינו את שתי חלופות המכס",
-      "invalid-expression": "מספר או ביטוי לא תקין"
+      "invalid-expression": "מספר או ביטוי לא תקין",
+      "insurance-or-premium": "הזינו ביטוח או פרמיה"
     },
     "hints": {
-      "insurance_derived": "השאירו ריק לחישוב לפי הפרמיה: (עלות + הובלה) × 110% × פרמיה",
+      "insurance_derived": "או השאירו ריק ומלאו פרמיה: (עלות + הובלה) × 110% × פרמיה",
       "percent_expense": "% מתוך הסכום המצטבר",
       "vat_default": "ריק = 18%",
       "expression_result": "= {{value}}",
-      "required_legend": "שדות המסומנים ב-* הם חובה"
+      "required_legend": "שדות המסומנים ב-* הם חובה",
+      "freight_zero": "הזינו 0 אם המשלוח חינם או כלול",
+      "premium_alternative": "נדרש רק אם הביטוח ריק"
     },
     "actions": {
       "clear_form": "נקה טופס",

@@ -431,14 +431,17 @@
       "positive": "يجب أن يكون أكبر من 0",
       "non-negative": "لا يمكن أن يكون سالبًا",
       "duty-options-required": "أدخل خياري الرسوم كليهما",
-      "invalid-expression": "رقم أو تعبير غير صالح"
+      "invalid-expression": "رقم أو تعبير غير صالح",
+      "insurance-or-premium": "أدخل التأمين أو العلاوة"
     },
     "hints": {
-      "insurance_derived": "اتركه فارغًا للحساب من العلاوة: (التكلفة + الشحن) × 110% × العلاوة",
+      "insurance_derived": "أو اتركه فارغًا واملأ العلاوة: (التكلفة + الشحن) × 110% × العلاوة",
       "percent_expense": "% من الإجمالي المتراكم",
       "vat_default": "فارغ = 18%",
       "expression_result": "= {{value}}",
-      "required_legend": "الحقول المميزة بـ * مطلوبة"
+      "required_legend": "الحقول المميزة بـ * مطلوبة",
+      "freight_zero": "أدخل 0 إذا كان الشحن مجانيًا أو مشمولًا",
+      "premium_alternative": "مطلوب فقط إذا كان التأمين فارغًا"
     },
     "actions": {
       "clear_form": "مسح النموذج",

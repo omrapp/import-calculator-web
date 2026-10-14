@@ -189,7 +189,9 @@ describe('CalculatorForm', () => {
       'aria-required',
       'true',
     );
-    expect(screen.getByLabelText('Cost')).not.toHaveAttribute('aria-required');
+    expect(screen.getByLabelText('Purchase Tax')).not.toHaveAttribute(
+      'aria-required',
+    );
     expect(screen.getAllByText('(optional)').length).toBeGreaterThan(0);
     expect(
       screen.getByText('Fields marked * are required'),
@@ -234,6 +236,58 @@ describe('CalculatorForm', () => {
     );
   });
 
+  it('requires Cost, Freight, and Insurance or Premium', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    for (const label of ['Cost', 'Freight', 'Insurance']) {
+      expect(screen.getByLabelText(label)).toHaveAttribute(
+        'aria-required',
+        'true',
+      );
+    }
+    await submit();
+    expect(screen.getByLabelText('Cost')).toHaveAccessibleDescription(
+      'Required',
+    );
+    expect(screen.getByLabelText('Freight')).toHaveAccessibleDescription(
+      'Required',
+    );
+    expect(screen.getByLabelText('Insurance')).toHaveAccessibleDescription(
+      'Enter Insurance or Premium',
+    );
+    expect(screen.queryByTestId('result-search')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Cost')).toHaveFocus();
+
+    type('Cost', '0');
+    await submit();
+    expect(screen.getByLabelText('Cost')).toHaveAccessibleDescription(
+      'Must be more than 0',
+    );
+
+    // Freight 0 is fine; a Premium alone satisfies Insurance.
+    type('Cost', '500');
+    type('Freight', '0');
+    type('Premium', '0.35');
+    await submit();
+    expect(await screen.findByTestId('result-search')).toBeInTheDocument();
+  });
+
+  it('does not ask for Freight in Air Shipment mode', async () => {
+    ratesApi(ratesPayload);
+    renderForm('air-shipment');
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    type('Cost', '500');
+    type('Insurance', '0');
+    expect(screen.queryByLabelText('Freight')).not.toBeInTheDocument();
+    await submit();
+    expect(await screen.findByTestId('result-search')).toBeInTheDocument();
+  });
+
   it('navigates to the Result with the inputs encoded in the URL', async () => {
     ratesApi(ratesPayload);
     renderForm();
@@ -242,6 +296,7 @@ describe('CalculatorForm', () => {
     );
     type('Cost', '1000*10');
     type('Freight', '1200');
+    type('Premium', '0.35');
     type('Customs Duty Rate', '12');
     await submit();
 
@@ -286,6 +341,8 @@ describe('CalculatorForm', () => {
       screen.getByRole('heading', { name: 'Shoes order' }),
     ).toBeInTheDocument();
     type('Cost', '100');
+    type('Freight', '0');
+    type('Insurance', '0');
     await submit();
 
     const search = await screen.findByTestId('result-search');
