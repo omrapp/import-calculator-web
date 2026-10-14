@@ -38,7 +38,16 @@ function ResultProbe() {
 function renderForm(mode: 'standard' | 'air-shipment' = 'standard') {
   const router = createMemoryRouter(
     [
-      { path: '/', element: <CalculatorForm mode={mode} title="Calc" /> },
+      {
+        path: '/',
+        element: (
+          <CalculatorForm
+            mode={mode}
+            title="Calc"
+            defaultTitle="Calculation 1"
+          />
+        ),
+      },
       { path: '/result', element: <ResultProbe /> },
     ],
     { initialEntries: ['/'] },
@@ -254,6 +263,38 @@ describe('CalculatorForm', () => {
         duty: { kind: 'percent', percent: 12 },
         vatPercent: null,
       },
+      meta: { title: 'Calculation 1' },
+    });
+  });
+
+  it('sends the title and description the user typed', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    expect(
+      screen.getByRole('heading', { name: 'Calculation 1' }),
+    ).toBeInTheDocument();
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Edit title and description' }),
+    );
+    type('Title', 'Shoes order');
+    type('Description', 'Supplier: Acme');
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+    expect(
+      screen.getByRole('heading', { name: 'Shoes order' }),
+    ).toBeInTheDocument();
+    type('Cost', '100');
+    await submit();
+
+    const search = await screen.findByTestId('result-search');
+    const link = decodeCalculation(
+      new URLSearchParams(search.textContent ?? '').get('c') ?? '',
+    );
+    expect(link?.meta).toEqual({
+      title: 'Shoes order',
+      description: 'Supplier: Acme',
     });
   });
 

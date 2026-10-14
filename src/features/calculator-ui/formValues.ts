@@ -1,5 +1,6 @@
 import type {
   CalculationInput,
+  CalculationMeta,
   Currency,
   ExpenseAmount,
   Money,
@@ -25,6 +26,8 @@ export type CartonValues = {
  * Paths mirror CalculationInput so engine validation errors map onto fields.
  */
 export type FormValues = {
+  /** Title and description; not engine input. Empty title = default "Calculation N". */
+  meta: { title: string; description: string };
   rates: { USD: string; EUR: string };
   cif: {
     cost: AmountField;
@@ -76,6 +79,7 @@ export function emptyFormValues(): FormValues {
   const usd = (): AmountField => ({ amount: '', currency: 'USD' });
   const ils = (): ExpenseField => ({ amount: '', unit: 'ILS' });
   return {
+    meta: { title: '', description: '' },
     rates: { USD: '', EUR: '' },
     cif: { cost: usd(), freight: usd(), insurance: usd(), premiumPercent: '' },
     airShipment: {
@@ -206,10 +210,25 @@ export function toCalculationInput(
   return { input, invalidExpressions };
 }
 
+/** The form's title/description as link meta; an empty title uses `fallbackTitle`. */
+export function toCalculationMeta(
+  meta: FormValues['meta'],
+  fallbackTitle: string,
+): CalculationMeta {
+  const description = meta.description.trim();
+  return {
+    title: meta.title.trim() || fallbackTitle,
+    ...(description ? { description } : {}),
+  };
+}
+
 const text = (value: number) => (value === 0 ? '' : String(value));
 
 /** Inverse of toCalculationInput, for reopening a Calculation in the form. */
-export function toFormValues(input: CalculationInput): FormValues {
+export function toFormValues(
+  input: CalculationInput,
+  meta?: CalculationMeta,
+): FormValues {
   const empty = emptyFormValues();
   const amount = (m: Money): AmountField => ({
     amount: text(m.amount),
@@ -221,6 +240,7 @@ export function toFormValues(input: CalculationInput): FormValues {
       : { amount: text(e.amount), unit: e.currency };
   const air = input.airShipment;
   return {
+    meta: { title: meta?.title ?? '', description: meta?.description ?? '' },
     rates: { USD: String(input.rates.USD), EUR: String(input.rates.EUR) },
     cif: {
       cost: amount(input.cif.cost),

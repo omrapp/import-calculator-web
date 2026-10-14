@@ -12,6 +12,7 @@ import {
   listSaved,
   saveCalculation,
   STORAGE_KEY,
+  updateSavedMeta,
 } from './storage';
 
 const linkWith = (cost: number): CalculationLink => {
@@ -100,5 +101,17 @@ describe('history storage', () => {
     const before = localStorage.getItem(STORAGE_KEY);
     expect(() => importHistory(file)).toThrow(HistoryImportError);
     expect(localStorage.getItem(STORAGE_KEY)).toBe(before);
+  });
+
+  it('renames a Saved Calculation in place', () => {
+    const item = save(100);
+    save(200);
+    updateSavedMeta(item.id, { title: 'Shoes', description: 'Order 42' });
+    const updated = listSaved().find(saved => saved.id === item.id);
+    expect(updated?.link.meta).toEqual({
+      title: 'Shoes',
+      description: 'Order 42',
+    });
+    expect(listSaved()).toHaveLength(2);
   });
 });

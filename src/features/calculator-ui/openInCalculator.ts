@@ -14,7 +14,7 @@ export function useOpenInCalculator() {
   return (link: CalculationLink) => {
     const { mode } = link.input;
     saveDraft(mode, {
-      values: toFormValues(link.input),
+      values: toFormValues(link.input, link.meta),
       // Bank rates are refetched; manual ones are kept.
       manualRates: link.rates.source === 'manual',
     });

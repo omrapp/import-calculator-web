@@ -1,10 +1,18 @@
 import type { CalculationInput, Currency, ExpenseAmount, Money } from './types';
 
+/** The user's name and note for a Calculation, shown on Result, History and exports. */
+export type CalculationMeta = { title: string; description?: string };
+
+export const META_TITLE_MAX = 80;
+export const META_DESCRIPTION_MAX = 500;
+
 /** A Calculation's inputs plus where its exchange rates came from. */
 export type CalculationLink = {
   v: 1;
   input: CalculationInput;
   rates: { source: 'live' | 'cached' | 'manual'; lastUpdate?: string };
+  /** Absent on links made before titles existed. */
+  meta?: CalculationMeta;
 };
 
 export function encodeCalculation(link: CalculationLink): string {
@@ -120,6 +128,17 @@ function isCalculationInput(v: unknown): v is CalculationInput {
   return true;
 }
 
+function isCalculationMeta(v: unknown): v is CalculationMeta {
+  return (
+    isObject(v) &&
+    typeof v.title === 'string' &&
+    v.title.length <= META_TITLE_MAX &&
+    (v.description === undefined ||
+      (typeof v.description === 'string' &&
+        v.description.length <= META_DESCRIPTION_MAX))
+  );
+}
+
 export function isCalculationLink(v: unknown): v is CalculationLink {
   return (
     isObject(v) &&
@@ -127,6 +146,8 @@ export function isCalculationLink(v: unknown): v is CalculationLink {
     isCalculationInput(v.input) &&
     isObject(v.rates) &&
     ['live', 'cached', 'manual'].includes(v.rates.source as string) &&
-    (v.rates.lastUpdate === undefined || typeof v.rates.lastUpdate === 'string')
+    (v.rates.lastUpdate === undefined ||
+      typeof v.rates.lastUpdate === 'string') &&
+    (v.meta === undefined || isCalculationMeta(v.meta))
   );
 }
