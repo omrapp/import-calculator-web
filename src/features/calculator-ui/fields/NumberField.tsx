@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { formatNumber, useLanguage } from '@/features/i18n';
 import { cn } from '@/lib/utils';
 
-import { evaluateExpression } from '../expression';
+import { evaluateExpression, sanitizeNumericInput } from '../expression';
 import type { FormPath } from '../formPath';
 
 type Props = {
@@ -23,7 +23,11 @@ type Props = {
 
 const HAS_OPERATOR = /\d\s*[-+*/×÷−]\s*[\d(]/;
 
-/** Text field that accepts a number or an arithmetic expression. */
+/**
+ * Text field that accepts a number or an arithmetic expression. Letters and
+ * other symbols are dropped as they are typed or pasted; an expression that
+ * still doesn't parse is flagged when the field loses focus.
+ */
 export function NumberField({
   name,
   label,
@@ -35,7 +39,7 @@ export function NumberField({
 }: Props) {
   const { t } = useTranslation();
   const { language } = useLanguage();
-  const { clearErrors } = useFormContext();
+  const { clearErrors, setError } = useFormContext();
   const {
     field: { ref, value: rawValue, onBlur, onChange },
     fieldState,
@@ -56,9 +60,14 @@ export function NumberField({
           ref={ref}
           name={name}
           value={value}
-          onBlur={onBlur}
+          onBlur={() => {
+            onBlur();
+            if (Number.isNaN(evaluateExpression(value))) {
+              setError(name, { type: 'invalid-expression' });
+            }
+          }}
           onChange={event => {
-            onChange(event.target.value);
+            onChange(sanitizeNumericInput(event.target.value));
             clearErrors(name);
             onUserChange?.();
           }}
