@@ -10,7 +10,7 @@ export function AppLayout() {
 
   return (
     <div className="min-h-svh">
-      <header className="border-b">
+      <header className="border-b print:hidden">
         <div className="mx-auto flex max-w-5xl items-start justify-between gap-4 px-4 py-3">
           <nav className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
             {navItems.map(({ path, titleKey }) => (

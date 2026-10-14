@@ -18,16 +18,17 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] IMCL-6 result: summary cards, step breakdown with formulas, rates note, copy/share link, Edit back into calculator, invalid-link state
 - [x] SPEC-final-modules.md (history, export, guides, site-pages) — approved
 - [x] IMCL-7 history: Save on Result, History page (open, recalculate with today's rates, delete, clear), JSON export/import with merge by id
+- [x] IMCL-8 export: PNG (html-to-image), PDF (react-pdf, embedded Noto Sans / Noto Sans Hebrew / IBM Plex Sans Arabic, RTL), Print; both libs lazy-loaded
 
 ## Pending
 
 - [ ] Code-split routes (bundle 566 kB > Vite 500 kB warning)
-- [ ] Spec + build export
 - [ ] Spec + build guides
 - [ ] Spec + build site-pages
 - [ ] Owner: local browser test, then Vercel deploy
 
 ## Blockers
+- Owner: open a he and an ar PDF from a real browser download and check them; the render was checked only from test output via macOS sips
 - Browser check of calculator pages (en/he) not done — Chrome extension not connected
 - Vercel deploy of api/rates.ts untested until owner deploys (works on Vite dev/preview)
 - Owner review of he/ar wording (renamed terms, new pages)

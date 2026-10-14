@@ -263,5 +263,12 @@
       "percent": "Percent",
       "cif_preview": "CIF"
     }
+  },
+  "export": {
+    "png": "Download image",
+    "pdf": "Download PDF",
+    "print": "Print",
+    "failed": "Couldn't create the file — try Print instead.",
+    "disclaimer": "Estimate only — not customs advice. Verify with a licensed customs broker."
   }
 }
