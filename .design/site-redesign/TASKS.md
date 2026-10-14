@@ -48,7 +48,7 @@ Date: 2026-10-14 · Branch: `feat/IMCL-11-site-redesign`
   - Results (2026-10-14, `vite preview`, headless Chrome over CDP): initial JS 195 KiB gz (baseline 154, budget 214); Latin Inter preloaded, all fonts `font-display: swap`; CLS ≤ 0.007 on /, /result, /guides, /history in en at 375 and 1280, he worst 0.068 (/result, 375; Hebrew font swap); local LCP 0.3–0.9 s. Lighthouse not run (not installed; owner to run).
   - T17: no horizontal overflow on 12 routes × en/he/ar × 375/768. Fixed: Radix tabs/accordion were LTR in he/ar (DirectionProvider), result actions grid on mobile, active guides tab scrolled into view.
   - T18: no unnamed controls; footer email target raised to 24px; reduced motion shows the final total on first paint with no transforms. Keyboard walk covered by existing tests (dialogs, lightbox, tabs), not done by hand. impeccable detect: 0 findings after removing the unused overshoot easing.
-- [ ] **T20 Wrap-up**: Update root `TASKS.md` (IMCL-11 entry + owner follow-ups such as setting `VITE_SITE_URL` on Vercel), final diff review, commit, merge `--no-ff` into `develop` (and `main` per repo rule, confirm with owner first).
+- [x] **T20 Wrap-up**: Update root `TASKS.md` (IMCL-11 entry + owner follow-ups such as setting `VITE_SITE_URL` on Vercel), final diff review, commit, merge `--no-ff` into `develop` (and `main` per repo rule, confirm with owner first).
 
 ## Review
 
