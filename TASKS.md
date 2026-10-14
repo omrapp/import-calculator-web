@@ -31,7 +31,6 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [ ] Owner: local browser test, then Vercel deploy
 
 ## Blockers
-- `src/features/guides/data/learning-modules.ts` was edited outside IMCL-11 ($150 → $75 personal-import threshold); 2 guides tests still expect $150. Owner to confirm and update tests
 - Guide content copied verbatim from the app; module 1 still says VAT 17% (now 18%). Owner to review the content
 - Owner: open a he and an ar PDF from a real browser download and check them; the render was checked only from test output via macOS sips
 - Browser check of calculator pages (en/he) not done — Chrome extension not connected
