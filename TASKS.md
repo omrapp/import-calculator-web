@@ -13,10 +13,11 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] Draft SPEC.md, SPEC-calc-engine.md, SPEC-i18n.md, SPEC-fx-rates.md — approved
 - [x] IMCL-2 calc-engine: pure engine, 20 RN golden fixtures, 4 deviations tested, purity lint rule
 - [x] IMCL-3 i18n: en/he/ar locales restructured to CONTEXT.md terms, instant RTL switch, Latin-digit formatting, locale/engine-key/direction tests
+- [x] IMCL-4 fx-rates: self-contained api/rates.ts (BOI proxy, 1h CDN cache), Vite dev/preview middleware, useExchangeRates (live/cached/unavailable)
 
 ## Pending
-- [ ] Build fx-rates
-- [ ] Spec + build calculator-ui
+- [ ] Spec calculator-ui (needs owner review)
+- [ ] Build calculator-ui
 - [ ] Spec + build result
 - [ ] Spec + build history
 - [ ] Spec + build export
@@ -25,5 +26,6 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [ ] Owner: local browser test, then Vercel deploy
 
 ## Blockers
+- Vercel deploy of api/rates.ts untested until owner deploys (works on Vite dev/preview)
 - Owner review of he/ar wording (renamed terms, new pages)
 - Legal review of Privacy / Terms drafts (after drafting)
