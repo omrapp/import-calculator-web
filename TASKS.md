@@ -24,6 +24,8 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 
 ## Pending
 
+- [ ] IMCL-11 site redesign (design flow; `.design/site-redesign/`): brief, IA, tokens, task list done; Foundation T1–T3 + Core UI T4–T10 + T11 (PageHeader/EmptyState) done; Interactions T12–T16, Polish T17–T20 pending. Initial JS 193 KiB gz (budget 214)
+
 - [ ] Owner: replace the About Us "who built it" draft paragraph (src/locales/*.json `pages.about.who_body`)
 - [ ] Owner: after first deploy, make og:image absolute and add og:url in index.html
 - [ ] Owner: local browser test, then Vercel deploy

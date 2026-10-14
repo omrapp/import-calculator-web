@@ -3,13 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Import Calculator</title>
     <meta
       name="description"
       content="Estimate the landed cost of importing goods into Israel: CIF, customs duty, purchase tax, VAT and expenses."
     />
-    <meta name="theme-color" content="#111827" />
+    <meta name="theme-color" content="#f8fafd" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      // Pre-paint theme: same key and logic as src/features/theme/theme.ts.
+      (function () {
+        var theme = 'system';
+        try {
+          theme = localStorage.getItem('theme') || 'system';
+        } catch (e) {}
+        var dark =
+          theme === 'dark' ||
+          (theme !== 'light' &&
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var root = document.documentElement;
+        if (dark) root.classList.add('dark');
+        root.style.colorScheme = dark ? 'dark' : 'light';
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute('content', dark ? '#0b1423' : '#f8fafd');
+      })();
+    </script>
     <!-- og:url and an absolute og:image URL are set once the deploy URL is known. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Import Calculator" />

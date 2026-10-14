@@ -1,4 +1,4 @@
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, Wallet } from 'lucide-react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -28,7 +28,7 @@ export function ExpensesSection() {
   });
 
   return (
-    <Section title={t('home.expenses')}>
+    <Section icon={<Wallet />} title={t('home.expenses')}>
       <p className="text-xs text-muted-foreground">
         {t('calculator.hints.percent_expense')}
       </p>

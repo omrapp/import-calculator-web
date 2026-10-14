@@ -1,10 +1,13 @@
+import { SearchX } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+
+import { EmptyState as SharedEmptyState } from '@/components/page';
 
 export function EmptyState() {
   const { t } = useTranslation();
   return (
-    <p className="rounded-lg border border-dashed p-6 text-center text-muted-foreground">
+    <SharedEmptyState icon={<SearchX />}>
       {t('guides.no_results')}
-    </p>
+    </SharedEmptyState>
   );
 }

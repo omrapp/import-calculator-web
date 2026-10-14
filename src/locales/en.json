@@ -25,7 +25,8 @@
     "currency_symbol": "₪",
     "dollar_symbol": "$",
     "euro_symbol": "€",
-    "premium_symbol": "%"
+    "premium_symbol": "%",
+    "close": "Close"
   },
   "nav": {
     "standard": "Standard Calculation",
@@ -40,7 +41,12 @@
     "result": "Result",
     "menu": "Menu",
     "main": "Main",
-    "footer": "Site information"
+    "footer": "Site information",
+    "calculator": "Calculator",
+    "guides_short": "Guides",
+    "home": "Import Calculator home",
+    "tools": "Tools",
+    "information": "Information"
   },
   "pages": {
     "not_found": "Page not found",
@@ -214,6 +220,13 @@
     "about": {
       "description": "Import Calculator helps importers into Israel estimate the full landed cost of a shipment: CIF, customs duty, purchase tax, VAT and local expenses, for sea and air shipments.",
       "contact": "Contact Developer"
+    },
+    "theme": {
+      "label": "Theme",
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark",
+      "toggle": "Theme: {{current}}. Switch to {{next}}"
     }
   },
   "history": {
@@ -303,5 +316,27 @@
     "print": "Print",
     "failed": "Couldn't create the file — try Print instead.",
     "disclaimer": "Estimate only — not customs advice. Verify with a licensed customs broker."
+  },
+  "footer": {
+    "tagline": "Landed-cost estimates for imports to Israel: customs duty, purchase tax and VAT on live exchange rates.",
+    "data_heading": "Data & trust",
+    "rates_note": "Exchange rates are the Bank of Israel's representative rates, fetched live.",
+    "rights": "© {{year}} Import Calculator"
+  },
+  "hero": {
+    "lead": {
+      "standard": "Customs duty, purchase tax and VAT for any shipment, with the freight you already know.",
+      "air": "Chargeable weight and freight worked out from your cartons, then every duty and tax."
+    },
+    "mode_label": "Calculation mode",
+    "mode": {
+      "standard": "Standard",
+      "air": "Air shipment"
+    },
+    "trust": {
+      "rates": "Live Bank of Israel rates",
+      "free": "Free",
+      "no_signup": "No signup"
+    }
   }
 }

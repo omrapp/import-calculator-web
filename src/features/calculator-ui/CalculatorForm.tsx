@@ -4,6 +4,7 @@ import { FormProvider, useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 
+import { AnimatedNumber } from '@/components/motion';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -33,6 +34,7 @@ import {
   formPathFor,
   toCalculationInput,
 } from './formValues';
+import { Hero } from './hero';
 import { AirShipmentSection } from './sections/AirShipmentSection';
 import { CifSection } from './sections/CifSection';
 import { DutiesSection } from './sections/DutiesSection';
@@ -41,22 +43,78 @@ import { RatesSection } from './sections/RatesSection';
 
 type Mode = CalculationInput['mode'];
 
+function ClearFormButton({ onConfirm }: { onConfirm: () => void }) {
+  const { t } = useTranslation();
+
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="shrink-0 text-muted-foreground"
+          aria-label={t('calculator.actions.clear_form')}
+          title={t('calculator.actions.clear_form')}
+        >
+          <Trash2 />
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>
+            {t('calculator.actions.clear_confirm_title')}
+          </AlertDialogTitle>
+          <AlertDialogDescription>
+            {t('calculator.actions.clear_confirm_body')}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm}>
+            {t('common.clear')}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+}
+
 function CifPreview({ mode }: { mode: Mode }) {
   const { t } = useTranslation();
   const { language } = useLanguage();
   const values = useWatch<FormValues>() as FormValues;
   const cif = estimateCif(toCalculationInput(values, mode).input);
+  const format = (value: number) => formatMoney(value, 'ILS', language);
+
+  // Flash the figure when it changes, but not on first paint.
+  const figureRef = useRef<HTMLSpanElement>(null);
+  const initialCif = useRef(cif);
+  useEffect(() => {
+    const el = figureRef.current;
+    if (!el || cif === initialCif.current) return;
+    initialCif.current = Number.NaN;
+    el.classList.remove('animate-highlight-flash');
+    void el.offsetWidth; // restart the animation
+    el.classList.add('animate-highlight-flash');
+  }, [cif]);
 
   return (
-    <div className="flex flex-col" aria-live="polite">
+    <div className="flex min-w-0 flex-col">
       <span className="text-xs text-muted-foreground">
         {t('calculator.labels.cif_preview')}
       </span>
       <span
-        className="text-lg font-semibold tabular-nums"
+        ref={figureRef}
+        aria-hidden
+        className="-mx-1.5 rounded-md px-1.5 text-xl font-bold tracking-tight tabular-nums sm:text-2xl"
         data-testid="cif-preview"
       >
-        {formatMoney(cif, 'ILS', language)}
+        <AnimatedNumber value={cif} format={format} />
+      </span>
+      {/* The tween is visual only; screen readers get the settled value. */}
+      <span className="sr-only" aria-live="polite">
+        {format(cif)}
       </span>
     </div>
   );
@@ -167,39 +225,14 @@ export function CalculatorForm({ mode, title }: { mode: Mode; title: string }) {
         ref={formRef}
         noValidate
         onSubmit={event => void form.handleSubmit(onSubmit)(event)}
-        className="mx-auto flex max-w-3xl flex-col gap-4 pb-24"
+        className="mx-auto flex max-w-form flex-col gap-4 [counter-reset:calc-section]"
       >
-        <div className="flex items-center justify-between gap-2">
-          <h1 className="text-2xl font-semibold">{title}</h1>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                aria-label={t('calculator.actions.clear_form')}
-              >
-                <Trash2 />
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>
-                  {t('calculator.actions.clear_confirm_title')}
-                </AlertDialogTitle>
-                <AlertDialogDescription>
-                  {t('calculator.actions.clear_confirm_body')}
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
-                <AlertDialogAction onClick={clearForm}>
-                  {t('common.clear')}
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        </div>
+        <Hero
+          mode={mode}
+          title={title}
+          ratesLive={bankRates !== null}
+          action={<ClearFormButton onConfirm={clearForm} />}
+        />
 
         <DraftSaver mode={mode} manualRates={manualRates} />
         <RatesSection
@@ -214,11 +247,13 @@ export function CalculatorForm({ mode, title }: { mode: Mode; title: string }) {
         <DutiesSection />
         <ExpensesSection />
 
-        <div className="sticky bottom-0 -mx-4 flex items-center justify-between gap-4 border-t bg-background/95 px-4 py-3 backdrop-blur">
-          <CifPreview mode={mode} />
-          <Button type="submit" size="lg">
-            {t('common.calculate')}
-          </Button>
+        <div className="sticky bottom-0 z-20 -mx-4 mt-2 sm:mx-0 sm:mb-2">
+          <div className="flex items-center justify-between gap-4 border-t bg-surface-glass px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-md backdrop-blur-md sm:rounded-2xl sm:border sm:px-5 sm:pb-3">
+            <CifPreview mode={mode} />
+            <Button type="submit" size="lg" className="shrink-0 px-6">
+              {t('common.calculate')}
+            </Button>
+          </div>
         </div>
       </form>
     </FormProvider>
