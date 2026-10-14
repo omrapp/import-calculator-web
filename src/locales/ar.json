@@ -205,5 +205,41 @@
     "download": "تنزيل",
     "share": "مشاركة",
     "no_terms_found": "لم يتم العثور على مصطلحات"
+  },
+  "calculator": {
+    "rates": {
+      "loading": "جارٍ تحميل أسعار بنك إسرائيل…",
+      "status_live": "سعر بنك إسرائيل، {{date}}",
+      "status_cached": "آخر سعر معروف من بنك إسرائيل بتاريخ {{date}}",
+      "status_unavailable": "تعذّر الوصول إلى بنك إسرائيل — أدخل الأسعار",
+      "status_manual": "مُدخل يدويًا",
+      "use_bank_rate": "استخدم سعر بنك إسرائيل",
+      "refresh": "تحديث الأسعار"
+    },
+    "validation": {
+      "required": "حقل مطلوب",
+      "positive": "يجب أن يكون أكبر من 0",
+      "non-negative": "لا يمكن أن يكون سالبًا",
+      "duty-options-required": "أدخل خياري الرسوم كليهما",
+      "invalid-expression": "رقم أو تعبير غير صالح"
+    },
+    "hints": {
+      "insurance_derived": "اتركه فارغًا للحساب من العلاوة: (التكلفة + الشحن) × 110% × العلاوة",
+      "percent_expense": "% من الإجمالي المتراكم",
+      "vat_default": "فارغ = 18%",
+      "expression_result": "= {{value}}"
+    },
+    "actions": {
+      "clear_form": "مسح النموذج",
+      "clear_confirm_title": "مسح جميع الحقول؟",
+      "clear_confirm_body": "سيؤدي هذا إلى حذف كل ما أدخلته في هذه الصفحة.",
+      "add_carton": "إضافة كرتون",
+      "remove": "إزالة"
+    },
+    "labels": {
+      "duty_mode": "الرسوم الجمركية",
+      "percent": "نسبة مئوية",
+      "cif_preview": "CIF"
+    }
   }
 }

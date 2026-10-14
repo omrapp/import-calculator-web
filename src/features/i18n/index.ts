@@ -1,5 +1,5 @@
 export { detectLanguage } from './detect';
-export { formatMoney, formatNumber } from './format';
+export { formatDate, formatMoney, formatNumber } from './format';
 export { changeLanguage, initI18n } from './i18n';
 export {
   directionOf,

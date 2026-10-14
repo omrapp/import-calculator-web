@@ -205,5 +205,41 @@
     "download": "Download",
     "share": "Share",
     "no_terms_found": "No terms found"
+  },
+  "calculator": {
+    "rates": {
+      "loading": "Loading Bank of Israel rates…",
+      "status_live": "Bank of Israel rate, {{date}}",
+      "status_cached": "Last known Bank of Israel rate from {{date}}",
+      "status_unavailable": "Couldn't reach Bank of Israel — enter rates",
+      "status_manual": "Entered manually",
+      "use_bank_rate": "Use Bank of Israel rate",
+      "refresh": "Refresh rates"
+    },
+    "validation": {
+      "required": "Required",
+      "positive": "Must be more than 0",
+      "non-negative": "Can't be negative",
+      "duty-options-required": "Enter both Duty Options",
+      "invalid-expression": "Not a valid number or expression"
+    },
+    "hints": {
+      "insurance_derived": "Leave empty to calculate from the Premium: (Cost + Freight) × 110% × Premium",
+      "percent_expense": "% is of the running total",
+      "vat_default": "Empty = 18%",
+      "expression_result": "= {{value}}"
+    },
+    "actions": {
+      "clear_form": "Clear form",
+      "clear_confirm_title": "Clear all fields?",
+      "clear_confirm_body": "This removes everything you entered on this page.",
+      "add_carton": "Add carton",
+      "remove": "Remove"
+    },
+    "labels": {
+      "duty_mode": "Customs Duty",
+      "percent": "Percent",
+      "cif_preview": "CIF"
+    }
   }
 }

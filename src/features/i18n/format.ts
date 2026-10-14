@@ -28,3 +28,9 @@ export function formatMoney(
     maximumFractionDigits: 2,
   }).format(amount);
 }
+
+export function formatDate(iso: string, language: Language): string {
+  return new Intl.DateTimeFormat(locale(language), {
+    dateStyle: 'medium',
+  }).format(new Date(iso));
+}
