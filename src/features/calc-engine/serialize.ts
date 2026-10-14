@@ -120,7 +120,7 @@ function isCalculationInput(v: unknown): v is CalculationInput {
   return true;
 }
 
-function isCalculationLink(v: unknown): v is CalculationLink {
+export function isCalculationLink(v: unknown): v is CalculationLink {
   return (
     isObject(v) &&
     v.v === 1 &&

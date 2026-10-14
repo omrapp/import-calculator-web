@@ -1,10 +1,13 @@
 import { Check, Copy, Pencil, Plus, Share2 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
-import type { CalculationLink } from '@/features/calc-engine';
+import type {
+  CalculationLink,
+  CalculationResult,
+} from '@/features/calc-engine';
 import { calculatorPath, useOpenInCalculator } from '@/features/calculator-ui';
 import { formatDate, formatNumber, useLanguage } from '@/features/i18n';
 
@@ -35,7 +38,21 @@ function RatesNote({ link }: { link: CalculationLink }) {
   );
 }
 
-function Actions({ link }: { link: CalculationLink }) {
+/** Extra Result actions supplied by other modules (Save, Export). */
+export type ResultActions = (args: {
+  link: CalculationLink;
+  result: CalculationResult;
+  /** The rendered Result, for image export; null before mount. */
+  content: HTMLElement | null;
+}) => ReactNode;
+
+function Actions({
+  link,
+  children,
+}: {
+  link: CalculationLink;
+  children?: ReactNode;
+}) {
   const { t } = useTranslation();
   const openInCalculator = useOpenInCalculator();
   const [copied, setCopied] = useState(false);
@@ -51,7 +68,8 @@ function Actions({ link }: { link: CalculationLink }) {
   };
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2" data-export-ignore>
+      {children}
       <Button type="button" variant="outline" onClick={() => void copyLink()}>
         {copied ? <Check /> : <Copy />}
         {copied ? t('result.link_copied') : t('result.copy_link')}
@@ -88,9 +106,10 @@ function Actions({ link }: { link: CalculationLink }) {
   );
 }
 
-export function ResultView() {
+export function ResultView({ actions }: { actions?: ResultActions }) {
   const { t } = useTranslation();
   const calculation = useCalculationFromUrl();
+  const [content, setContent] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     document.title = t('result.page_title');
@@ -110,7 +129,10 @@ export function ResultView() {
 
   const { link, result } = calculation;
   return (
-    <article className="mx-auto flex max-w-3xl flex-col gap-6">
+    <article
+      ref={setContent}
+      className="mx-auto flex max-w-3xl flex-col gap-6 bg-background"
+    >
       <header className="flex flex-col gap-1">
         <h1 className="text-2xl font-semibold">{t('result.title')}</h1>
         <p className="text-sm font-medium">
@@ -122,7 +144,7 @@ export function ResultView() {
         </p>
         <RatesNote link={link} />
       </header>
-      <Actions link={link} />
+      <Actions link={link}>{actions?.({ link, result, content })}</Actions>
       <SummaryCards totals={result.totals} />
       <Breakdown steps={result.steps} />
     </article>

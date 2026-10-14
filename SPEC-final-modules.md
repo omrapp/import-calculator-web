@@ -61,14 +61,14 @@ No new dependencies.
 
 ### Success Criteria
 
-- [ ] `storage.test.ts`:
+- [x] `storage.test.ts`:
   - save → list round-trips, newest first;
   - delete and clear work;
   - malformed storage → empty list;
   - export → import into empty storage reproduces the items;
   - importing the same file again adds 0 and skips N;
   - wrong `app`/`v` or garbage → error, storage unchanged.
-- [ ] `HistoryView.test.tsx`:
+- [x] `HistoryView.test.tsx`:
   - empty state;
   - card shows the frozen Total Including VAT;
   - Open navigates to the Result;
@@ -76,7 +76,7 @@ No new dependencies.
   - Delete removes the card;
   - Clear removes everything after confirm;
   - Import reports counts.
-- [ ] Result Save: first click saves and shows "Saved"; a reload of the same link still shows "Saved".
+- [x] Result Save: first click saves and shows "Saved"; a reload of the same link still shows "Saved".
 
 ---
 

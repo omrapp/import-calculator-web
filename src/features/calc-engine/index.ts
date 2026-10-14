@@ -10,6 +10,7 @@ export {
   type CalculationLink,
   decodeCalculation,
   encodeCalculation,
+  isCalculationLink,
 } from './serialize';
 export type * from './types';
 export { validate } from './validate';
