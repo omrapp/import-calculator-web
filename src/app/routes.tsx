@@ -3,6 +3,7 @@ import type { RouteObject } from 'react-router';
 import { AppLayout } from '@/app/AppLayout';
 import { navItems } from '@/app/nav';
 import { AirShipmentCalculationPage } from '@/pages/AirShipmentCalculationPage';
+import { GuidesPage } from '@/pages/GuidesPage';
 import { HistoryPage } from '@/pages/HistoryPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { PlaceholderPage } from '@/pages/PlaceholderPage';
@@ -13,6 +14,7 @@ const pages: Partial<Record<string, React.ReactNode>> = {
   '/': <StandardCalculationPage />,
   '/air-shipment': <AirShipmentCalculationPage />,
   '/history': <HistoryPage />,
+  '/guides': <GuidesPage />,
 };
 
 export const routes: RouteObject[] = [

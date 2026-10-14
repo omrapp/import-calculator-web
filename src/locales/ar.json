@@ -226,7 +226,17 @@
     "download_failed": "فشل تنزيل الصورة",
     "download": "تنزيل",
     "share": "مشاركة",
-    "no_terms_found": "لم يتم العثور على مصطلحات"
+    "no_terms_found": "لم يتم العثور على مصطلحات",
+    "page_title": "الأدلة — حاسبة الاستيراد",
+    "search_label": "البحث في الأدلة",
+    "no_results": "لا توجد نتائج مطابقة لبحثك.",
+    "position": "{{n}} / {{total}}",
+    "zoom_in": "تكبير",
+    "zoom_out": "تصغير",
+    "zoom_reset": "إعادة ضبط التكبير",
+    "previous": "السابق",
+    "next": "التالي",
+    "close": "إغلاق"
   },
   "calculator": {
     "rates": {
