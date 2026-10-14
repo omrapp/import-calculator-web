@@ -6,3 +6,4 @@ export {
   toCalculationInput,
   toFormValues,
 } from './formValues';
+export { calculatorPath, useOpenInCalculator } from './openInCalculator';
