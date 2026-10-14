@@ -4,6 +4,7 @@ import { detectLanguage } from './detect';
 
 afterEach(() => {
   localStorage.clear();
+  window.history.replaceState(null, '', '/');
   vi.restoreAllMocks();
 });
 
@@ -34,5 +35,21 @@ describe('detectLanguage', () => {
       throw new Error('blocked');
     });
     expect(detectLanguage(['ar'])).toBe('ar');
+  });
+
+  it('takes ?lang= first, saves it and strips it from the URL', () => {
+    localStorage.setItem('language', 'ar');
+    window.history.replaceState(null, '', '/guides?tab=terms&lang=he');
+    expect(detectLanguage(['en'])).toBe('he');
+    expect(localStorage.getItem('language')).toBe('he');
+    expect(window.location.pathname + window.location.search).toBe(
+      '/guides?tab=terms',
+    );
+  });
+
+  it('strips an unsupported ?lang= and falls back', () => {
+    window.history.replaceState(null, '', '/?lang=fr');
+    expect(detectLanguage(['he'])).toBe('he');
+    expect(window.location.search).toBe('');
   });
 });

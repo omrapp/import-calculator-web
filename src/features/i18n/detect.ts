@@ -17,10 +17,30 @@ export function saveLanguage(language: Language): void {
   }
 }
 
-/** Saved choice → first supported browser language → English. */
+/** Query parameter for language links (`?lang=he`), used by hreflang URLs. */
+export const LANGUAGE_PARAM = 'lang';
+
+/**
+ * Reads `?lang=` from the address bar, saves it, and removes it from the URL
+ * so a shared link does not pin the receiver's language.
+ */
+export function consumeLanguageParam(): Language | null {
+  const url = new URL(window.location.href);
+  const value = url.searchParams.get(LANGUAGE_PARAM);
+  if (value === null) return null;
+  url.searchParams.delete(LANGUAGE_PARAM);
+  window.history.replaceState(window.history.state, '', url);
+  if (!isLanguage(value)) return null;
+  saveLanguage(value);
+  return value;
+}
+
+/** `?lang=` → saved choice → first supported browser language → English. */
 export function detectLanguage(
   browserLanguages: readonly string[] = navigator.languages,
 ): Language {
+  const fromUrl = consumeLanguageParam();
+  if (fromUrl) return fromUrl;
   const saved = readSavedLanguage();
   if (saved) return saved;
   for (const tag of browserLanguages) {

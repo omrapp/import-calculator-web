@@ -22,6 +22,8 @@ type T = (key: string, params?: Record<string, unknown>) => string;
 export type PdfModel = {
   language: Language;
   dir: 'ltr' | 'rtl';
+  /** Site name beside the logo in the header. */
+  brand: string;
   title: string;
   subtitle: string;
   ratesNote: string;
@@ -92,6 +94,7 @@ export function buildPdfModel(
   return {
     language,
     dir: directionOf(language),
+    brand: t('home.title'),
     title: t('result.title'),
     subtitle: t(
       link.input.mode === 'standard' ? 'nav.standard' : 'nav.air_shipment',

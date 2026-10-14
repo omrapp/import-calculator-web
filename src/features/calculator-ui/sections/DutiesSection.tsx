@@ -1,3 +1,4 @@
+import { Landmark } from 'lucide-react';
 import { useController, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -21,7 +22,7 @@ export function DutiesSection() {
   const kind = useWatch<FormValues, 'duty.kind'>({ name: 'duty.kind' });
 
   return (
-    <Section title={t('home.duties_taxes')}>
+    <Section icon={<Landmark />} title={t('home.duties_taxes')}>
       <div className="flex flex-col gap-1.5">
         <span className="text-sm font-medium">
           {t('calculator.labels.duty_mode')}

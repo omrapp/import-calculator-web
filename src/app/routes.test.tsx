@@ -7,7 +7,7 @@ import {
   within,
 } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { routes } from '@/app/routes';
 import { changeLanguage } from '@/features/i18n';
@@ -19,8 +19,15 @@ function renderAt(path: string) {
 }
 
 afterEach(async () => {
+  vi.unstubAllEnvs();
   await changeLanguage('en');
 });
+
+const head = (selector: string) =>
+  [...document.head.querySelectorAll(selector)].map(
+    element =>
+      element.getAttribute('href') ?? element.getAttribute('content') ?? '',
+  );
 
 describe('routes', () => {
   it.each([
@@ -94,5 +101,43 @@ describe('layout', () => {
     ]) {
       expect(footer.getByRole('link', { name })).toBeInTheDocument();
     }
+  });
+});
+
+describe('head tags', () => {
+  it('sets the description, canonical and hreflang links', async () => {
+    vi.stubEnv('VITE_SITE_URL', 'https://example.com');
+    renderAt('/guides');
+    await waitFor(() =>
+      expect(head('link[rel="canonical"]')).toEqual([
+        'https://example.com/guides?lang=en',
+      ]),
+    );
+    expect(head('link[rel="alternate"]')).toEqual([
+      'https://example.com/guides?lang=en',
+      'https://example.com/guides?lang=he',
+      'https://example.com/guides?lang=ar',
+      'https://example.com/guides',
+    ]);
+    expect(head('meta[name="description"]')[0]).toMatch(/^Import and export/);
+    expect(head('meta[name="robots"]')).toEqual(['index, follow']);
+  });
+
+  it('keeps /result out of the index', async () => {
+    vi.stubEnv('VITE_SITE_URL', 'https://example.com');
+    renderAt('/result');
+    await waitFor(() =>
+      expect(head('meta[name="robots"]')).toEqual(['noindex, follow']),
+    );
+    expect(head('link[rel="canonical"]')).toEqual([]);
+  });
+
+  it('omits canonical links when the site URL is unset', async () => {
+    vi.stubEnv('VITE_SITE_URL', '');
+    renderAt('/about');
+    await waitFor(() =>
+      expect(document.title).toBe('About Us — Import Calculator'),
+    );
+    expect(head('link[rel="canonical"]')).toEqual([]);
   });
 });

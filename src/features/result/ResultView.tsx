@@ -1,8 +1,17 @@
-import { Check, Copy, Pencil, Plus, Share2 } from 'lucide-react';
+import {
+  ArrowLeft,
+  Check,
+  Copy,
+  FileWarning,
+  Plus,
+  Share2,
+} from 'lucide-react';
 import { type ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
+import { ExportBrandHeader } from '@/components/brand';
+import { EmptyState, ModeBadge, PageHeader } from '@/components/page';
 import { Button } from '@/components/ui/button';
 import type {
   CalculationLink,
@@ -26,7 +35,7 @@ function RatesNote({ link }: { link: CalculationLink }) {
           date: formatDate(lastUpdate, language),
         });
   return (
-    <p className="text-sm text-muted-foreground" data-testid="rates-note">
+    <p data-testid="rates-note">
       {note} ·{' '}
       <bdi dir="ltr">
         {t('result.rates_used', {
@@ -46,15 +55,8 @@ export type ResultActions = (args: {
   content: HTMLElement | null;
 }) => ReactNode;
 
-function Actions({
-  link,
-  children,
-}: {
-  link: CalculationLink;
-  children?: ReactNode;
-}) {
+function Actions({ children }: { children?: ReactNode }) {
   const { t } = useTranslation();
-  const openInCalculator = useOpenInCalculator();
   const [copied, setCopied] = useState(false);
   const canShare = typeof navigator.share === 'function';
 
@@ -68,7 +70,10 @@ function Actions({
   };
 
   return (
-    <div className="flex flex-wrap gap-2 print:hidden" data-export-ignore>
+    <div
+      className="grid grid-cols-2 gap-2 print:hidden sm:flex sm:flex-wrap"
+      data-export-ignore
+    >
       {children}
       <Button type="button" variant="outline" onClick={() => void copyLink()}>
         {copied ? <Check /> : <Copy />}
@@ -88,15 +93,30 @@ function Actions({
           {t('result.share')}
         </Button>
       )}
+    </div>
+  );
+}
+
+function BackBar({ link }: { link: CalculationLink }) {
+  const { t } = useTranslation();
+  const openInCalculator = useOpenInCalculator();
+
+  return (
+    <div
+      className="flex items-center justify-between gap-2 print:hidden"
+      data-export-ignore
+    >
       <Button
         type="button"
-        variant="outline"
+        variant="ghost"
+        size="sm"
+        className="-ms-2.5"
         onClick={() => openInCalculator(link)}
       >
-        <Pencil />
+        <ArrowLeft className="rtl:-scale-x-100" />
         {t('result.edit')}
       </Button>
-      <Button asChild variant="ghost">
+      <Button asChild variant="ghost" size="sm" className="-me-2.5">
         <Link to={calculatorPath(link.input.mode)}>
           <Plus />
           {t('result.new_calculation')}
@@ -113,12 +133,18 @@ export function ResultView({ actions }: { actions?: ResultActions }) {
 
   if (calculation.status === 'invalid') {
     return (
-      <section className="mx-auto flex max-w-3xl flex-col items-start gap-4">
-        <h1 className="text-2xl font-semibold">{t('result.title')}</h1>
-        <p role="alert">{t('result.invalid_link')}</p>
-        <Button asChild>
-          <Link to="/">{t('pages.back_to_calculator')}</Link>
-        </Button>
+      <section className="mx-auto flex max-w-form flex-col gap-6">
+        <PageHeader title={t('result.title')} />
+        <EmptyState
+          icon={<FileWarning />}
+          action={
+            <Button asChild>
+              <Link to="/">{t('pages.back_to_calculator')}</Link>
+            </Button>
+          }
+        >
+          <p role="alert">{t('result.invalid_link')}</p>
+        </EmptyState>
       </section>
     );
   }
@@ -127,20 +153,20 @@ export function ResultView({ actions }: { actions?: ResultActions }) {
   return (
     <article
       ref={setContent}
-      className="mx-auto flex max-w-3xl flex-col gap-6 bg-background"
+      className="mx-auto flex max-w-form flex-col gap-6 bg-background"
     >
-      <header className="flex flex-col gap-1">
-        <h1 className="text-2xl font-semibold">{t('result.title')}</h1>
-        <p className="text-sm font-medium">
-          {t(
-            link.input.mode === 'standard'
-              ? 'nav.standard'
-              : 'nav.air_shipment',
-          )}
-        </p>
-        <RatesNote link={link} />
-      </header>
-      <Actions link={link}>{actions?.({ link, result, content })}</Actions>
+      <ExportBrandHeader />
+      <BackBar link={link} />
+      <PageHeader
+        title={t('result.title')}
+        meta={
+          <>
+            <ModeBadge mode={link.input.mode} />
+            <RatesNote link={link} />
+          </>
+        }
+      />
+      <Actions>{actions?.({ link, result, content })}</Actions>
       <SummaryCards totals={result.totals} />
       <Breakdown steps={result.steps} />
     </article>

@@ -1,4 +1,16 @@
-/** Main tools, in the header (and the mobile menu). */
+/** Header navigation: the three things people come here to do. */
+export const headerNav = [
+  {
+    path: '/',
+    titleKey: 'nav.calculator',
+    // The calculator group: both modes and their result.
+    activeOn: ['/', '/air-shipment', '/result'],
+  },
+  { path: '/history', titleKey: 'nav.history', activeOn: ['/history'] },
+  { path: '/guides', titleKey: 'nav.guides_short', activeOn: ['/guides'] },
+] as const;
+
+/** Every tool, by name (footer "Tools" column and the mobile menu). */
 export const primaryNav = [
   { path: '/', titleKey: 'nav.standard' },
   { path: '/air-shipment', titleKey: 'nav.air_shipment' },

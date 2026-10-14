@@ -24,9 +24,13 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 
 ## Pending
 
+- [ ] IMCL-11 site redesign (design flow; `.design/site-redesign/`): brief, IA, tokens, task list done; Foundation T1–T3 + Core UI T4–T11 + Interactions T12–T16 (History, Guides, info pages + Settings theme + 404, SEO kit, export brand header) and Polish T17–T19 (responsive/RTL, a11y + reduced motion, perf) done; T20 merge pending owner confirmation. Initial JS 195 KiB gz (budget 214), CLS < 0.07
+
 - [ ] Owner: replace the About Us "who built it" draft paragraph (src/locales/*.json `pages.about.who_body`)
-- [ ] Owner: after first deploy, make og:image absolute and add og:url in index.html
+- [ ] Owner: set `VITE_SITE_URL` (e.g. https://your-domain) on Vercel; the build then adds og:url, absolute og:image, canonical/hreflang and sitemap.xml
 - [ ] Owner: local browser test, then Vercel deploy
+- [ ] Owner: run Lighthouse on `npm run build && npx vite preview` (target ≥ 90 in all four categories)
+- [ ] Flaky: CalculatorForm rates/draft tests can time out (1 s waitFor) when the machine is busy; pass alone
 
 ## Blockers
 - Guide content copied verbatim from the app; module 1 still says VAT 17% (now 18%). Owner to review the content

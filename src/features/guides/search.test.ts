@@ -40,7 +40,7 @@ describe('guides search', () => {
 
   it('matches modules by content, slides by title only', () => {
     expect(
-      searchModules(learningModules, 'up to $150', 'en').map(m => m.id),
+      searchModules(learningModules, 'up to $75', 'en').map(m => m.id),
     ).toContain('1');
     expect(searchSlides(presentationSlides, 'incoterms', 'en')).toHaveLength(4);
     expect(searchSlides(presentationSlides, 'zzz', 'en')).toEqual([]);

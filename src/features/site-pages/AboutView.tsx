@@ -1,45 +1,73 @@
-import { Check, Mail } from 'lucide-react';
+import {
+  BookOpen,
+  Calculator,
+  Download,
+  History,
+  Info,
+  Languages,
+  type LucideIcon,
+  Mail,
+  Plane,
+  TrendingUp,
+} from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
+import { RevealGroup, RevealItem } from '@/components/motion';
+import { PageHeader } from '@/components/page';
 import { Button } from '@/components/ui/button';
 
-const FEATURES = [
-  'standard',
-  'air',
-  'rates',
-  'history',
-  'export',
-  'guides',
-  'languages',
-] as const;
+const FEATURES: [string, LucideIcon][] = [
+  ['standard', Calculator],
+  ['air', Plane],
+  ['rates', TrendingUp],
+  ['history', History],
+  ['export', Download],
+  ['guides', BookOpen],
+  ['languages', Languages],
+];
 
 export function AboutView() {
   const { t } = useTranslation();
 
   return (
-    <article className="mx-auto flex max-w-3xl flex-col gap-6">
-      <h1 className="text-2xl font-semibold">{t('nav.about')}</h1>
-      <p className="leading-relaxed">{t('settings.about.description')}</p>
+    <article className="mx-auto flex max-w-3xl flex-col gap-10">
+      <PageHeader
+        icon={<Info />}
+        title={t('nav.about')}
+        description={t('settings.about.description')}
+      />
 
-      <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold">{t('pages.about.features')}</h2>
-        <ul className="flex flex-col gap-2">
-          {FEATURES.map(feature => (
-            <li key={feature} className="flex items-start gap-2">
-              <Check className="mt-1 size-4 shrink-0 text-primary" />
-              {t(`pages.about.feature_${feature}`)}
-            </li>
+      <section className="flex flex-col gap-4">
+        <h2 className="text-xl font-semibold">{t('pages.about.features')}</h2>
+        <RevealGroup className="grid gap-3 sm:grid-cols-2">
+          {FEATURES.map(([feature, Icon]) => (
+            <RevealItem
+              key={feature}
+              className="flex items-start gap-3 rounded-2xl border bg-card p-4 shadow-xs"
+            >
+              <span
+                aria-hidden
+                className="grid size-9 shrink-0 place-items-center rounded-lg bg-accent text-accent-foreground ring-1 ring-highlight/20 ring-inset"
+              >
+                <Icon className="size-4.5" />
+              </span>
+              <p className="pt-1.5 text-sm leading-relaxed">
+                {t(`pages.about.feature_${feature}`)}
+              </p>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </section>
 
-      <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold">{t('pages.about.who')}</h2>
-        <p className="leading-relaxed">{t('pages.about.who_body')}</p>
+      <section className="flex max-w-prose-tight flex-col gap-3">
+        <h2 className="text-xl font-semibold">{t('pages.about.who')}</h2>
+        <p className="leading-relaxed text-muted-foreground">
+          {t('pages.about.who_body')}
+        </p>
       </section>
 
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-wrap items-center gap-4 border-t pt-6">
         <Button asChild>
           <Link to="/contact">
             <Mail />
@@ -47,7 +75,7 @@ export function AboutView() {
           </Link>
         </Button>
         <span className="text-sm text-muted-foreground">
-          {t('pages.about.version', { version: __APP_VERSION__ })}
+          <bdi>{t('pages.about.version', { version: __APP_VERSION__ })}</bdi>
         </span>
       </div>
     </article>
