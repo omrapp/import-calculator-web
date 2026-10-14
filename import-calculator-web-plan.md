@@ -2,7 +2,7 @@
 
 **Goal**: build a public website that brings the React Native app's import cost calculator to the web, with full feature parity.
 
-- Source app (React Native/Expo): `/Users/omarayed/Documents/Projects/react-native/InternationalTradeCalculator/TradeCalculator`
+- Source app (React Native/Expo): `InternationalTradeCalculator/TradeCalculator` (local checkout)
 - Source app repo: https://github.com/omrapp/ImportCalculator.git (RN app only, not used for the web)
 - Web repo: new separate repo (e.g. `omrapp/import-calculator-web`), linked to Vercel
 

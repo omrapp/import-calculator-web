@@ -18,9 +18,8 @@ import type {
   Money,
 } from '../src/features/calc-engine/types';
 
-const RN_APP_PATH =
-  process.env.RN_APP_PATH ??
-  '/Users/omarayed/Documents/Projects/react-native/InternationalTradeCalculator/TradeCalculator';
+const RN_APP_PATH = process.env.RN_APP_PATH;
+if (!RN_APP_PATH) throw new Error('Set RN_APP_PATH to the RN app checkout');
 const OUT = join(
   import.meta.dirname,
   '../src/features/calc-engine/__fixtures__/rn-golden.json',
