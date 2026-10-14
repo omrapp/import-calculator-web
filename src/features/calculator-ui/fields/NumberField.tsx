@@ -1,0 +1,95 @@
+import { useId } from 'react';
+import { useController, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { formatNumber, useLanguage } from '@/features/i18n';
+import { cn } from '@/lib/utils';
+
+import { evaluateExpression } from '../expression';
+import type { FormPath } from '../formPath';
+
+type Props = {
+  name: FormPath;
+  label: string;
+  /** Unit shown inside the field, e.g. ₪, %, kg. */
+  unit?: string;
+  hint?: string;
+  placeholder?: string;
+  className?: string;
+  onUserChange?: () => void;
+};
+
+const HAS_OPERATOR = /\d\s*[-+*/×÷−]\s*[\d(]/;
+
+/** Text field that accepts a number or an arithmetic expression. */
+export function NumberField({
+  name,
+  label,
+  unit,
+  hint,
+  placeholder,
+  className,
+  onUserChange,
+}: Props) {
+  const { t } = useTranslation();
+  const { language } = useLanguage();
+  const { clearErrors } = useFormContext();
+  const {
+    field: { ref, value: rawValue, onBlur, onChange },
+    fieldState,
+  } = useController({ name });
+  const id = useId();
+  const value = String(rawValue ?? '');
+  const evaluated = HAS_OPERATOR.test(value) ? evaluateExpression(value) : null;
+  const error = fieldState.error?.type;
+  const describedBy = `${id}-desc`;
+
+  return (
+    <div className={cn('flex flex-col gap-1.5', className)}>
+      <Label htmlFor={id}>{label}</Label>
+      <div className="relative">
+        <Input
+          id={id}
+          ref={ref}
+          name={name}
+          value={value}
+          onBlur={onBlur}
+          onChange={event => {
+            onChange(event.target.value);
+            clearErrors(name);
+            onUserChange?.();
+          }}
+          inputMode="decimal"
+          autoComplete="off"
+          dir="ltr"
+          placeholder={placeholder}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={describedBy}
+          className={cn('tabular-nums', unit && 'pe-10')}
+        />
+        {unit && (
+          <span className="pointer-events-none absolute inset-y-0 end-3 flex items-center text-sm text-muted-foreground">
+            {unit}
+          </span>
+        )}
+      </div>
+      <p id={describedBy} className="min-h-4 text-xs">
+        {error ? (
+          <span className="text-destructive">
+            {t(`calculator.validation.${error}`)}
+          </span>
+        ) : evaluated !== null && !Number.isNaN(evaluated) ? (
+          <span className="text-muted-foreground tabular-nums">
+            {t('calculator.hints.expression_result', {
+              value: formatNumber(evaluated, language),
+            })}
+          </span>
+        ) : (
+          hint && <span className="text-muted-foreground">{hint}</span>
+        )}
+      </p>
+    </div>
+  );
+}

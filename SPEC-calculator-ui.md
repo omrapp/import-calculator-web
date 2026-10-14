@@ -46,18 +46,19 @@ New runtime dependency: `react-hook-form` (as in the RN app; `useFieldArray` for
 
 ## Success Criteria
 
-- [ ] `expression.test.ts`: `1200*3+45` → 3645, `(10+5)/3` → 5, `١٢٣` → 123, `2÷4×3` → 1.5; `1+`, `abc`, `2**3`, `alert(1)` → invalid; no `eval`/`Function` in the module (lint rule `no-new-func`, `no-eval`).
-- [ ] `formValues.test.ts`: round-trips every field; empty Insurance → `null`; empty VAT → `null`; percent Expenses map to `{ percent }`.
-- [ ] `serialize.test.ts`: encode → decode round-trips a full Air Shipment link with Hebrew Custom Expense names; rejects `v: 2`, garbage and truncated strings.
-- [ ] Component tests (Testing Library):
+- [x] `expression.test.ts`: `1200*3+45` → 3645, `(10+5)/3` → 5, `١٢٣` → 123, `2÷4×3` → 1.5; `1+`, `abc`, `2**3`, `alert(1)` → invalid; no `eval`/`Function` in the module (lint rule `no-new-func`, `no-eval`).
+- [x] `formValues.test.ts`: round-trips every field; empty Insurance → `null`; empty VAT → `null`; percent Expenses map to `{ percent }`.
+- [x] `serialize.test.ts`: encode → decode round-trips a full Air Shipment link with Hebrew Custom Expense names; rejects `v: 2`, garbage and truncated strings.
+- [x] Component tests (Testing Library):
   - Standard page shows Freight; Air page hides Freight and shows Cartons; adding/removing Carton lines works; at least one stays.
   - Rates prefill from a mocked `/api/rates`; status text for live/cached/unavailable; editing a rate shows "manual" and reset restores the bank rate.
   - Submitting with a missing rate or a missing Duty Option shows the translated error on that field and does not navigate.
   - Valid submit navigates to `/result?c=…` whose decoded input equals the form values.
   - Draft restores after remount; Clear (after confirm) empties the form and the draft.
   - Live CIF preview updates as Cost changes.
-- [ ] he and ar render the form RTL with no physical-direction classes (existing direction test).
-- [ ] `npm test`, `npm run lint`, `npm run build` pass; manual browser check of both pages in en and he (recorded in the report).
+- [x] he and ar render the form RTL with no physical-direction classes (existing direction test).
+- [x] `npm test`, `npm run lint`, `npm run build` pass.
+- [ ] Manual browser check of both pages in en and he — not done (Chrome extension not connected); owner to check locally.
 
 ## Open Questions
 
