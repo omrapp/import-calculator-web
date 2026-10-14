@@ -104,12 +104,12 @@ New dev dependency: `tsx` (run the generator). No runtime dependencies.
 
 ## Success Criteria
 
-- [ ] `golden.test.ts`: every fixture's totals (CIF, duty, purchase tax, expenses, Landed Cost, VAT, Total Including VAT, both factors, Chargeable Weight) equal RN output exactly (to the cent / 4 dp).
-- [ ] Each of deviations 1–4 has a test asserting the web behaviour.
-- [ ] `validate` returns the documented error for: missing/≤0 rate, negative amounts, compound rule with a missing option, air-shipment mode without Cartons or with divisor ≤ 0.
-- [ ] Step list order and kinds match RN sections (Air freight → CIF → Duty → Purchase Tax → Expenses → VAT → Factors); empty sections omitted as in RN.
-- [ ] Module has no imports from React, i18n or the DOM (checked by an ESLint `no-restricted-imports` rule on the folder).
-- [ ] `npm test`, `npm run lint`, `npm run build` pass.
+- [x] `golden.test.ts`: every fixture's totals (CIF, duty, purchase tax, expenses, Landed Cost, VAT, Total Including VAT, both factors, Chargeable Weight) equal RN output exactly (to the cent / 4 dp).
+- [x] Each of deviations 1–4 has a test asserting the web behaviour.
+- [x] `validate` returns the documented error for: missing/≤0 rate, negative amounts, compound rule with a missing option, air-shipment mode without Cartons or with divisor ≤ 0.
+- [x] Step list order and kinds match RN sections (Air freight → CIF → Duty → Purchase Tax → Expenses → VAT → Factors); empty sections omitted as in RN.
+- [x] Module has no imports from React, i18n or the DOM (checked by an ESLint `no-restricted-imports` rule on the folder).
+- [x] `npm test`, `npm run lint`, `npm run build` pass.
 
 ## Open Questions
 

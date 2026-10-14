@@ -1,0 +1,1305 @@
+[
+  {
+    "name": "usd cost, derived insurance",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34561.35,
+      "customsDuty": 4147.36,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 38708.71,
+      "vat": 6967.57,
+      "totalIncludingVat": 45676.28,
+      "importFactor": 1.2592,
+      "shekelPerUnitFactor": 3.8709
+    }
+  },
+  {
+    "name": "eur cost and freight",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 25000,
+          "currency": "EUR"
+        },
+        "freight": {
+          "amount": 1850.5,
+          "currency": "EUR"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 92702.46,
+      "customsDuty": 11124.3,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 103826.76,
+      "vat": 18688.82,
+      "totalIncludingVat": 122515.58,
+      "importFactor": 1.2075,
+      "shekelPerUnitFactor": 4.1531
+    }
+  },
+  {
+    "name": "ils cost, usd freight",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 48000,
+          "currency": "ILS"
+        },
+        "freight": {
+          "amount": 640,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 50159.73,
+      "customsDuty": 6019.17,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 56178.9,
+      "vat": 10112.2,
+      "totalIncludingVat": 66291.1,
+      "importFactor": 1.1704,
+      "shekelPerUnitFactor": 1.1704
+    }
+  },
+  {
+    "name": "entered insurance usd",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": {
+          "amount": 85,
+          "currency": "USD"
+        },
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34690.09,
+      "customsDuty": 4162.81,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 38852.9,
+      "vat": 6993.52,
+      "totalIncludingVat": 45846.42,
+      "importFactor": 1.2639,
+      "shekelPerUnitFactor": 3.8853
+    }
+  },
+  {
+    "name": "entered insurance eur",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": {
+          "amount": 120.75,
+          "currency": "EUR"
+        },
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34844.1,
+      "customsDuty": 4181.29,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 39025.39,
+      "vat": 7024.57,
+      "totalIncludingVat": 46049.96,
+      "importFactor": 1.2695,
+      "shekelPerUnitFactor": 3.9025
+    }
+  },
+  {
+    "name": "entered insurance ils",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": {
+          "amount": 410,
+          "currency": "ILS"
+        },
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34838.8,
+      "customsDuty": 4180.66,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 39019.46,
+      "vat": 7023.5,
+      "totalIncludingVat": 46042.96,
+      "importFactor": 1.2693,
+      "shekelPerUnitFactor": 3.9019
+    }
+  },
+  {
+    "name": "zero duty, vat 17",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 0
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 17,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34561.35,
+      "customsDuty": 0,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 34561.35,
+      "vat": 5875.43,
+      "totalIncludingVat": 40436.78,
+      "importFactor": 1.1243,
+      "shekelPerUnitFactor": 3.4561
+    }
+  },
+  {
+    "name": "compound higher",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "compound",
+        "rule": "higher",
+        "optionI": 3500,
+        "optionII": 4120.4
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34561.35,
+      "customsDuty": 4120.4,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 38681.75,
+      "vat": 6962.72,
+      "totalIncludingVat": 45644.47,
+      "importFactor": 1.2584,
+      "shekelPerUnitFactor": 3.8682
+    }
+  },
+  {
+    "name": "compound lower",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "compound",
+        "rule": "lower",
+        "optionI": 3500,
+        "optionII": 4120.4
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34561.35,
+      "customsDuty": 3500,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 38061.35,
+      "vat": 6851.04,
+      "totalIncludingVat": 44912.39,
+      "importFactor": 1.2382,
+      "shekelPerUnitFactor": 3.8061
+    }
+  },
+  {
+    "name": "tama without purchase tax",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 14,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34561.35,
+      "customsDuty": 4147.36,
+      "tama": 5419.22,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 38708.71,
+      "vat": 6967.57,
+      "totalIncludingVat": 45676.28,
+      "importFactor": 1.2592,
+      "shekelPerUnitFactor": 3.8709
+    }
+  },
+  {
+    "name": "purchase tax without tama",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 35,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34561.35,
+      "customsDuty": 4147.36,
+      "tama": 0,
+      "purchaseTax": 13548.05,
+      "expenses": 0,
+      "landedCost": 52256.76,
+      "vat": 9406.22,
+      "totalIncludingVat": 61662.98,
+      "importFactor": 1.7,
+      "shekelPerUnitFactor": 5.2257
+    }
+  },
+  {
+    "name": "tama and purchase tax",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 21,
+      "purchaseTaxPercent": 15,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34561.35,
+      "customsDuty": 4147.36,
+      "tama": 8128.83,
+      "purchaseTax": 7025.63,
+      "expenses": 0,
+      "landedCost": 45734.34,
+      "vat": 8232.18,
+      "totalIncludingVat": 53966.52,
+      "importFactor": 1.4878,
+      "shekelPerUnitFactor": 4.5734
+    }
+  },
+  {
+    "name": "compound + tama + purchase tax",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "compound",
+        "rule": "higher",
+        "optionI": 980,
+        "optionII": 1210
+      },
+      "tamaPercent": 8,
+      "purchaseTaxPercent": 25,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34561.35,
+      "customsDuty": 1210,
+      "tama": 2861.71,
+      "purchaseTax": 9658.27,
+      "expenses": 0,
+      "landedCost": 45429.62,
+      "vat": 8177.33,
+      "totalIncludingVat": 53606.95,
+      "importFactor": 1.4779,
+      "shekelPerUnitFactor": 4.543
+    }
+  },
+  {
+    "name": "fixed expenses mixed currencies",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 1350,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 220,
+          "currency": "USD"
+        },
+        "bank": {
+          "amount": 35,
+          "currency": "EUR"
+        },
+        "other": {
+          "amount": 99.9,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34561.35,
+      "customsDuty": 4147.36,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 2246.56,
+      "landedCost": 40955.27,
+      "vat": 7371.95,
+      "totalIncludingVat": 48327.22,
+      "importFactor": 1.3323,
+      "shekelPerUnitFactor": 4.0955
+    }
+  },
+  {
+    "name": "percent expenses on running total",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 900,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "percent": 0.5
+        },
+        "bank": {
+          "percent": 0.25
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      }
+    },
+    "expected": {
+      "cif": 34561.35,
+      "customsDuty": 4147.36,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 1197.56,
+      "landedCost": 39906.27,
+      "vat": 7183.13,
+      "totalIncludingVat": 47089.4,
+      "importFactor": 1.2982,
+      "shekelPerUnitFactor": 3.9906
+    }
+  },
+  {
+    "name": "custom expenses",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 750,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": [
+          {
+            "id": "a",
+            "name": "Port storage",
+            "amount": {
+              "amount": 430,
+              "currency": "ILS"
+            }
+          },
+          {
+            "id": "b",
+            "name": "Lab test",
+            "amount": {
+              "amount": 180,
+              "currency": "USD"
+            }
+          },
+          {
+            "id": "c",
+            "name": "Agent margin",
+            "amount": {
+              "percent": 1.5
+            }
+          }
+        ]
+      }
+    },
+    "expected": {
+      "cif": 34561.35,
+      "customsDuty": 4147.36,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 2339.95,
+      "landedCost": 41048.66,
+      "vat": 7388.76,
+      "totalIncludingVat": 48437.42,
+      "importFactor": 1.3354,
+      "shekelPerUnitFactor": 4.1049
+    }
+  },
+  {
+    "name": "everything combined",
+    "input": {
+      "mode": "standard",
+      "rates": {
+        "USD": 3.65,
+        "EUR": 3.97
+      },
+      "cif": {
+        "cost": {
+          "amount": 18450.25,
+          "currency": "EUR"
+        },
+        "freight": {
+          "amount": 2310,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.5
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 8
+      },
+      "tamaPercent": 12,
+      "purchaseTaxPercent": 20,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 1800,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 260,
+          "currency": "USD"
+        },
+        "bank": {
+          "percent": 0.3
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": [
+          {
+            "id": "x",
+            "name": "Forklift",
+            "amount": {
+              "amount": 350,
+              "currency": "ILS"
+            }
+          }
+        ]
+      }
+    },
+    "expected": {
+      "cif": 82128.22,
+      "customsDuty": 6570.26,
+      "tama": 10643.82,
+      "purchaseTax": 19868.46,
+      "expenses": 3432.95,
+      "landedCost": 111999.89,
+      "vat": 20159.98,
+      "totalIncludingVat": 132159.87,
+      "importFactor": 1.5291,
+      "shekelPerUnitFactor": 6.0704
+    }
+  },
+  {
+    "name": "air: single carton, actual wins",
+    "input": {
+      "mode": "air-shipment",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      },
+      "airShipment": {
+        "cartons": [
+          {
+            "length": 40,
+            "width": 30,
+            "height": 20,
+            "weight": 18,
+            "quantity": 3
+          }
+        ],
+        "divisor": 6000,
+        "ratePerKg": 3.2,
+        "fuelSurchargePerKg": 0.85,
+        "handlingFee": 45
+      }
+    },
+    "expected": {
+      "cif": 31672.08,
+      "customsDuty": 3800.65,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 35472.73,
+      "vat": 6385.09,
+      "totalIncludingVat": 41857.82,
+      "importFactor": 1.154,
+      "shekelPerUnitFactor": 3.5473,
+      "chargeableWeight": 54,
+      "airFreightUsd": 263.7
+    }
+  },
+  {
+    "name": "air: multi carton, volumetric wins",
+    "input": {
+      "mode": "air-shipment",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 10000,
+          "currency": "USD"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 0,
+      "purchaseTaxPercent": 0,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      },
+      "airShipment": {
+        "cartons": [
+          {
+            "length": 60,
+            "width": 50,
+            "height": 45,
+            "weight": 9.5,
+            "quantity": 4
+          },
+          {
+            "length": 35,
+            "width": 35,
+            "height": 35,
+            "weight": 4.2,
+            "quantity": 2
+          }
+        ],
+        "divisor": 6000,
+        "ratePerKg": 2.75,
+        "fuelSurchargePerKg": 1.1,
+        "handlingFee": 60
+      }
+    },
+    "expected": {
+      "cif": 32282.52,
+      "customsDuty": 3873.9,
+      "tama": 0,
+      "purchaseTax": 0,
+      "expenses": 0,
+      "landedCost": 36156.42,
+      "vat": 6508.16,
+      "totalIncludingVat": 42664.58,
+      "importFactor": 1.1762,
+      "shekelPerUnitFactor": 3.6156,
+      "chargeableWeight": 104.29,
+      "airFreightUsd": 461.52
+    }
+  },
+  {
+    "name": "air: divisor 5000 with taxes and expenses",
+    "input": {
+      "mode": "air-shipment",
+      "rates": {
+        "USD": 3.074,
+        "EUR": 3.4393
+      },
+      "cif": {
+        "cost": {
+          "amount": 7400,
+          "currency": "EUR"
+        },
+        "freight": {
+          "amount": 1200,
+          "currency": "USD"
+        },
+        "insurance": null,
+        "premiumPercent": 0.35
+      },
+      "duty": {
+        "kind": "percent",
+        "percent": 12
+      },
+      "tamaPercent": 10,
+      "purchaseTaxPercent": 12,
+      "vatPercent": 18,
+      "expenses": {
+        "localTransport": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "customsBroker": {
+          "amount": 600,
+          "currency": "ILS"
+        },
+        "bank": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "other": {
+          "amount": 0,
+          "currency": "ILS"
+        },
+        "custom": []
+      },
+      "airShipment": {
+        "cartons": [
+          {
+            "length": 55,
+            "width": 42,
+            "height": 38,
+            "weight": 12.3,
+            "quantity": 5
+          }
+        ],
+        "divisor": 5000,
+        "ratePerKg": 4.1,
+        "fuelSurchargePerKg": 0.6,
+        "handlingFee": 30
+      }
+    },
+    "expected": {
+      "cif": 26914.5,
+      "customsDuty": 3229.74,
+      "tama": 3014.42,
+      "purchaseTax": 3979.04,
+      "expenses": 600,
+      "landedCost": 34723.28,
+      "vat": 6250.19,
+      "totalIncludingVat": 40973.47,
+      "importFactor": 1.3643,
+      "shekelPerUnitFactor": 4.6923,
+      "chargeableWeight": 87.78,
+      "airFreightUsd": 442.57
+    }
+  }
+]

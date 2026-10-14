@@ -10,11 +10,10 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] Create `develop` from `main`
 - [x] IMCL-1: scaffold Vite 8 + React 19 + TS + Tailwind 4 + shadcn (RTL) + React Router 8 + Vitest + ESLint/Prettier + React Compiler; placeholder routes; `vercel.json` SPA rewrite — merged into `develop` and `main`
 - [x] Capability map approved (9 modules)
-- [x] Draft SPEC.md, SPEC-calc-engine.md, SPEC-i18n.md, SPEC-fx-rates.md
+- [x] Draft SPEC.md, SPEC-calc-engine.md, SPEC-i18n.md, SPEC-fx-rates.md — approved
+- [x] IMCL-2 calc-engine: pure engine, 20 RN golden fixtures, 4 deviations tested, purity lint rule
 
 ## Pending
-- [ ] Owner review: SPEC-calc-engine, SPEC-i18n, SPEC-fx-rates
-- [ ] Build calc-engine
 - [ ] Build i18n
 - [ ] Build fx-rates
 - [ ] Spec + build calculator-ui

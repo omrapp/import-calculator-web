@@ -27,4 +27,15 @@ export default defineConfig([
     files: ['src/components/ui/**/*.tsx'],
     rules: { 'react-refresh/only-export-components': 'off' },
   },
+  {
+    // calc-engine stays pure: no UI, i18n or browser APIs
+    files: ['src/features/calc-engine/**/*.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        { patterns: ['react', 'react-*', 'react/*', 'i18next', '@/*'] },
+      ],
+      'no-restricted-globals': ['error', 'window', 'document', 'localStorage'],
+    },
+  },
 ]);
