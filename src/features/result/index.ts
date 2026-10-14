@@ -1,1 +1,1 @@
-export { ResultView } from './ResultView';
+export { type ResultActions, ResultView } from './ResultView';
