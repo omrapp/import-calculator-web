@@ -2,6 +2,7 @@
 import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, type Connect, type Plugin } from 'vite';
 
@@ -28,7 +29,12 @@ function ratesApi(): Plugin {
 }
 
 // https://vite.dev/config/
+const { version } = JSON.parse(
+  readFileSync(new URL('./package.json', import.meta.url), 'utf8'),
+) as { version: string };
+
 export default defineConfig({
+  define: { __APP_VERSION__: JSON.stringify(version) },
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] }),
@@ -43,5 +49,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
+    // Heavy jsdom suites (forms, dialogs) run in parallel; 5s is too tight.
+    testTimeout: 15_000,
   },
 });

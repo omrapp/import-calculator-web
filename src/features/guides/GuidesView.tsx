@@ -1,5 +1,5 @@
 import { Search } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router';
 
@@ -34,10 +34,6 @@ export function GuidesView() {
   const param = params.get('tab');
   const tab: Tab = isTab(param) ? param : 'guides';
   const [query, setQuery] = useState('');
-
-  useEffect(() => {
-    document.title = t('guides.page_title');
-  }, [t]);
 
   const changeTab = (value: string) => {
     setQuery('');

@@ -205,7 +205,7 @@ The site shell and the informational pages: navigation that works on phones, Set
 
 ```
 src/app/{AppLayout.tsx,nav.ts,routes.tsx,SiteFooter.tsx,MobileNav.tsx,usePageTitle.ts}
-src/features/site-pages/  SettingsView.tsx  AboutView.tsx  ContactView.tsx  LegalView.tsx  content/{privacy,terms}.ts  index.ts  (+ tests)
+src/features/site-pages/  SettingsView.tsx  AboutView.tsx  ContactView.tsx  LegalView.tsx  content/{privacy,terms,types}.ts  index.ts  (+ tests)
 src/pages/{Settings,About,Contact,Privacy,Terms}Page.tsx, src/pages/NotFoundPage.tsx
 src/components/ui/{sheet,radio-group}.tsx (shadcn)
 index.html, public/og-image.png, scripts/make-og-image.ts, vite.config.ts (define), src/locales/*.json
@@ -215,22 +215,22 @@ New runtime dependency: `@vercel/analytics`.
 
 ### Success Criteria
 
-- [ ] `routes.test.tsx`: every route renders its page heading (lazy), and an unknown path renders 404.
-- [ ] `usePageTitle`: title changes with the route and with the language.
-- [ ] Layout: at a narrow width the menu button opens the nav sheet, and choosing a link closes it; the footer links are present.
-- [ ] Settings: choosing עברית sets `<html dir="rtl" lang="he">`; Share calls `navigator.share` when available and otherwise copies the URL.
-- [ ] Contact: the `mailto:omrayed.27@gmail.com` link is present.
-- [ ] Privacy and Terms render every section in en/he/ar; a test checks section-count parity across languages.
-- [ ] `index.html` has the OG/Twitter meta tags; `public/og-image.png` is 1200×630.
-- [ ] `npm run build`: no chunk-size warning for the main chunk.
+- [x] `routes.test.tsx`: every route renders its page heading (lazy), and an unknown path renders 404.
+- [x] `usePageTitle`: title changes with the route and with the language.
+- [x] Layout: at a narrow width the menu button opens the nav sheet, and choosing a link closes it; the footer links are present.
+- [x] Settings: choosing עברית sets `<html dir="rtl" lang="he">`; Share calls `navigator.share` when available and otherwise copies the URL.
+- [x] Contact: the `mailto:omrayed.27@gmail.com` link is present.
+- [x] Privacy and Terms render every section in en/he/ar; a test checks section-count parity across languages.
+- [x] `index.html` has the OG/Twitter meta tags; `public/og-image.png` is 1200×630.
+- [x] `npm run build`: main chunk 273 kB, under 500 kB. Vite still warns about the lazy `renderPdf` chunk (1.2 MB), which loads only when a PDF is made.
 
 ---
 
 ## Shared success criteria (every ticket)
 
-- [ ] `npm test`, `npm run lint` and `npm run build` pass before each merge.
-- [ ] New strings exist in en/he/ar (the locale parity test passes) and the direction test passes.
-- [ ] Each ticket is merged `--no-ff` into `develop` and then `main`, and pushed; branches are kept; TASKS.md is updated.
+- [x] `npm test`, `npm run lint` and `npm run build` pass before each merge.
+- [x] New strings exist in en/he/ar (the locale parity test passes) and the direction test passes.
+- [x] Each ticket is merged `--no-ff` into `develop` and then `main`, and pushed; branches are kept; TASKS.md is updated.
 - [ ] Manual (owner): browser check in en/he/ar of the History, Guides, Settings and legal pages, plus the PDF in he and ar.
 
 ## Open Questions
