@@ -70,4 +70,21 @@ describe('GuidesView', () => {
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');
   });
+
+  it('groups websites by category and filters by one', () => {
+    renderGuides('/guides?tab=websites');
+    expect(
+      screen.getByRole('heading', { level: 2, name: 'Government & Customs' }),
+    ).toBeInTheDocument();
+    fireEvent.click(
+      screen.getByRole('button', { name: /^Shipping & Logistics/ }),
+    );
+    expect(
+      screen.getByRole('button', { name: /^Shipping & Logistics/ }),
+    ).toHaveAttribute('aria-pressed', 'true');
+    expect(
+      screen.queryByRole('heading', { level: 2, name: 'Government & Customs' }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText('Tevel Logistics')).toBeInTheDocument();
+  });
 });

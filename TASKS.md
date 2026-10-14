@@ -29,7 +29,7 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] IMCL-13 required `*` / `(optional)` markers + legend; required = USD/EUR rates, Duty Option I/II, carton quantity, divisor (empty = 0 elsewhere)
 - [x] IMCL-14 info popups for Customs Duty, Duty Option I, Duty Option II (drafted examples en/he/ar — owner review)
 - [x] IMCL-15 editable calculation title + description ("Calculation N"): form header, Result, History cards, PDF/PNG/share link
-- [ ] IMCL-16 Websites tab: categories, ~15-25 new Israel-import links (verified), generated branded hero cards
+- [x] IMCL-16 Websites tab: 7 categories with filter + sections, generated hero cards, 22 new sites (37 total; fetched 2026-10-14). Not added (blocked to fetch, need manual check): Bank of Israel rates, Israel Ports, Export Institute, Ministry of Health import
 - [ ] IMCL-17 Guides as documentation: sticky TOC + scroll-spy + anchors, SVG flow diagrams, tables + charts, callouts + icons
 
 - [ ] IMCL-11 site redesign (design flow; `.design/site-redesign/`): brief, IA, tokens, task list done; Foundation T1–T3 + Core UI T4–T11 + Interactions T12–T16 (History, Guides, info pages + Settings theme + 404, SEO kit, export brand header) and Polish T17–T19 (responsive/RTL, a11y + reduced motion, perf) done; merged --no-ff into develop (62f7c22), main pending owner test + deploy. Initial JS 195 KiB gz (budget 214), CLS < 0.07
