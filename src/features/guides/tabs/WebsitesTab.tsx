@@ -87,25 +87,28 @@ function WebsiteCard({ site }: { site: TradingWebsite }) {
 
   return (
     <li className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-xs transition-shadow duration-150 hover:shadow-md">
-      {/* Generated hero: category gradient, dot grid, icon watermark, monogram. */}
-      <div
-        aria-hidden
-        className={cn(
-          'relative isolate h-24 overflow-hidden bg-linear-to-br',
-          style.hero,
-        )}
-      >
-        <div className="absolute inset-0 -z-10 bg-dot-grid opacity-60 mask-b-from-10% mask-b-to-100%" />
-        <Icon
+      {/* Generated hero: category gradient, dot grid, icon watermark, monogram.
+          The monogram sits outside the clipped art layer so it can overlap
+          the card body without being cut in half. */}
+      <div aria-hidden className="relative h-24">
+        <div
           className={cn(
-            'absolute -end-3 -bottom-5 size-28 opacity-15 transition-transform duration-300 group-hover:scale-105',
-            style.tint,
+            'absolute inset-0 isolate overflow-hidden bg-linear-to-br',
+            style.hero,
           )}
-          strokeWidth={1.25}
-        />
+        >
+          <div className="absolute inset-0 -z-10 bg-dot-grid opacity-60 mask-b-from-10% mask-b-to-100%" />
+          <Icon
+            className={cn(
+              'absolute -end-3 -bottom-5 size-28 opacity-15 transition-transform duration-300 group-hover:scale-105',
+              style.tint,
+            )}
+            strokeWidth={1.25}
+          />
+        </div>
         <span
           className={cn(
-            'absolute start-5 bottom-0 grid size-12 translate-y-1/2 place-items-center rounded-xl border bg-card text-base font-bold shadow-sm',
+            'absolute start-5 bottom-0 z-10 grid size-12 translate-y-1/2 place-items-center rounded-xl border bg-card text-base font-bold shadow-sm',
             style.tint,
           )}
         >
