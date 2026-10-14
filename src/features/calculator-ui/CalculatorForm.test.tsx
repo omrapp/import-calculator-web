@@ -170,6 +170,23 @@ describe('CalculatorForm', () => {
     );
   });
 
+  it('marks required fields with * and the rest as optional', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    expect(screen.getByLabelText('USD $')).toHaveAttribute(
+      'aria-required',
+      'true',
+    );
+    expect(screen.getByLabelText('Cost')).not.toHaveAttribute('aria-required');
+    expect(screen.getAllByText('(optional)').length).toBeGreaterThan(0);
+    expect(
+      screen.getByText('Fields marked * are required'),
+    ).toBeInTheDocument();
+  });
+
   it('drops letters and symbols typed into a number field', async () => {
     ratesApi(ratesPayload);
     renderForm();

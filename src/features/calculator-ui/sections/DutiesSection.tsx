@@ -58,11 +58,13 @@ export function DutiesSection() {
         <div className="grid gap-x-3 sm:grid-cols-2">
           <NumberField
             name="duty.optionI"
+            required
             label={t('home.labels.duty_option_i')}
             unit="₪"
           />
           <NumberField
             name="duty.optionII"
+            required
             label={t('home.labels.duty_option_ii')}
             unit="₪"
           />

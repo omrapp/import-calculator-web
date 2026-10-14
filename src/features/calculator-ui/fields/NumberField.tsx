@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { type ReactNode, useId } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +16,10 @@ type Props = {
   /** Unit shown inside the field, e.g. ₪, %, kg. */
   unit?: string;
   hint?: string;
+  /** Marks the field with * (required) or "optional" next to the label. */
+  required?: boolean;
+  /** Extra control shown after the label, e.g. an info button. */
+  labelAddon?: ReactNode;
   placeholder?: string;
   className?: string;
   onUserChange?: () => void;
@@ -33,6 +37,8 @@ export function NumberField({
   label,
   unit,
   hint,
+  required = false,
+  labelAddon,
   placeholder,
   className,
   onUserChange,
@@ -52,7 +58,12 @@ export function NumberField({
 
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
-      <Label htmlFor={id}>{label}</Label>
+      <FieldLabel
+        htmlFor={id}
+        label={label}
+        required={required}
+        addon={labelAddon}
+      />
       {/* Numbers read LTR in every language, so the unit sits at the LTR end. */}
       <div className="relative" dir="ltr">
         <Input
@@ -75,6 +86,7 @@ export function NumberField({
           autoComplete="off"
           dir="ltr"
           placeholder={placeholder}
+          aria-required={required || undefined}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy}
           className={cn('tabular-nums', unit && 'pe-10')}
@@ -100,6 +112,36 @@ export function NumberField({
           hint && <span className="text-muted-foreground">{hint}</span>
         )}
       </p>
+    </div>
+  );
+}
+
+/** Label row: the label, then * or "optional", then an optional addon. */
+export function FieldLabel({
+  htmlFor,
+  label,
+  required,
+  addon,
+}: {
+  htmlFor: string;
+  label: string;
+  required: boolean;
+  addon?: ReactNode;
+}) {
+  const { t } = useTranslation();
+  return (
+    <div className="flex min-h-5 items-center gap-1">
+      <Label htmlFor={htmlFor}>{label}</Label>
+      {required ? (
+        <span aria-hidden className="text-sm font-medium text-destructive">
+          *
+        </span>
+      ) : (
+        <span className="text-xs text-muted-foreground">
+          ({t('calculator.labels.optional')})
+        </span>
+      )}
+      {addon}
     </div>
   );
 }

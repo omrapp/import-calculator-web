@@ -235,6 +235,9 @@ export function CalculatorForm({ mode, title }: { mode: Mode; title: string }) {
         />
 
         <DraftSaver mode={mode} manualRates={manualRates} />
+        <p className="text-xs text-muted-foreground">
+          {t('calculator.hints.required_legend')}
+        </p>
         <RatesSection
           rates={exchangeRates}
           manual={manualRates}

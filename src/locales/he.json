@@ -301,7 +301,8 @@
       "insurance_derived": "השאירו ריק לחישוב לפי הפרמיה: (עלות + הובלה) × 110% × פרמיה",
       "percent_expense": "% מתוך הסכום המצטבר",
       "vat_default": "ריק = 18%",
-      "expression_result": "= {{value}}"
+      "expression_result": "= {{value}}",
+      "required_legend": "שדות המסומנים ב-* הם חובה"
     },
     "actions": {
       "clear_form": "נקה טופס",
@@ -313,7 +314,8 @@
     "labels": {
       "duty_mode": "מכס",
       "percent": "אחוז",
-      "cif_preview": "CIF"
+      "cif_preview": "CIF",
+      "optional": "רשות"
     }
   },
   "export": {

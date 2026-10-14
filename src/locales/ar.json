@@ -301,7 +301,8 @@
       "insurance_derived": "اتركه فارغًا للحساب من العلاوة: (التكلفة + الشحن) × 110% × العلاوة",
       "percent_expense": "% من الإجمالي المتراكم",
       "vat_default": "فارغ = 18%",
-      "expression_result": "= {{value}}"
+      "expression_result": "= {{value}}",
+      "required_legend": "الحقول المميزة بـ * مطلوبة"
     },
     "actions": {
       "clear_form": "مسح النموذج",
@@ -313,7 +314,8 @@
     "labels": {
       "duty_mode": "الرسوم الجمركية",
       "percent": "نسبة مئوية",
-      "cif_preview": "CIF"
+      "cif_preview": "CIF",
+      "optional": "اختياري"
     }
   },
   "export": {

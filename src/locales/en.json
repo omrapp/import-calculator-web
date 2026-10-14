@@ -301,7 +301,8 @@
       "insurance_derived": "Leave empty to calculate from the Premium: (Cost + Freight) × 110% × Premium",
       "percent_expense": "% is of the running total",
       "vat_default": "Empty = 18%",
-      "expression_result": "= {{value}}"
+      "expression_result": "= {{value}}",
+      "required_legend": "Fields marked * are required"
     },
     "actions": {
       "clear_form": "Clear form",
@@ -313,7 +314,8 @@
     "labels": {
       "duty_mode": "Customs Duty",
       "percent": "Percent",
-      "cif_preview": "CIF"
+      "cif_preview": "CIF",
+      "optional": "optional"
     }
   },
   "export": {
