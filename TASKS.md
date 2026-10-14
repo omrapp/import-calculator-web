@@ -30,7 +30,7 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] IMCL-14 info popups for Customs Duty, Duty Option I, Duty Option II (drafted examples en/he/ar — owner review)
 - [x] IMCL-15 editable calculation title + description ("Calculation N"): form header, Result, History cards, PDF/PNG/share link
 - [x] IMCL-16 Websites tab: 7 categories with filter + sections, generated hero cards, 22 new sites (37 total; fetched 2026-10-14). Not added (blocked to fetch, need manual check): Bank of Israel rates, Israel Ports, Export Institute, Ministry of Health import
-- [ ] IMCL-17 Guides as documentation: sticky TOC + scroll-spy + anchors, SVG flow diagrams, tables + charts, callouts + icons
+- [x] IMCL-17 Guides as documentation: sticky TOC + scroll-spy + #module-N anchors, import-flow diagram, personal-import table, chargeable-weight SVG, tax cascade, engine-computed sample cost chart, document thumbnails, tip/note/warning callouts with links, category badges
 
 - [ ] IMCL-11 site redesign (design flow; `.design/site-redesign/`): brief, IA, tokens, task list done; Foundation T1–T3 + Core UI T4–T11 + Interactions T12–T16 (History, Guides, info pages + Settings theme + 404, SEO kit, export brand header) and Polish T17–T19 (responsive/RTL, a11y + reduced motion, perf) done; merged --no-ff into develop (62f7c22), main pending owner test + deploy. Initial JS 195 KiB gz (budget 214), CLS < 0.07
 
@@ -41,6 +41,9 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [ ] Flaky: CalculatorForm rates/draft tests can time out (1 s waitFor) when the machine is busy; pass alone
 
 ## Blockers
+- Owner: browser check of IMCL-12..17 (en/he/ar, light/dark, mobile) — Chrome extension not connected this session
+- Owner: review drafted he/ar text: duty info popups (IMCL-14), docs callouts/diagrams (IMCL-17), new website descriptions (IMCL-16)
+- Owner: Cost/Freight are optional by current engine rules (empty = 0); say if Cost should be required
 - Guide content copied verbatim from the app; module 1 still says VAT 17% (now 18%). Owner to review the content
 - Owner: open a he and an ar PDF from a real browser download and check them; the render was checked only from test output via macOS sips
 - Browser check of calculator pages (en/he) not done — Chrome extension not connected

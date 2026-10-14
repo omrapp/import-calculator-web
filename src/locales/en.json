@@ -300,6 +300,120 @@
         "payments": "Pay suppliers abroad and manage currency costs.",
         "tools": "Everyday helpers for talking to suppliers and doing the math."
       }
+    },
+    "docs": {
+      "on_this_page": "On this page",
+      "link_to_section": "Link to this section",
+      "overview_title": "The import journey at a glance",
+      "overview_lead": "Every import follows the same six steps. The sections below explain the rules, systems, documents and costs behind each one.",
+      "callout": {
+        "tip": "Tip",
+        "note": "Note",
+        "warning": "Important"
+      },
+      "category": {
+        "regulations": "Regulations",
+        "vehicles": "Vehicles",
+        "systems": "Government systems",
+        "documentation": "Documents",
+        "shipping": "Shipping",
+        "calculation": "Costs"
+      },
+      "flow": {
+        "caption": "From finding a product to receiving it: the six steps of an import into Israel.",
+        "research": "Research",
+        "research_desc": "Product, HS code, demand",
+        "order": "Order",
+        "order_desc": "Supplier, price, Incoterms",
+        "ship": "Ship",
+        "ship_desc": "Sea or air freight",
+        "clear": "Clear customs",
+        "clear_desc": "Documents and approvals",
+        "pay": "Pay taxes",
+        "pay_desc": "Duty, Purchase Tax, VAT",
+        "receive": "Receive",
+        "receive_desc": "Release and delivery"
+      },
+      "personal": {
+        "caption": "Personal imports by declared value (USD). Rates and limits change; confirm on gov.il before ordering.",
+        "value": "Declared value",
+        "duty": "Customs Duty",
+        "vat": "VAT",
+        "purchase_tax": "Purchase Tax",
+        "broker": "Formal declaration (broker)",
+        "up_to_75": "Up to $75",
+        "75_500": "$75 – $500",
+        "500_1000": "$500 – $1,000",
+        "over_1000": "Over $1,000",
+        "yes": "Yes",
+        "no": "No",
+        "maybe": "If applicable"
+      },
+      "weight": {
+        "caption": "Airlines charge for space as well as weight: you pay for whichever is larger.",
+        "box_label": "A carton with length, width and height marked",
+        "volumetric": "Volumetric weight",
+        "actual": "Actual weight",
+        "chargeable": "Chargeable weight",
+        "chargeable_rule": "max(volumetric, actual)",
+        "example": "Example: 60 × 40 × 50 cm ÷ 6000 = 20 kg volumetric. Actual 14 kg → you pay for 20 kg."
+      },
+      "cascade": {
+        "caption": "Each tax is calculated on top of the layer before it, so a higher Customs Duty also raises Purchase Tax and VAT.",
+        "cif": "CIF value",
+        "cif_formula": "Cost + Freight + Insurance",
+        "duty": "Customs Duty",
+        "duty_formula": "CIF × duty %",
+        "purchase_tax": "Purchase Tax",
+        "purchase_tax_formula": "(CIF + Duty) × purchase tax %",
+        "landed": "Landed Cost",
+        "landed_formula": "CIF + Duty + Purchase Tax + Expenses",
+        "vat": "VAT",
+        "vat_formula": "Landed Cost × 18%"
+      },
+      "chart": {
+        "title": "Where the money goes: a sample import",
+        "total": "Total including VAT",
+        "caption": "Sample: $10,000 goods + $1,200 freight (USD = ₪3.70), 0.35% insurance premium, 12% Customs Duty, 15% Purchase Tax, ₪2,300 local expenses, 18% VAT. Calculated with this site's calculator.",
+        "cif": "CIF value",
+        "customsDuty": "Customs Duty",
+        "purchaseTax": "Purchase Tax",
+        "expenses": "Local expenses",
+        "vat": "VAT"
+      },
+      "documents_caption": "Certificates of origin you may need. Open one to view it full size in the Gallery.",
+      "module": {
+        "1": {
+          "callout": "Limits and VAT rates change (VAT has been 18% since 2025). Check the Tax Authority under <websites>Websites</websites> before you order."
+        },
+        "2": {
+          "callout": "Vehicle imports have strict standards and paperwork. Talk to a licensed customs broker before you buy."
+        },
+        "3": {
+          "callout": "Find your product's HS code in Shaar Olami, then use its Customs Duty and Purchase Tax rates in the <calc>calculator</calc>."
+        },
+        "4": {
+          "callout": "Apply for licenses and approvals before the goods ship. Goods waiting at the port for approval pay storage fees."
+        },
+        "5": {
+          "callout": "A valid certificate of origin can cut or cancel the Customs Duty under a trade agreement. See the samples in the <gallery>Gallery</gallery>."
+        },
+        "6": {
+          "callout": "Counterfeit and prohibited goods are seized at customs and can lead to fines. When in doubt, ask before you order."
+        },
+        "7": {
+          "callout": "Use the <air>Air Shipment calculator</air>: it works out the chargeable weight for every carton for you."
+        },
+        "8": {
+          "callout": "Wood packaging without the ISPM 15 stamp can be rejected or destroyed at the port, at your cost."
+        },
+        "9": {
+          "callout": "Rules differ from regular imports. Confirm the procedure with a customs broker before you ship."
+        },
+        "10": {
+          "callout": "Run your own numbers in the <calc>calculator</calc>. Trade terms like CIF and FOB are explained under <terms>Terms</terms>."
+        }
+      }
     }
   },
   "calculator": {
