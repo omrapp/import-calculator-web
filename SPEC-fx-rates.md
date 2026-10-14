@@ -14,9 +14,10 @@ Consumers: `calculator-ui` (default rates, status line, override), `history` (re
 
 ## Design
 
-- Shared handler `src/features/fx-rates/server/getRates.ts`: fetch BOI (5 s timeout), pick USD and EUR, divide by `unit`, return
-  `{ rates: { USD: { rate, lastUpdate }, EUR: { rate, lastUpdate } }, source: 'boi' }`. Malformed or missing data → throw.
-- Vercel function `api/rates.ts` (Web `GET` handler) wraps it: 200 with `Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400`; on error 502 `{ error: 'unavailable' }` with `no-store`.
+- `api/rates.ts` is self-contained (no imports from `src/`: Vercel compiles functions per file and the repo is ESM, so cross-folder extensionless imports are a deploy risk). It exports:
+  - `getRates()`: fetch BOI (5 s timeout), pick USD and EUR, divide by `unit`, return `{ rates: { USD: { rate, lastUpdate }, EUR: { rate, lastUpdate } }, source: 'boi' }`. Malformed or missing data → throw.
+  - `GET()` (Web handler): 200 with `Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400`; on error 502 `{ error: 'unavailable' }` with `no-store`.
+  - `RatesPayload` type, imported type-only by the client.
 - Local dev: a small Vite plugin in `vite.config.ts` mounts the same handler at `/api/rates` on the dev and preview servers, so `npm run dev` gets real rates without `vercel dev` or a linked project.
 - Client `useExchangeRates()` → `{ status: 'live' | 'cached' | 'unavailable' | 'loading', rates?, lastUpdate?, refresh() }`:
   - Success: `live`; save to localStorage key `fx-rates:last`.
@@ -28,23 +29,22 @@ Consumers: `calculator-ui` (default rates, status line, override), `history` (re
 ## Files
 
 ```
-api/rates.ts
-src/features/fx-rates/  index.ts  useExchangeRates.ts  storage.ts  types.ts
-src/features/fx-rates/server/getRates.ts
-(+ tests next to each)
-vite.config.ts (dev middleware), tsconfig.node.json (include api/ and server/ for typecheck)
+api/rates.ts                      (every file in api/ becomes a Vercel function, so no tests here)
+src/features/fx-rates/rates-api.test.ts
+src/features/fx-rates/  index.ts  useExchangeRates.ts  storage.ts  (+ tests)
+vite.config.ts (dev/preview middleware), tsconfig.node.json (include api/ for typecheck)
 ```
 
 No new runtime deps (native `fetch`).
 
 ## Success Criteria
 
-- [ ] `getRates` test (mocked fetch): parses the real response shape; divides by `unit`; throws on missing USD/EUR, non-positive rate, non-200, timeout.
-- [ ] `api/rates.ts` test: 200 + `s-maxage=3600` header on success; 502 + `no-store` on failure.
-- [ ] `useExchangeRates` tests: live → saved to localStorage; failure + saved → `cached` with date; failure + nothing saved → `unavailable`; localStorage throwing doesn't crash.
-- [ ] `npm run dev` then `curl localhost:5173/api/rates` returns live USD/EUR (manual check, recorded in the report).
-- [ ] `grep` finds no numeric rate literals (3.5, 4.0, etc.) in `src/` outside tests.
-- [ ] `npm test`, `npm run lint`, `npm run build` pass.
+- [x] `getRates` test (mocked fetch): parses the real response shape; divides by `unit`; throws on missing USD/EUR, non-positive rate, non-200, timeout.
+- [x] `api/rates.ts` test: 200 + `s-maxage=3600` header on success; 502 + `no-store` on failure.
+- [x] `useExchangeRates` tests: live → saved to localStorage; failure + saved → `cached` with date; failure + nothing saved → `unavailable`; localStorage throwing doesn't crash.
+- [x] `npm run dev` / `npm run preview` then `curl …/api/rates` returns live USD/EUR (checked 2026-10-14: USD 3.074, EUR 3.4393).
+- [x] `grep` finds no numeric rate literals (3.5, 4.0, etc.) in `src/` outside tests.
+- [x] `npm test`, `npm run lint`, `npm run build` pass.
 
 ## Open Questions
 
