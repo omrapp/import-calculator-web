@@ -164,7 +164,17 @@
       "factors": "معاملات الاستيراد",
       "import_factor": "معامل الاستيراد",
       "shekel_per_unit_factor": "معامل الشيكل لكل وحدة عملة"
-    }
+    },
+    "rates_manual": "أسعار مُدخلة يدويًا",
+    "rates_used": "USD {{usd}} · EUR {{eur}}",
+    "invalid_link": "رابط الحساب غير صالح أو غير مكتمل.",
+    "copy_link": "نسخ الرابط",
+    "link_copied": "تم نسخ الرابط",
+    "edit": "تعديل",
+    "new_calculation": "حساب جديد",
+    "page_title": "النتيجة — حاسبة الاستيراد",
+    "summary": "الملخص",
+    "breakdown": "التفصيل خطوة بخطوة"
   },
   "settings": {
     "title": "الإعدادات",

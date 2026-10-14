@@ -9,9 +9,10 @@ export function formatNumber(
   value: number,
   language: Language,
   fractionDigits = 2,
+  minFractionDigits = fractionDigits,
 ): string {
   return new Intl.NumberFormat(locale(language), {
-    minimumFractionDigits: fractionDigits,
+    minimumFractionDigits: minFractionDigits,
     maximumFractionDigits: fractionDigits,
   }).format(value);
 }
