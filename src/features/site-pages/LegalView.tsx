@@ -1,4 +1,7 @@
+import { FileText } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+
+import { PageHeader } from '@/components/page';
 
 import { formatDate, useLanguage } from '@/features/i18n';
 
@@ -15,25 +18,28 @@ export function LegalView({
   const { language } = useLanguage();
 
   return (
-    <article className="mx-auto flex max-w-3xl flex-col gap-6">
-      <header className="flex flex-col gap-1">
-        <h1 className="text-2xl font-semibold">{t(titleKey)}</h1>
-        <p className="text-sm text-muted-foreground">
-          {t('pages.effective_date', {
-            date: formatDate(legal.effectiveDate, language),
-          })}
+    <article className="mx-auto flex max-w-prose-tight flex-col gap-8">
+      <PageHeader
+        icon={<FileText />}
+        title={t(titleKey)}
+        meta={
+          <span>
+            {t('pages.effective_date', {
+              date: formatDate(legal.effectiveDate, language),
+            })}
+          </span>
+        }
+      />
+      {import.meta.env.DEV && (
+        <p className="rounded-xl border border-dashed p-3 text-sm text-muted-foreground">
+          {t('pages.draft_notice')}
         </p>
-        {import.meta.env.DEV && (
-          <p className="rounded-md border border-dashed p-2 text-sm">
-            {t('pages.draft_notice')}
-          </p>
-        )}
-      </header>
+      )}
       {legal.sections[language].map(section => (
-        <section key={section.heading} className="flex flex-col gap-2">
-          <h2 className="text-lg font-semibold">{section.heading}</h2>
+        <section key={section.heading} className="flex flex-col gap-3">
+          <h2 className="text-xl font-semibold">{section.heading}</h2>
           {section.body.map((paragraph, i) => (
-            <p key={i} className="leading-relaxed">
+            <p key={i} className="leading-relaxed text-foreground/85">
               {paragraph}
             </p>
           ))}

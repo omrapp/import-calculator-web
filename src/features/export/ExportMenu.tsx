@@ -79,7 +79,10 @@ export function ExportMenu({
         {t('export.print')}
       </Button>
       {failed && (
-        <p role="alert" className="basis-full text-sm text-destructive">
+        <p
+          role="alert"
+          className="col-span-full basis-full text-sm text-destructive"
+        >
           {t('export.failed')}
         </p>
       )}

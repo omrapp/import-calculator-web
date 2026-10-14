@@ -4,9 +4,10 @@ import tailwindcss from '@tailwindcss/vite';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { defineConfig, type Connect, type Plugin } from 'vite';
+import { defineConfig, loadEnv, type Connect, type Plugin } from 'vite';
 
 import { GET as getRatesResponse } from './api/rates.ts';
+import { pageUrl, robotsTxt, sitemapXml } from './src/app/seo/site.ts';
 
 /** Serves api/rates.ts on the dev and preview servers, as Vercel does in production. */
 function ratesApi(): Plugin {
@@ -28,6 +29,80 @@ function ratesApi(): Plugin {
   };
 }
 
+/**
+ * Emits robots.txt, and with VITE_SITE_URL set also sitemap.xml, og:url and
+ * absolute preview-image URLs (social crawlers do not run JavaScript).
+ */
+function seo(): Plugin {
+  let siteUrl: string | undefined;
+  return {
+    name: 'seo',
+    configResolved: config => {
+      siteUrl = loadEnv(
+        config.mode,
+        config.envDir || process.cwd(),
+        'VITE_',
+      ).VITE_SITE_URL;
+    },
+    transformIndexHtml: html =>
+      siteUrl
+        ? html
+            .replaceAll(
+              'content="/og-image.png"',
+              `content="${pageUrl(siteUrl, '/og-image.png')}"`,
+            )
+            .replace(
+              '<meta property="og:type"',
+              `<meta property="og:url" content="${pageUrl(siteUrl, '/')}" />\n    <meta property="og:type"`,
+            )
+        : html,
+    generateBundle() {
+      this.emitFile({
+        type: 'asset',
+        fileName: 'robots.txt',
+        source: robotsTxt(siteUrl),
+      });
+      if (siteUrl) {
+        this.emitFile({
+          type: 'asset',
+          fileName: 'sitemap.xml',
+          source: sitemapXml(siteUrl),
+        });
+      }
+    },
+  };
+}
+
+/**
+ * Preloads the Latin Inter file, which every page needs for its first text,
+ * so it does not wait for the CSS to be parsed (other scripts load on demand).
+ */
+function preloadLatinFont(): Plugin {
+  return {
+    name: 'preload-latin-font',
+    apply: 'build',
+    transformIndexHtml: (_html, context) => {
+      const file = Object.keys(context.bundle ?? {}).find(name =>
+        /inter-latin-opsz-normal-[\w-]+\.woff2$/.test(name),
+      );
+      if (!file) return [];
+      return [
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'preload',
+            href: `/${file}`,
+            as: 'font',
+            type: 'font/woff2',
+            crossorigin: '',
+          },
+          injectTo: 'head-prepend',
+        },
+      ];
+    },
+  };
+}
+
 // https://vite.dev/config/
 const { version } = JSON.parse(
   readFileSync(new URL('./package.json', import.meta.url), 'utf8'),
@@ -40,6 +115,8 @@ export default defineConfig({
     babel({ presets: [reactCompilerPreset()] }),
     tailwindcss(),
     ratesApi(),
+    seo(),
+    preloadLatinFont(),
   ],
   resolve: {
     alias: {

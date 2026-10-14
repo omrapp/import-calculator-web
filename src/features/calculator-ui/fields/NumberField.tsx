@@ -49,7 +49,8 @@ export function NumberField({
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
       <Label htmlFor={id}>{label}</Label>
-      <div className="relative">
+      {/* Numbers read LTR in every language, so the unit sits at the LTR end. */}
+      <div className="relative" dir="ltr">
         <Input
           id={id}
           ref={ref}

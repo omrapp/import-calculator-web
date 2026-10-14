@@ -25,7 +25,8 @@
     "currency_symbol": "₪",
     "dollar_symbol": "$",
     "euro_symbol": "€",
-    "premium_symbol": "%"
+    "premium_symbol": "%",
+    "close": "Close"
   },
   "nav": {
     "standard": "Standard Calculation",
@@ -40,7 +41,12 @@
     "result": "Result",
     "menu": "Menu",
     "main": "Main",
-    "footer": "Site information"
+    "footer": "Site information",
+    "calculator": "Calculator",
+    "guides_short": "Guides",
+    "home": "Import Calculator home",
+    "tools": "Tools",
+    "information": "Information"
   },
   "pages": {
     "not_found": "Page not found",
@@ -67,8 +73,11 @@
       "version": "Version {{version}}"
     },
     "settings": {
-      "share_hint": "Send the calculator to a colleague."
-    }
+      "share_hint": "Send the calculator to a colleague.",
+      "lead": "Language, appearance and sharing.",
+      "theme_hint": "System follows your device setting."
+    },
+    "not_found_body": "This page seems to have been lost at sea. Head back to the calculator, or try one of these."
   },
   "home": {
     "title": "Import Calculator",
@@ -214,6 +223,13 @@
     "about": {
       "description": "Import Calculator helps importers into Israel estimate the full landed cost of a shipment: CIF, customs duty, purchase tax, VAT and local expenses, for sea and air shipments.",
       "contact": "Contact Developer"
+    },
+    "theme": {
+      "label": "Theme",
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark",
+      "toggle": "Theme: {{current}}. Switch to {{next}}"
     }
   },
   "history": {
@@ -232,7 +248,9 @@
     "imported": "Imported {{added}}, skipped {{skipped}}",
     "import_failed": "This file is not an Import Calculator History export.",
     "backup_hint": "History is stored only in this browser. Use Export to keep a backup.",
-    "rates_unavailable": "Today's Bank of Israel rates are unavailable, so Recalculate is disabled."
+    "rates_unavailable": "Today's Bank of Israel rates are unavailable, so Recalculate is disabled.",
+    "count": "Saved calculations: {{n}}",
+    "empty_hint": "Calculate a landed cost, then press Save on the result to keep it here."
   },
   "guides": {
     "title_guides": "Import/Export Guide",
@@ -259,7 +277,8 @@
     "zoom_reset": "Reset zoom",
     "previous": "Previous",
     "next": "Next",
-    "close": "Close"
+    "close": "Close",
+    "lead": "Rules, documents, trade terms and trusted suppliers for importing into Israel, in one place."
   },
   "calculator": {
     "rates": {
@@ -303,5 +322,38 @@
     "print": "Print",
     "failed": "Couldn't create the file — try Print instead.",
     "disclaimer": "Estimate only — not customs advice. Verify with a licensed customs broker."
+  },
+  "footer": {
+    "tagline": "Landed-cost estimates for imports to Israel: customs duty, purchase tax and VAT on live exchange rates.",
+    "data_heading": "Data & trust",
+    "rates_note": "Exchange rates are the Bank of Israel's representative rates, fetched live.",
+    "rights": "© {{year}} Import Calculator"
+  },
+  "hero": {
+    "lead": {
+      "standard": "Customs duty, purchase tax and VAT for any shipment, with the freight you already know.",
+      "air": "Chargeable weight and freight worked out from your cartons, then every duty and tax."
+    },
+    "mode_label": "Calculation mode",
+    "mode": {
+      "standard": "Standard",
+      "air": "Air shipment"
+    },
+    "trust": {
+      "rates": "Live Bank of Israel rates",
+      "free": "Free",
+      "no_signup": "No signup"
+    }
+  },
+  "seo": {
+    "description": {
+      "default": "Estimate the landed cost of importing goods into Israel: CIF, customs duty, purchase tax, VAT and expenses.",
+      "standard": "Free import cost calculator for Israel. Enter cost, freight and duty rates to get CIF, customs duty, purchase tax, VAT and the full landed cost.",
+      "air": "Air shipment calculator for imports into Israel: freight from carton sizes and weights, then duty, purchase tax, VAT and landed cost.",
+      "history": "Your saved import cost calculations, kept in this browser, with export and import for backups.",
+      "guides": "Import and export guides for Israel: personal import rules, Incoterms, trade terms, document examples and trusted trading websites.",
+      "about": "About Import Calculator: a free tool that estimates the landed cost of importing goods into Israel, in English, Hebrew and Arabic.",
+      "contact": "Contact the Import Calculator team with questions, ideas or a correction."
+    }
   }
 }

@@ -57,7 +57,7 @@ describe('GuidesView', () => {
     fireEvent.click(
       screen.getByRole('button', { name: '1. Personal Import Rules' }),
     );
-    expect(screen.getByText('Up to $150:')).toBeInTheDocument();
+    expect(screen.getByText('Up to $75:')).toBeInTheDocument();
   });
 
   it('opens websites in a new tab without opener access', () => {

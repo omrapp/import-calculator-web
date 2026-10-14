@@ -7,6 +7,7 @@ import {
   ZoomIn,
   ZoomOut,
 } from 'lucide-react';
+import * as m from 'motion/react-m';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -19,6 +20,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { directionOf, useLanguage } from '@/features/i18n';
+import { duration, ease } from '@/lib/motion';
 
 import type { ImagePath } from './data/types';
 import { Picture } from './Picture';
@@ -155,17 +157,26 @@ export function Lightbox({
           </div>
 
           <div
-            className="min-h-0 flex-1 overflow-auto rounded-md bg-muted"
+            className="min-h-0 flex-1 overflow-auto rounded-xl bg-muted"
             onDoubleClick={() => setZoom(z => (z === MIN_ZOOM ? 2 : MIN_ZOOM))}
           >
-            <Picture
-              image={item.image}
-              alt={item.title}
-              sizes="95vw"
-              eager
-              className="mx-auto max-w-none object-contain"
-              style={{ width: `${zoom * 100}%` }}
-            />
+            <m.div
+              key={item.id}
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: duration.normal, ease: ease.outQuart },
+              }}
+            >
+              <Picture
+                image={item.image}
+                alt={item.title}
+                sizes="95vw"
+                eager
+                className="mx-auto max-w-none object-contain"
+                style={{ width: `${zoom * 100}%` }}
+              />
+            </m.div>
           </div>
 
           {items.length > 1 && (

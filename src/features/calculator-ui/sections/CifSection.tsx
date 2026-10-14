@@ -1,3 +1,4 @@
+import { Package } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import type { CalculationInput } from '@/features/calc-engine';
@@ -10,7 +11,7 @@ export function CifSection({ mode }: { mode: CalculationInput['mode'] }) {
   const { t } = useTranslation();
 
   return (
-    <Section title={t('home.cif_calculation')}>
+    <Section icon={<Package />} title={t('home.cif_calculation')}>
       <AmountField
         path="cif.cost"
         unitKey="currency"

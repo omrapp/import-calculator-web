@@ -1,4 +1,4 @@
-import { Plus, Trash2 } from 'lucide-react';
+import { Plane, Plus, Trash2 } from 'lucide-react';
 import { useFieldArray, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -61,7 +61,7 @@ export function AirShipmentSection() {
   const preview = useAirFreightPreview();
 
   return (
-    <Section title={t('home.labels.air_freight_details')}>
+    <Section icon={<Plane />} title={t('home.labels.air_freight_details')}>
       {fields.map((carton, index) => (
         <fieldset key={carton.id} className="rounded-md border p-3">
           <div className="mb-2 flex items-center justify-between">
