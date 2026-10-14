@@ -108,7 +108,7 @@ function WebsiteCard({ site }: { site: TradingWebsite }) {
         </div>
         <span
           className={cn(
-            'absolute start-5 bottom-0 z-10 grid size-12 translate-y-1/2 place-items-center rounded-xl border bg-card text-base font-bold shadow-sm',
+            'absolute inset-s-5 bottom-0 z-10 grid size-12 translate-y-1/2 place-items-center rounded-xl border bg-card text-base font-bold shadow-sm',
             style.tint,
           )}
         >
