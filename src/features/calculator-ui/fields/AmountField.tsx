@@ -13,6 +13,7 @@ export function AmountField({
   unitKey,
   label,
   hint,
+  required = false,
   allowPercent = false,
 }: {
   /** Group path holding `amount` and the unit field. */
@@ -20,6 +21,7 @@ export function AmountField({
   unitKey: 'currency' | 'unit';
   label: string;
   hint?: string;
+  required?: boolean;
   allowPercent?: boolean;
 }) {
   const { t } = useTranslation();
@@ -33,6 +35,7 @@ export function AmountField({
         label={label}
         unit={unitSymbol(unit)}
         hint={hint}
+        required={required}
         className="min-w-40 flex-1"
       />
       <div className="mt-6">

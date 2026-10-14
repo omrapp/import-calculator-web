@@ -55,12 +55,14 @@ export function RatesSection({
       <div className="grid gap-x-3 sm:grid-cols-2">
         <NumberField
           name="rates.USD"
+          required
           label={t('home.labels.usd')}
           unit="₪"
           onUserChange={onManualChange}
         />
         <NumberField
           name="rates.EUR"
+          required
           label={t('home.labels.eur')}
           unit="₪"
           onUserChange={onManualChange}

@@ -38,7 +38,16 @@ function ResultProbe() {
 function renderForm(mode: 'standard' | 'air-shipment' = 'standard') {
   const router = createMemoryRouter(
     [
-      { path: '/', element: <CalculatorForm mode={mode} title="Calc" /> },
+      {
+        path: '/',
+        element: (
+          <CalculatorForm
+            mode={mode}
+            title="Calc"
+            defaultTitle="Calculation 1"
+          />
+        ),
+      },
       { path: '/result', element: <ResultProbe /> },
     ],
     { initialEntries: ['/'] },
@@ -170,6 +179,115 @@ describe('CalculatorForm', () => {
     );
   });
 
+  it('marks required fields with * and the rest as optional', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    expect(screen.getByLabelText('USD $')).toHaveAttribute(
+      'aria-required',
+      'true',
+    );
+    expect(screen.getByLabelText('Purchase Tax')).not.toHaveAttribute(
+      'aria-required',
+    );
+    expect(screen.getAllByText('(optional)').length).toBeGreaterThan(0);
+    expect(
+      screen.getByText('Fields marked * are required'),
+    ).toBeInTheDocument();
+  });
+
+  it('explains Customs Duty in an info popup with an example', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await act(async () => {
+      fireEvent.click(
+        screen.getByRole('button', { name: 'About Customs Duty Rate' }),
+      );
+    });
+    const dialog = screen.getByRole('dialog', { name: 'Customs Duty rate' });
+    expect(within(dialog).getByText('Example')).toBeInTheDocument();
+    expect(within(dialog).getByText(/= ₪1,200/)).toBeInTheDocument();
+  });
+
+  it('drops letters and symbols typed into a number field', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    type('Cost', '12abc$0*2');
+    expect(screen.getByLabelText('Cost')).toHaveValue('120*2');
+  });
+
+  it('flags an invalid expression when the field loses focus', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    type('Cost', '(12+');
+    fireEvent.blur(screen.getByLabelText('Cost'));
+    await waitFor(() =>
+      expect(screen.getByLabelText('Cost')).toHaveAccessibleDescription(
+        'Not a valid number or expression',
+      ),
+    );
+  });
+
+  it('requires Cost, Freight, and Insurance or Premium', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    for (const label of ['Cost', 'Freight', 'Insurance']) {
+      expect(screen.getByLabelText(label)).toHaveAttribute(
+        'aria-required',
+        'true',
+      );
+    }
+    await submit();
+    expect(screen.getByLabelText('Cost')).toHaveAccessibleDescription(
+      'Required',
+    );
+    expect(screen.getByLabelText('Freight')).toHaveAccessibleDescription(
+      'Required',
+    );
+    expect(screen.getByLabelText('Insurance')).toHaveAccessibleDescription(
+      'Enter Insurance or Premium',
+    );
+    expect(screen.queryByTestId('result-search')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Cost')).toHaveFocus();
+
+    type('Cost', '0');
+    await submit();
+    expect(screen.getByLabelText('Cost')).toHaveAccessibleDescription(
+      'Must be more than 0',
+    );
+
+    // Freight 0 is fine; a Premium alone satisfies Insurance.
+    type('Cost', '500');
+    type('Freight', '0');
+    type('Premium', '0.35');
+    await submit();
+    expect(await screen.findByTestId('result-search')).toBeInTheDocument();
+  });
+
+  it('does not ask for Freight in Air Shipment mode', async () => {
+    ratesApi(ratesPayload);
+    renderForm('air-shipment');
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    type('Cost', '500');
+    type('Insurance', '0');
+    expect(screen.queryByLabelText('Freight')).not.toBeInTheDocument();
+    await submit();
+    expect(await screen.findByTestId('result-search')).toBeInTheDocument();
+  });
+
   it('navigates to the Result with the inputs encoded in the URL', async () => {
     ratesApi(ratesPayload);
     renderForm();
@@ -178,6 +296,7 @@ describe('CalculatorForm', () => {
     );
     type('Cost', '1000*10');
     type('Freight', '1200');
+    type('Premium', '0.35');
     type('Customs Duty Rate', '12');
     await submit();
 
@@ -199,6 +318,40 @@ describe('CalculatorForm', () => {
         duty: { kind: 'percent', percent: 12 },
         vatPercent: null,
       },
+      meta: { title: 'Calculation 1' },
+    });
+  });
+
+  it('sends the title and description the user typed', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    expect(
+      screen.getByRole('heading', { name: 'Calculation 1' }),
+    ).toBeInTheDocument();
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Edit title and description' }),
+    );
+    type('Title', 'Shoes order');
+    type('Description', 'Supplier: Acme');
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+    expect(
+      screen.getByRole('heading', { name: 'Shoes order' }),
+    ).toBeInTheDocument();
+    type('Cost', '100');
+    type('Freight', '0');
+    type('Insurance', '0');
+    await submit();
+
+    const search = await screen.findByTestId('result-search');
+    const link = decodeCalculation(
+      new URLSearchParams(search.textContent ?? '').get('c') ?? '',
+    );
+    expect(link?.meta).toEqual({
+      title: 'Shoes order',
+      description: 'Supplier: Acme',
     });
   });
 

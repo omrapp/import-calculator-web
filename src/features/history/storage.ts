@@ -1,5 +1,6 @@
 import {
   type CalculationLink,
+  type CalculationMeta,
   type CalculationTotals,
   encodeCalculation,
   isCalculationLink,
@@ -122,6 +123,15 @@ export function saveCalculation(
   };
   write([item, ...listSaved()]);
   return item;
+}
+
+/** Renames a Saved Calculation or changes its description. */
+export function updateSavedMeta(id: string, meta: CalculationMeta): void {
+  write(
+    listSaved().map(item =>
+      item.id === id ? { ...item, link: { ...item.link, meta } } : item,
+    ),
+  );
 }
 
 export function deleteSaved(id: string): void {

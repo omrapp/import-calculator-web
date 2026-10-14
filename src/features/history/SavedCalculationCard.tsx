@@ -3,13 +3,13 @@ import * as m from 'motion/react-m';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
-import { ModeBadge } from '@/components/page';
+import { CalculationMetaEditor, ModeBadge } from '@/components/page';
 import { Button } from '@/components/ui/button';
 import { formatDate, formatMoney, useLanguage } from '@/features/i18n';
 import { duration, ease, spring, staggerFor } from '@/lib/motion';
 
 import { resultPath } from './resultPath';
-import type { SavedCalculation } from './storage';
+import { type SavedCalculation, updateSavedMeta } from './storage';
 
 export function SavedCalculationCard({
   item,
@@ -74,6 +74,12 @@ export function SavedCalculationCard({
           <Trash2 />
         </Button>
       </div>
+
+      <CalculationMetaEditor
+        meta={item.link.meta}
+        fallbackTitle={t('calculation_meta.untitled')}
+        onSave={meta => updateSavedMeta(item.id, meta)}
+      />
 
       <dl className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-[1.4fr_1fr_1fr]">
         <div className="col-span-2 flex flex-col gap-0.5 sm:col-span-1">

@@ -12,6 +12,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   type CalculationInput,
   type CalculationLink,
+  decodeCalculation,
   encodeCalculation,
 } from '@/features/calc-engine';
 import golden from '@/features/calc-engine/__fixtures__/rn-golden.json';
@@ -36,11 +37,23 @@ function renderResult(search: string) {
       { path: '/result', element: <ResultView /> },
       {
         path: '/',
-        element: <CalculatorForm mode="standard" title="Standard" />,
+        element: (
+          <CalculatorForm
+            mode="standard"
+            title="Standard"
+            defaultTitle="Calculation 1"
+          />
+        ),
       },
       {
         path: '/air-shipment',
-        element: <CalculatorForm mode="air-shipment" title="Air" />,
+        element: (
+          <CalculatorForm
+            mode="air-shipment"
+            title="Air"
+            defaultTitle="Calculation 1"
+          />
+        ),
       },
     ],
     { initialEntries: [`/result${search}`] },
@@ -55,6 +68,29 @@ afterEach(() => {
 });
 
 describe('ResultView', () => {
+  it('renames the Calculation and keeps the new title in the link', async () => {
+    const router = renderResult(
+      `?c=${linkFor(fixture('everything combined'))}`,
+    );
+    expect(
+      screen.getByRole('heading', { name: 'Untitled calculation' }),
+    ).toBeInTheDocument();
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Edit title and description' }),
+    );
+    fireEvent.change(screen.getByLabelText('Title'), {
+      target: { value: 'Shoes order' },
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+    });
+    expect(
+      screen.getByRole('heading', { name: 'Shoes order' }),
+    ).toBeInTheDocument();
+    const c = new URLSearchParams(router.state.location.search).get('c');
+    expect(decodeCalculation(c ?? '')?.meta).toEqual({ title: 'Shoes order' });
+  });
+
   it('shows headline totals and every section in order', () => {
     renderResult(`?c=${linkFor(fixture('everything combined'))}`);
     const summary = within(screen.getByRole('region', { name: 'Summary' }));

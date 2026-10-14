@@ -121,6 +121,7 @@ export function ResultDocument({ model }: { model: PdfModel }) {
         </View>
         <View>
           <Text style={[styles.title, text]}>{model.title}</Text>
+          {model.description && <Text style={text}>{model.description}</Text>}
           <Text style={text}>{model.subtitle}</Text>
           <Text style={[styles.muted, text]}>{model.ratesNote}</Text>
           <Text style={[styles.muted, text]}>{model.createdOn}</Text>

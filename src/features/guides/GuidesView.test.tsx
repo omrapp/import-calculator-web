@@ -52,12 +52,38 @@ describe('GuidesView', () => {
     ).toBeInTheDocument();
   });
 
-  it('expands a learning module', () => {
+  it('shows the guides as a documentation page with an index', () => {
     renderGuides();
-    fireEvent.click(
-      screen.getByRole('button', { name: '1. Personal Import Rules' }),
-    );
+    const index = screen.getAllByRole('navigation', {
+      name: 'On this page',
+    })[0];
+    expect(
+      within(index).getAllByRole('link', {
+        name: '1. Personal Import Rules',
+      })[0],
+    ).toHaveAttribute('href', '#module-1');
+    expect(
+      screen.getByRole('heading', {
+        level: 2,
+        name: /1\. Personal Import Rules/,
+      }),
+    ).toBeInTheDocument();
     expect(screen.getByText('Up to $75:')).toBeInTheDocument();
+  });
+
+  it('adds a table, diagrams, a chart and callouts to the modules', () => {
+    renderGuides();
+    expect(
+      screen.getByRole('columnheader', { name: 'Customs Duty' }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Chargeable weight')).toBeInTheDocument();
+    expect(
+      screen.getAllByText('Where the money goes: a sample import').length,
+    ).toBeGreaterThan(0);
+    expect(screen.getAllByText('Important').length).toBeGreaterThan(0);
+    expect(
+      screen.getAllByRole('link', { name: 'calculator' })[0],
+    ).toHaveAttribute('href', '/');
   });
 
   it('opens websites in a new tab without opener access', () => {
@@ -69,5 +95,22 @@ describe('GuidesView', () => {
     expect(link).toHaveAttribute('href', 'https://www.wechat.com/');
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
+  it('groups websites by category and filters by one', () => {
+    renderGuides('/guides?tab=websites');
+    expect(
+      screen.getByRole('heading', { level: 2, name: 'Government & Customs' }),
+    ).toBeInTheDocument();
+    fireEvent.click(
+      screen.getByRole('button', { name: /^Shipping & Logistics/ }),
+    );
+    expect(
+      screen.getByRole('button', { name: /^Shipping & Logistics/ }),
+    ).toHaveAttribute('aria-pressed', 'true');
+    expect(
+      screen.queryByRole('heading', { level: 2, name: 'Government & Customs' }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText('Tevel Logistics')).toBeInTheDocument();
   });
 });

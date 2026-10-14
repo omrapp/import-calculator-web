@@ -16,12 +16,15 @@ export function CifSection({ mode }: { mode: CalculationInput['mode'] }) {
         path="cif.cost"
         unitKey="currency"
         label={t('home.labels.cost')}
+        required
       />
       {mode === 'standard' && (
         <AmountField
           path="cif.freight"
           unitKey="currency"
           label={t('home.labels.freight')}
+          hint={t('calculator.hints.freight_zero')}
+          required
         />
       )}
       <AmountField
@@ -29,11 +32,14 @@ export function CifSection({ mode }: { mode: CalculationInput['mode'] }) {
         unitKey="currency"
         label={t('home.labels.insurance')}
         hint={t('calculator.hints.insurance_derived')}
+        required
       />
       <NumberField
         name="cif.premiumPercent"
         label={t('home.labels.premium')}
         unit="%"
+        hint={t('calculator.hints.premium_alternative')}
+        showOptional={false}
         className="max-w-48"
       />
     </Section>
