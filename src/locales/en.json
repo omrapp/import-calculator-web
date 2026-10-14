@@ -226,7 +226,17 @@
     "download_failed": "Failed to download image",
     "download": "Download",
     "share": "Share",
-    "no_terms_found": "No terms found"
+    "no_terms_found": "No terms found",
+    "page_title": "Guides — Import Calculator",
+    "search_label": "Search guides",
+    "no_results": "Nothing matches your search.",
+    "position": "{{n}} / {{total}}",
+    "zoom_in": "Zoom in",
+    "zoom_out": "Zoom out",
+    "zoom_reset": "Reset zoom",
+    "previous": "Previous",
+    "next": "Next",
+    "close": "Close"
   },
   "calculator": {
     "rates": {

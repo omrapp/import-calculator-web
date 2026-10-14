@@ -147,7 +147,7 @@ Port the app's Guides screen: learning modules, the 22-slide presentation, trade
 ```
 scripts/convert-guides.ts
 public/guides/*
-src/features/guides/  GuidesView.tsx  tabs/{ModulesTab,PresentationTab,TermsTab,GalleryTab,WebsitesTab}.tsx  Lightbox.tsx  RichText.tsx  search.ts  data/*  index.ts  (+ tests)
+src/features/guides/  GuidesView.tsx  tabs/{ModulesTab,ImageGridTab,TermsTab,WebsitesTab,EmptyState}.tsx  Lightbox.tsx  Picture.tsx  RichText.tsx  search.ts  data/* (incl. image-sizes.json written by the script)  index.ts  (+ tests)
 src/components/ui/{tabs,accordion,dialog}.tsx (shadcn)
 src/pages/GuidesPage.tsx, src/app/routes.tsx, src/locales/*.json
 ```
@@ -156,17 +156,17 @@ New dev dependency: `sharp` (image conversion script only).
 
 ### Success Criteria
 
-- [ ] `search.test.ts`: per-tab filtering matches the app's rules in en/he/ar; an empty query returns everything.
-- [ ] `RichText.test.tsx`: bullets, numbered lines and `**bold**` render as list items and `<strong>`; `<script>` in content renders as text.
-- [ ] `GuidesView.test.tsx`:
+- [x] `search.test.ts`: per-tab filtering matches the app's rules in en/he/ar; an empty query returns everything.
+- [x] `RichText.test.tsx`: bullets, numbered lines and `**bold**` render as list items and `<strong>`; `<script>` in content renders as text.
+- [x] `GuidesView.test.tsx`:
   - `?tab=terms` opens Terms;
   - switching tabs updates the URL and clears the search;
   - searching "FOB" shows the FOB card;
   - an empty result shows the empty state;
   - website links open in a new tab with `noopener`.
-- [ ] `Lightbox.test.tsx`: opens on the clicked slide; next and previous (arrow keys) change "n / total"; zoom in changes scale; Esc closes.
-- [ ] All 22 slides and 6 gallery items have AVIF and WebP files at both widths (test reads `public/guides`).
-- [ ] Total `public/guides` size is under 12 MB (sources are 45 MB).
+- [x] `Lightbox.test.tsx`: opens on the clicked slide; next and previous (arrow keys) change "n / total"; zoom in changes scale; Esc closes.
+- [x] All 22 slides and 6 gallery items have AVIF and WebP files at both widths (test reads `public/guides`).
+- [x] Total `public/guides` size is under 12 MB (sources are 45 MB).
 
 ---
 
