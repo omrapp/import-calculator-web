@@ -226,7 +226,17 @@
     "download_failed": "נכשל בהורדת התמונה",
     "download": "הורד",
     "share": "שתף",
-    "no_terms_found": "לא נמצאו מונחים"
+    "no_terms_found": "לא נמצאו מונחים",
+    "page_title": "מדריכים — מחשבון יבוא",
+    "search_label": "חיפוש במדריכים",
+    "no_results": "לא נמצאו תוצאות לחיפוש.",
+    "position": "{{n}} / {{total}}",
+    "zoom_in": "הגדלה",
+    "zoom_out": "הקטנה",
+    "zoom_reset": "איפוס זום",
+    "previous": "הקודם",
+    "next": "הבא",
+    "close": "סגירה"
   },
   "calculator": {
     "rates": {
