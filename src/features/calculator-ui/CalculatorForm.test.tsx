@@ -187,6 +187,19 @@ describe('CalculatorForm', () => {
     ).toBeInTheDocument();
   });
 
+  it('explains Customs Duty in an info popup with an example', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await act(async () => {
+      fireEvent.click(
+        screen.getByRole('button', { name: 'About Customs Duty Rate' }),
+      );
+    });
+    const dialog = screen.getByRole('dialog', { name: 'Customs Duty rate' });
+    expect(within(dialog).getByText('Example')).toBeInTheDocument();
+    expect(within(dialog).getByText(/= ₪1,200/)).toBeInTheDocument();
+  });
+
   it('drops letters and symbols typed into a number field', async () => {
     ratesApi(ratesPayload);
     renderForm();

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
+import { InfoButton } from '../fields/InfoButton';
 import { NumberField } from '../fields/NumberField';
 import type { FormValues } from '../formValues';
 import { Section } from './Section';
@@ -51,6 +52,12 @@ export function DutiesSection() {
         <NumberField
           name="duty.percent"
           label={t('home.labels.customs_duty_rate')}
+          labelAddon={
+            <InfoButton
+              topic="customs_duty"
+              label={t('home.labels.customs_duty_rate')}
+            />
+          }
           unit="%"
           className="max-w-48"
         />
@@ -60,12 +67,24 @@ export function DutiesSection() {
             name="duty.optionI"
             required
             label={t('home.labels.duty_option_i')}
+            labelAddon={
+              <InfoButton
+                topic="duty_option_i"
+                label={t('home.labels.duty_option_i')}
+              />
+            }
             unit="₪"
           />
           <NumberField
             name="duty.optionII"
             required
             label={t('home.labels.duty_option_ii')}
+            labelAddon={
+              <InfoButton
+                topic="duty_option_ii"
+                label={t('home.labels.duty_option_ii')}
+              />
+            }
             unit="₪"
           />
         </div>

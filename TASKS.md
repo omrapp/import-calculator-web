@@ -27,7 +27,7 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 ### Enhancements batch (2026-10-14) — one ticket each, merged --no-ff into develop; owner promotes develop → main
 - [x] IMCL-12 numeric input validation: letters/symbols dropped on type/paste (math expressions kept), invalid expression flagged on blur; .gitignore `.vercel`
 - [x] IMCL-13 required `*` / `(optional)` markers + legend; required = USD/EUR rates, Duty Option I/II, carton quantity, divisor (empty = 0 elsewhere)
-- [ ] IMCL-14 info popups for Customs Duty, Duty Option I, Duty Option II (drafted examples en/he/ar — owner review)
+- [x] IMCL-14 info popups for Customs Duty, Duty Option I, Duty Option II (drafted examples en/he/ar — owner review)
 - [ ] IMCL-15 editable calculation title + description ("Calculation N"): form header, Result, History cards, PDF/PNG/share link
 - [ ] IMCL-16 Websites tab: categories, ~15-25 new Israel-import links (verified), generated branded hero cards
 - [ ] IMCL-17 Guides as documentation: sticky TOC + scroll-spy + anchors, SVG flow diagrams, tables + charts, callouts + icons
