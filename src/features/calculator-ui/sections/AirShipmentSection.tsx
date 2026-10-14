@@ -86,6 +86,7 @@ export function AirShipmentSection() {
                 name={`airShipment.cartons.${index}.${key}`}
                 label={t(labelKey)}
                 unit={unit ? t('common.cm') : undefined}
+                required={key === 'quantity'}
               />
             ))}
           </div>
@@ -104,6 +105,7 @@ export function AirShipmentSection() {
       <div className="grid grid-cols-2 gap-x-3 sm:grid-cols-4">
         <NumberField
           name="airShipment.divisor"
+          required
           label={t('home.labels.volumetric_divisor')}
         />
         <NumberField
