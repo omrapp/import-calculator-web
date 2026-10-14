@@ -56,6 +56,18 @@ export function evaluateExpression(raw: string): number | null {
   return pos === source.length && Number.isFinite(value) ? value : NaN;
 }
 
+/**
+ * Characters a number field accepts while typing: Latin and Arabic-Indic
+ * digits, decimal and thousands separators, spaces, parentheses and the
+ * arithmetic operators the parser understands. Letters are not allowed.
+ */
+const DISALLOWED = /[^0-9٠-٩۰-۹.,٫٬\s+\-*/()×÷−–]/g;
+
+/** Drops every character a number field doesn't accept (typed or pasted). */
+export function sanitizeNumericInput(raw: string): string {
+  return raw.replace(DISALLOWED, '');
+}
+
 function normalize(raw: string): string {
   return (
     raw

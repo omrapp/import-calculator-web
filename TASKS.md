@@ -24,6 +24,14 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 
 ## Pending
 
+### Enhancements batch (2026-10-14) — one ticket each, merged --no-ff into develop; owner promotes develop → main
+- [x] IMCL-12 numeric input validation: letters/symbols dropped on type/paste (math expressions kept), invalid expression flagged on blur; .gitignore `.vercel`
+- [ ] IMCL-13 required `*` / `(optional)` hint on calculator fields, driven by current validation rules
+- [ ] IMCL-14 info popups for Customs Duty, Duty Option I, Duty Option II (drafted examples en/he/ar — owner review)
+- [ ] IMCL-15 editable calculation title + description ("Calculation N"): form header, Result, History cards, PDF/PNG/share link
+- [ ] IMCL-16 Websites tab: categories, ~15-25 new Israel-import links (verified), generated branded hero cards
+- [ ] IMCL-17 Guides as documentation: sticky TOC + scroll-spy + anchors, SVG flow diagrams, tables + charts, callouts + icons
+
 - [ ] IMCL-11 site redesign (design flow; `.design/site-redesign/`): brief, IA, tokens, task list done; Foundation T1–T3 + Core UI T4–T11 + Interactions T12–T16 (History, Guides, info pages + Settings theme + 404, SEO kit, export brand header) and Polish T17–T19 (responsive/RTL, a11y + reduced motion, perf) done; merged --no-ff into develop (62f7c22), main pending owner test + deploy. Initial JS 195 KiB gz (budget 214), CLS < 0.07
 
 - [ ] Owner: replace the About Us "who built it" draft paragraph (src/locales/*.json `pages.about.who_body`)

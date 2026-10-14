@@ -170,6 +170,31 @@ describe('CalculatorForm', () => {
     );
   });
 
+  it('drops letters and symbols typed into a number field', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    type('Cost', '12abc$0*2');
+    expect(screen.getByLabelText('Cost')).toHaveValue('120*2');
+  });
+
+  it('flags an invalid expression when the field loses focus', async () => {
+    ratesApi(ratesPayload);
+    renderForm();
+    await waitFor(() =>
+      expect(screen.getByLabelText('USD $')).toHaveValue('3.074'),
+    );
+    type('Cost', '(12+');
+    fireEvent.blur(screen.getByLabelText('Cost'));
+    await waitFor(() =>
+      expect(screen.getByLabelText('Cost')).toHaveAccessibleDescription(
+        'Not a valid number or expression',
+      ),
+    );
+  });
+
   it('navigates to the Result with the inputs encoded in the URL', async () => {
     ratesApi(ratesPayload);
     renderForm();
