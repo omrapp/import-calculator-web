@@ -18,6 +18,8 @@ type Props = {
   hint?: string;
   /** Marks the field with * (required) or "optional" next to the label. */
   required?: boolean;
+  /** Hide "optional" for a field that is needed only as an alternative to another. */
+  showOptional?: boolean;
   /** Extra control shown after the label, e.g. an info button. */
   labelAddon?: ReactNode;
   placeholder?: string;
@@ -38,6 +40,7 @@ export function NumberField({
   unit,
   hint,
   required = false,
+  showOptional = true,
   labelAddon,
   placeholder,
   className,
@@ -62,6 +65,7 @@ export function NumberField({
         htmlFor={id}
         label={label}
         required={required}
+        showOptional={showOptional}
         addon={labelAddon}
       />
       {/* Numbers read LTR in every language, so the unit sits at the LTR end. */}
@@ -121,11 +125,13 @@ export function FieldLabel({
   htmlFor,
   label,
   required,
+  showOptional = true,
   addon,
 }: {
   htmlFor: string;
   label: string;
   required: boolean;
+  showOptional?: boolean;
   addon?: ReactNode;
 }) {
   const { t } = useTranslation();
@@ -137,9 +143,11 @@ export function FieldLabel({
           *
         </span>
       ) : (
-        <span className="text-xs text-muted-foreground">
-          ({t('calculator.labels.optional')})
-        </span>
+        showOptional && (
+          <span className="text-xs text-muted-foreground">
+            ({t('calculator.labels.optional')})
+          </span>
+        )
       )}
       {addon}
     </div>

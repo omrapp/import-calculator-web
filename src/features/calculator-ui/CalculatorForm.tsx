@@ -39,6 +39,7 @@ import {
   emptyFormValues,
   type FormValues,
   formPathFor,
+  requiredFieldErrors,
   toCalculationInput,
   toCalculationMeta,
 } from './formValues';
@@ -209,6 +210,7 @@ export function CalculatorForm({
   const onSubmit = (values: FormValues) => {
     const { input, invalidExpressions } = toCalculationInput(values, mode);
     const errors = [
+      ...requiredFieldErrors(values, mode),
       ...invalidExpressions.map(path => ({ path, code: 'invalid-expression' })),
       ...validate(input).map(error => ({
         path: formPathFor(error.field),
