@@ -46,7 +46,7 @@ _Avoid_: Shipping, transport
 Charge for insuring the goods in transit, entered directly or derived from the Premium.
 
 **Premium**:
-Insurance rate as a percentage of the goods' value.
+Insurance rate, applied to 110% of Cost plus Freight when Insurance is not entered directly.
 
 ### Air shipments
 
@@ -93,7 +93,7 @@ Israeli value-added tax charged on the landed total before VAT; 18% by default a
 ### Expenses
 
 **Expense**:
-A local cost paid in Israel to receive the goods, added to Landed Cost after duties and taxes.
+A local cost paid in Israel to receive the goods, added to Landed Cost after duties and taxes; given as an amount or as a percentage of the running total.
 _Avoid_: Fee, charge, extra
 
 **Customs Broker Fee**:
