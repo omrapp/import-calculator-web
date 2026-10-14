@@ -17,10 +17,14 @@ export function ModulesTab({ query }: { query: string }) {
   if (modules.length === 0) return <EmptyState />;
 
   return (
-    <Accordion type="single" collapsible className="rounded-lg border px-4">
+    <Accordion type="single" collapsible className="flex flex-col gap-2">
       {modules.map(module => (
-        <AccordionItem key={module.id} value={module.id}>
-          <AccordionTrigger className="text-start">
+        <AccordionItem
+          key={module.id}
+          value={module.id}
+          className="rounded-2xl border bg-card px-5 shadow-xs transition-shadow duration-150 last:border-b data-[state=open]:shadow-md"
+        >
+          <AccordionTrigger className="text-start text-base font-semibold hover:no-underline">
             {module.title[language]}
           </AccordionTrigger>
           <AccordionContent>

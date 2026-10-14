@@ -1,7 +1,24 @@
-import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
+import {
+  Defs,
+  Document,
+  G,
+  LinearGradient,
+  Page,
+  Path,
+  Rect,
+  Stop,
+  StyleSheet,
+  Svg,
+  Text,
+  View,
+} from '@react-pdf/renderer';
 
 import { FONT_STACK } from './fonts';
 import type { PdfModel } from './model';
+
+/** Brand colours, matching public/favicon.svg. Body text stays black on white. */
+const NAVY = '#193365';
+const TEAL = '#25a4b1';
 
 const styles = StyleSheet.create({
   page: {
@@ -10,6 +27,14 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: '#111827',
   },
+  brandBar: {
+    alignItems: 'center',
+    gap: 8,
+    paddingBottom: 10,
+    marginBottom: 14,
+    borderBottom: `2pt solid ${NAVY}`,
+  },
+  brandName: { fontSize: 12, fontWeight: 700, color: NAVY },
   title: { fontSize: 18, fontWeight: 700 },
   muted: { color: '#6b7280', fontSize: 9 },
   summary: { flexWrap: 'wrap', gap: 8, marginVertical: 14 },
@@ -19,7 +44,7 @@ const styles = StyleSheet.create({
     padding: 8,
     width: '31%',
   },
-  primaryCard: { backgroundColor: '#111827', color: '#ffffff' },
+  primaryCard: { backgroundColor: NAVY, color: '#ffffff' },
   cardValue: { fontSize: 12, fontWeight: 700, marginTop: 2 },
   section: {
     border: '1pt solid #d1d5db',
@@ -43,6 +68,35 @@ const styles = StyleSheet.create({
   footer: { marginTop: 12, color: '#6b7280', fontSize: 8 },
 });
 
+/** The ship badge from the favicon, drawn as vectors. */
+function LogoMark({ size = 22 }: { size?: number }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 32 32">
+      <Defs>
+        <LinearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+          <Stop offset="0" stopColor={NAVY} />
+          <Stop offset="1" stopColor={TEAL} />
+        </LinearGradient>
+      </Defs>
+      <Rect width="32" height="32" rx="8" fill="url(#brand)" />
+      <G
+        transform="translate(6 6) scale(0.8333)"
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <Path d="M12 2v2" />
+        <Path d="M12 9.189V13" />
+        <Path d="M19 12V6a2 2 0 00-2-2H7a2 2 0 00-2 2v6" />
+        <Path d="M19.38 19A11.6 11.6 0 0021 13l-8.188-3.639a2 2 0 00-1.624 0L3 13.001a11.6 11.6 0 002.81 7.76" />
+        <Path d="M2 20c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" />
+      </G>
+    </Svg>
+  );
+}
+
 /**
  * Intl adds RLM/ALM marks to he/ar numbers; in a PDF they flip whole formulas
  * right-to-left. Without them, figures read left-to-right as on screen.
@@ -61,6 +115,10 @@ export function ResultDocument({ model }: { model: PdfModel }) {
   return (
     <Document title={model.title} language={model.language}>
       <Page size="A4" style={styles.page}>
+        <View style={[styles.brandBar, line]}>
+          <LogoMark />
+          <Text style={[styles.brandName, text]}>{model.brand}</Text>
+        </View>
         <View>
           <Text style={[styles.title, text]}>{model.title}</Text>
           <Text style={text}>{model.subtitle}</Text>

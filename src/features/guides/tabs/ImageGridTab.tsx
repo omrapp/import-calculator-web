@@ -27,17 +27,19 @@ export function ImageGridTab({
             <button
               type="button"
               onClick={() => setOpen(i)}
-              className="flex h-full w-full flex-col overflow-hidden rounded-lg border text-start transition-shadow hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border bg-card text-start shadow-xs transition-shadow duration-150 hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
             >
-              <Picture
-                image={item.image}
-                alt=""
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="aspect-video bg-muted object-contain"
-              />
-              <span className="flex flex-col gap-1 p-3">
+              <span className="block overflow-hidden bg-muted">
+                <Picture
+                  image={item.image}
+                  alt=""
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="aspect-video object-contain transition-transform duration-300 ease-out-quart motion-safe:group-hover:scale-[1.03]"
+                />
+              </span>
+              <span className="flex flex-col gap-1 p-4">
                 {numbered && (
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-overline text-muted-foreground tabular-nums">
                     {t('guides.position', { n: i + 1, total: items.length })}
                   </span>
                 )}

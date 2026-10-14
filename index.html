@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Import Calculator</title>
     <meta
@@ -32,7 +33,7 @@
           .setAttribute('content', dark ? '#0b1423' : '#f8fafd');
       })();
     </script>
-    <!-- og:url and an absolute og:image URL are set once the deploy URL is known. -->
+    <!-- With VITE_SITE_URL set, the build adds og:url and makes image URLs absolute. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Import Calculator" />
     <meta property="og:title" content="Import Calculator" />
@@ -50,6 +51,20 @@
       content="Estimate the landed cost of importing goods into Israel: CIF, customs duty, purchase tax, VAT and expenses."
     />
     <meta name="twitter:image" content="/og-image.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Import Calculator",
+        "description": "Estimate the landed cost of importing goods into Israel: CIF, customs duty, purchase tax, VAT and expenses.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "inLanguage": ["en", "he", "ar"],
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "ILS" }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

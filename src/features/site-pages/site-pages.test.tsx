@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { changeLanguage, SUPPORTED_LANGUAGES } from '@/features/i18n';
+import { initTheme } from '@/features/theme';
 
 import { privacyPolicy } from './content/privacy';
 import { termsOfUse } from './content/terms';
@@ -24,6 +25,17 @@ describe('Settings', () => {
     expect(document.documentElement).toHaveAttribute('dir', 'rtl');
     expect(document.documentElement).toHaveAttribute('lang', 'he');
     expect(screen.getByRole('radio', { name: 'עברית' })).toBeChecked();
+  });
+
+  it('switches the theme', () => {
+    initTheme('system');
+    render(<SettingsView />);
+    fireEvent.click(screen.getByRole('radio', { name: 'Dark' }));
+    expect(screen.getByRole('radio', { name: 'Dark' })).toBeChecked();
+    expect(document.documentElement).toHaveClass('dark');
+    fireEvent.click(screen.getByRole('radio', { name: 'Light' }));
+    expect(document.documentElement).not.toHaveClass('dark');
+    initTheme('system');
   });
 
   it('shares the site with the Web Share API when available', async () => {

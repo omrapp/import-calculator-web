@@ -24,13 +24,14 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 
 ## Pending
 
-- [ ] IMCL-11 site redesign (design flow; `.design/site-redesign/`): brief, IA, tokens, task list done; Foundation T1–T3 + Core UI T4–T10 + T11 (PageHeader/EmptyState) done; Interactions T12–T16, Polish T17–T20 pending. Initial JS 193 KiB gz (budget 214)
+- [ ] IMCL-11 site redesign (design flow; `.design/site-redesign/`): brief, IA, tokens, task list done; Foundation T1–T3 + Core UI T4–T11 + Interactions T12–T16 (History, Guides, info pages + Settings theme + 404, SEO kit, export brand header) done; Polish T17–T20 pending. Initial JS 195 KiB gz (budget 214)
 
 - [ ] Owner: replace the About Us "who built it" draft paragraph (src/locales/*.json `pages.about.who_body`)
-- [ ] Owner: after first deploy, make og:image absolute and add og:url in index.html
+- [ ] Owner: set `VITE_SITE_URL` (e.g. https://your-domain) on Vercel; the build then adds og:url, absolute og:image, canonical/hreflang and sitemap.xml
 - [ ] Owner: local browser test, then Vercel deploy
 
 ## Blockers
+- `src/features/guides/data/learning-modules.ts` was edited outside IMCL-11 ($150 → $75 personal-import threshold); 2 guides tests still expect $150. Owner to confirm and update tests
 - Guide content copied verbatim from the app; module 1 still says VAT 17% (now 18%). Owner to review the content
 - Owner: open a he and an ar PDF from a real browser download and check them; the render was checked only from test output via macOS sips
 - Browser check of calculator pages (en/he) not done — Chrome extension not connected

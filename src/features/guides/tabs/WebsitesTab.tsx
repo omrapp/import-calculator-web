@@ -1,4 +1,4 @@
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/ui/button';
@@ -19,10 +19,25 @@ export function WebsitesTab({ query }: { query: string }) {
       {websites.map(site => (
         <li
           key={site.id}
-          className="flex flex-col items-start gap-2 rounded-lg border p-4"
+          className="flex flex-col items-start gap-3 rounded-2xl border bg-card p-5 shadow-xs transition-shadow duration-150 hover:shadow-md"
         >
-          <h2 className="font-semibold">{site.title[language]}</h2>
-          <p className="flex-1 text-sm text-muted-foreground">
+          <div className="flex items-center gap-3">
+            <span
+              aria-hidden
+              className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent text-accent-foreground ring-1 ring-highlight/20 ring-inset"
+            >
+              <Globe className="size-5" />
+            </span>
+            <div className="flex min-w-0 flex-col">
+              <h2 className="leading-tight font-semibold">
+                {site.title[language]}
+              </h2>
+              <bdi dir="ltr" className="truncate text-xs text-muted-foreground">
+                {new URL(site.url).hostname.replace(/^www\./, '')}
+              </bdi>
+            </div>
+          </div>
+          <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
             {site.description[language]}
           </p>
           <Button asChild variant="outline" size="sm">

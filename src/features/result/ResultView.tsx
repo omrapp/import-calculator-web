@@ -1,10 +1,8 @@
 import {
   ArrowLeft,
   Check,
-  Container,
   Copy,
   FileWarning,
-  Plane,
   Plus,
   Share2,
 } from 'lucide-react';
@@ -12,7 +10,8 @@ import { type ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
-import { EmptyState, PageHeader } from '@/components/page';
+import { ExportBrandHeader } from '@/components/brand';
+import { EmptyState, ModeBadge, PageHeader } from '@/components/page';
 import { Button } from '@/components/ui/button';
 import type {
   CalculationLink,
@@ -127,17 +126,6 @@ function BackBar({ link }: { link: CalculationLink }) {
   );
 }
 
-function ModeBadge({ mode }: { mode: CalculationLink['input']['mode'] }) {
-  const { t } = useTranslation();
-  const Icon = mode === 'standard' ? Container : Plane;
-  return (
-    <span className="inline-flex h-6 items-center gap-1.5 rounded-full bg-accent px-2.5 text-xs font-medium text-accent-foreground">
-      <Icon className="size-3.5" aria-hidden />
-      {t(mode === 'standard' ? 'nav.standard' : 'nav.air_shipment')}
-    </span>
-  );
-}
-
 export function ResultView({ actions }: { actions?: ResultActions }) {
   const { t } = useTranslation();
   const calculation = useCalculationFromUrl();
@@ -167,6 +155,7 @@ export function ResultView({ actions }: { actions?: ResultActions }) {
       ref={setContent}
       className="mx-auto flex max-w-form flex-col gap-6 bg-background"
     >
+      <ExportBrandHeader />
       <BackBar link={link} />
       <PageHeader
         title={t('result.title')}
