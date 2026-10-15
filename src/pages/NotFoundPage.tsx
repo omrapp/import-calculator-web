@@ -38,7 +38,7 @@ export function NotFoundPage() {
       </m.p>
       <m.div variants={fadeUp} className="flex flex-col items-center gap-3">
         <Button asChild size="lg">
-          <Link to="/">{t('pages.back_to_calculator')}</Link>
+          <Link to="/calculator">{t('pages.back_to_calculator')}</Link>
         </Button>
         <div className="flex gap-1">
           <Button asChild variant="ghost" size="sm">

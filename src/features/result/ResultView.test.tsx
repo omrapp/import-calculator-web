@@ -36,7 +36,7 @@ function renderResult(search: string) {
     [
       { path: '/result', element: <ResultView /> },
       {
-        path: '/',
+        path: '/calculator',
         element: (
           <CalculatorForm
             mode="standard"
@@ -170,7 +170,7 @@ describe('ResultView', () => {
     await act(async () => {
       fireEvent.click(screen.getByRole('link', { name: 'Back to calculator' }));
     });
-    expect(router.state.location.pathname).toBe('/');
+    expect(router.state.location.pathname).toBe('/calculator');
   });
 
   it('copies the link', async () => {
@@ -201,7 +201,7 @@ describe('ResultView', () => {
     await act(async () => {
       fireEvent.click(screen.getByRole('button', { name: 'Edit' }));
     });
-    expect(router.state.location.pathname).toBe('/');
+    expect(router.state.location.pathname).toBe('/calculator');
     expect(screen.getByLabelText('Cost')).toHaveValue('10000');
     expect(screen.getByLabelText('USD $')).toHaveValue('3.074');
     await waitFor(() =>

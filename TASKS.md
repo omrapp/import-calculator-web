@@ -36,7 +36,9 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 
 ### Home + nav batch (2026-10-15)
 - [x] IMCL-21 Websites page: `/websites` route in header/menu/footer/sitemap; Guides tabs now Guides · Presentation · Terms (Gallery + Websites removed); `?tab=websites` redirects, `?tab=gallery` falls back to Guides; module 5 document thumbnails open the Lightbox with download
-- [ ] IMCL-22 Home landing page at `/` (hero + CTA, features, how it works, guides/websites teaser); Standard calculator moves to `/calculator`
+- [x] IMCL-22 Home landing page at `/` (hero + CTAs + trust chips + engine-computed sample cost, 6 features, 3-step how it works, Guides/Websites cards, closing CTA band) in header/menu/footer; Standard calculator moves to `/calculator` (links, Edit/Recalculate, sitemap updated). New copy under `landing.*` in en/he/ar — owner review
+- [ ] Owner: check header nav fit at 768–1024px with 5 items (Home · Calculator · History · Guides · Websites) in all 3 languages
+- [ ] Owner: old bookmarks of `/` now open Home, not the calculator (no redirect by design)
 
 - [ ] IMCL-11 site redesign (design flow; `.design/site-redesign/`): brief, IA, tokens, task list done; Foundation T1–T3 + Core UI T4–T11 + Interactions T12–T16 (History, Guides, info pages + Settings theme + 404, SEO kit, export brand header) and Polish T17–T19 (responsive/RTL, a11y + reduced motion, perf) done; merged --no-ff into develop (62f7c22), main pending owner test + deploy. Initial JS 195 KiB gz (budget 214), CLS < 0.07
 

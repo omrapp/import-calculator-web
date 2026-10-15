@@ -47,7 +47,8 @@
     "home": "Import Calculator home",
     "tools": "Tools",
     "information": "Information",
-    "websites": "Websites"
+    "websites": "Websites",
+    "home_link": "Home"
   },
   "pages": {
     "not_found": "Page not found",
@@ -518,7 +519,8 @@
       "guides": "Import and export guides for Israel: personal import rules, Incoterms, trade terms and document examples.",
       "about": "About Import Calculator: a free tool that estimates the landed cost of importing goods into Israel, in English, Hebrew and Arabic.",
       "contact": "Contact the Import Calculator team with questions, ideas or a correction.",
-      "websites": "Trusted websites for importing into Israel: customs and government, sourcing marketplaces, trade fairs, shipping, research, payments and tools."
+      "websites": "Trusted websites for importing into Israel: customs and government, sourcing marketplaces, trade fairs, shipping, research, payments and tools.",
+      "home": "Free import cost calculator for Israel: customs duty, purchase tax, VAT and landed cost with live Bank of Israel rates, plus import guides and trusted websites."
     }
   },
   "calculation_meta": {
@@ -529,5 +531,77 @@
     "description": "Description",
     "description_placeholder": "Add a note: supplier, product, order number…",
     "add_description": "Add a description"
+  },
+  "landing": {
+    "page_title": "Import Cost Calculator for Israel",
+    "overline": "Import cost calculator for Israel",
+    "title": "Know your landed cost before you import.",
+    "lead": "Customs duty, purchase tax, VAT and local expenses for goods you bring into Israel, worked out step by step with live Bank of Israel rates.",
+    "cta_start": "Start calculating",
+    "cta_air": "Air shipment",
+    "features": {
+      "overline": "Features",
+      "title": "Everything you need to price an import",
+      "lead": "Free, in your browser, with no account.",
+      "standard": {
+        "title": "Standard Calculation",
+        "body": "Enter the freight you already know, for sea or any shipment."
+      },
+      "air": {
+        "title": "Air Shipment Calculation",
+        "body": "Chargeable weight and freight worked out from carton sizes and weights."
+      },
+      "rates": {
+        "title": "Live exchange rates",
+        "body": "USD and EUR from the Bank of Israel, or your own rates."
+      },
+      "history": {
+        "title": "History",
+        "body": "Save calculations in this browser and back them up to a file."
+      },
+      "export": {
+        "title": "Share and export",
+        "body": "Share a link, download an image or PDF, or print."
+      },
+      "languages": {
+        "title": "Three languages",
+        "body": "English, Hebrew and Arabic, right-to-left where it should be."
+      }
+    },
+    "how": {
+      "overline": "How it works",
+      "title": "From invoice to landed cost in three steps",
+      "step1": {
+        "title": "Enter your shipment",
+        "body": "Goods cost, freight, insurance and the duty rates for your product."
+      },
+      "step2": {
+        "title": "See every charge",
+        "body": "CIF, Customs Duty, Purchase Tax, VAT and expenses, each with its formula."
+      },
+      "step3": {
+        "title": "Save or share",
+        "body": "Keep it in History, send a link, or export a PDF for your records."
+      }
+    },
+    "learn": {
+      "overline": "Learn",
+      "title": "Learn before you ship",
+      "lead": "Plain-language guides and the websites importers actually use.",
+      "guides": {
+        "title": "Import & Export Guides",
+        "body": "Personal import rules, Incoterms, trade terms and document examples.",
+        "cta": "Read the guides"
+      },
+      "websites": {
+        "title": "Trading Websites",
+        "body": "Customs, sourcing, trade fairs, shipping, payments and tools, by category.",
+        "cta": "Browse websites"
+      }
+    },
+    "final": {
+      "title": "Ready to price your next shipment?",
+      "body": "It takes a minute, and nothing leaves your browser."
+    }
   }
 }

@@ -109,6 +109,6 @@ describe('GuidesView', () => {
     expect(screen.getAllByText('Important').length).toBeGreaterThan(0);
     expect(
       screen.getAllByRole('link', { name: 'calculator' })[0],
-    ).toHaveAttribute('href', '/');
+    ).toHaveAttribute('href', '/calculator');
   });
 });

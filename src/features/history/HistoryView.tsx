@@ -211,7 +211,7 @@ export function HistoryView() {
           title={t('history.no_history')}
           action={
             <Button asChild>
-              <Link to="/">{t('pages.back_to_calculator')}</Link>
+              <Link to="/calculator">{t('pages.back_to_calculator')}</Link>
             </Button>
           }
         >
