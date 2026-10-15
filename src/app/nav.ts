@@ -1,4 +1,4 @@
-/** Header navigation: the three things people come here to do. */
+/** Header navigation: the things people come here to do. */
 export const headerNav = [
   {
     path: '/',
@@ -8,6 +8,7 @@ export const headerNav = [
   },
   { path: '/history', titleKey: 'nav.history', activeOn: ['/history'] },
   { path: '/guides', titleKey: 'nav.guides_short', activeOn: ['/guides'] },
+  { path: '/websites', titleKey: 'nav.websites', activeOn: ['/websites'] },
 ] as const;
 
 /** Every tool, by name (footer "Tools" column and the mobile menu). */
@@ -16,6 +17,7 @@ export const primaryNav = [
   { path: '/air-shipment', titleKey: 'nav.air_shipment' },
   { path: '/history', titleKey: 'nav.history' },
   { path: '/guides', titleKey: 'nav.guides' },
+  { path: '/websites', titleKey: 'nav.websites' },
 ] as const;
 
 /** Site information, in the footer. */
