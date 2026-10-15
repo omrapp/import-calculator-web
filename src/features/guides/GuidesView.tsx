@@ -5,14 +5,16 @@ import {
   type LucideIcon,
   Presentation,
   Search,
+  SquareSigma,
 } from 'lucide-react';
 import * as m from 'motion/react-m';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Navigate, useSearchParams } from 'react-router';
+import { Link, Navigate, useSearchParams } from 'react-router';
 
 import { PageHeader } from '@/components/page';
 import { JsonLd } from '@/components/seo/JsonLd';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useLanguage } from '@/features/i18n';
@@ -98,6 +100,14 @@ export function GuidesView() {
         icon={<BookOpen />}
         title={t('nav.guides')}
         description={t('guides.lead')}
+        actions={
+          <Button asChild variant="outline">
+            <Link to="/examples">
+              <SquareSigma />
+              {t('examples.see_examples')}
+            </Link>
+          </Button>
+        }
       />
       <Tabs value={tab} onValueChange={changeTab} className="gap-6">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">

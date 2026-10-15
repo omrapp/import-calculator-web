@@ -12,8 +12,16 @@ import { Formula } from './Formula';
 import { stepLabelText, toBreakdownSections } from './sections';
 import { sectionTone } from './tones';
 
-export function Breakdown({ steps }: { steps: Step[] }) {
+export function Breakdown({
+  steps,
+  title,
+}: {
+  steps: Step[];
+  /** Heading above the sections; null leaves it to the caller. */
+  title?: string | null;
+}) {
   const { t } = useTranslation();
+  const heading = title === undefined ? t('result.breakdown') : title;
   const { language } = useLanguage();
   const { currency, rates } = useDisplayMoney();
   // Formulas only add up in their own units (e.g. $ × rate = ₪), so they
@@ -22,10 +30,10 @@ export function Breakdown({ steps }: { steps: Step[] }) {
 
   return (
     <section
-      aria-label={t('result.breakdown')}
+      aria-label={heading ?? t('result.breakdown')}
       className="flex flex-col gap-4 [counter-reset:breakdown]"
     >
-      <h2 className="mt-2 text-xl font-semibold">{t('result.breakdown')}</h2>
+      {heading && <h2 className="mt-2 text-xl font-semibold">{heading}</h2>}
       {!showFormulas && (
         <p
           data-testid="converted-note"

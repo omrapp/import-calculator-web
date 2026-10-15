@@ -1,7 +1,8 @@
-import { BadgeCheck, UserRoundX } from 'lucide-react';
+import { BadgeCheck, SquareSigma, UserRoundX } from 'lucide-react';
 import * as m from 'motion/react-m';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
 
 import type { CalculationInput } from '@/features/calc-engine';
 import { cn } from '@/lib/utils';
@@ -54,6 +55,13 @@ export function Hero({
             <p className="hidden max-w-prose text-muted-foreground sm:block sm:text-lg">
               {t(mode === 'standard' ? 'hero.lead.standard' : 'hero.lead.air')}
             </p>
+            <Link
+              to="/examples"
+              className="inline-flex w-fit items-center gap-1.5 rounded-sm text-sm font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <SquareSigma aria-hidden className="size-4" />
+              {t('examples.see_examples')}
+            </Link>
           </div>
           {action}
         </m.div>

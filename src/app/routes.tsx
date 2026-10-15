@@ -60,6 +60,14 @@ export const routes: RouteObject[] = [
         () => import('@/pages/GuidesPage').then(m => m.GuidesPage),
       ),
       page(
+        '/examples',
+        {
+          titleKey: 'nav.examples',
+          descriptionKey: 'seo.description.examples',
+        },
+        () => import('@/pages/ExamplesPage').then(m => m.ExamplesPage),
+      ),
+      page(
         '/websites',
         {
           titleKey: 'nav.websites',

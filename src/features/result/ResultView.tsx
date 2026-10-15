@@ -5,6 +5,7 @@ import {
   FileWarning,
   Plus,
   Share2,
+  SquareSigma,
 } from 'lucide-react';
 import { type ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -221,6 +222,14 @@ export function ResultView({ actions }: { actions?: ResultActions }) {
         <CostCharts result={result} />
         <Breakdown steps={result.steps} />
       </DisplayCurrencyContext>
+      <Link
+        to="/examples"
+        data-export-ignore
+        className="inline-flex w-fit items-center gap-1.5 rounded-sm text-sm font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring print:hidden"
+      >
+        <SquareSigma aria-hidden className="size-4" />
+        {t('examples.see_examples')}
+      </Link>
     </article>
   );
 }
