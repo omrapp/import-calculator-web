@@ -31,7 +31,8 @@ const head = (selector: string) =>
 
 describe('routes', () => {
   it.each([
-    ['/', 'Standard Calculation'],
+    ['/', 'Know your landed cost before you import.'],
+    ['/calculator', 'Standard Calculation'],
     ['/air-shipment', 'Air Shipment Calculation'],
     ['/result', 'Result'],
     ['/history', 'History'],

@@ -21,7 +21,7 @@ function CalloutText({ id }: { id: string }) {
     <Trans
       i18nKey={`guides.docs.module.${id}.callout`}
       components={{
-        calc: <Link to="/" className={linkClass} />,
+        calc: <Link to="/calculator" className={linkClass} />,
         air: <Link to="/air-shipment" className={linkClass} />,
         websites: <Link to="/websites" className={linkClass} />,
         terms: <Link to="/guides?tab=terms" className={linkClass} />,

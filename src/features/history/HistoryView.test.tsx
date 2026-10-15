@@ -55,7 +55,7 @@ function renderAt(path: string, resultElement = <LocationProbe />) {
     [
       { path: '/history', element: <HistoryView /> },
       { path: '/result', element: resultElement },
-      { path: '/', element: <p>calculator</p> },
+      { path: '/calculator', element: <p>calculator</p> },
     ],
     { initialEntries: [path] },
   );

@@ -152,7 +152,7 @@ export function ResultView({ actions }: { actions?: ResultActions }) {
           icon={<FileWarning />}
           action={
             <Button asChild>
-              <Link to="/">{t('pages.back_to_calculator')}</Link>
+              <Link to="/calculator">{t('pages.back_to_calculator')}</Link>
             </Button>
           }
         >

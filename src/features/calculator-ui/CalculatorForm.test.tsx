@@ -39,7 +39,7 @@ function renderForm(mode: 'standard' | 'air-shipment' = 'standard') {
   const router = createMemoryRouter(
     [
       {
-        path: '/',
+        path: '/calculator',
         element: (
           <CalculatorForm
             mode={mode}
@@ -50,7 +50,7 @@ function renderForm(mode: 'standard' | 'air-shipment' = 'standard') {
       },
       { path: '/result', element: <ResultProbe /> },
     ],
-    { initialEntries: ['/'] },
+    { initialEntries: ['/calculator'] },
   );
   return render(<RouterProvider router={router} />);
 }

@@ -22,6 +22,14 @@ export const routes: RouteObject[] = [
       page(
         '/',
         {
+          titleKey: 'landing.page_title',
+          descriptionKey: 'seo.description.home',
+        },
+        () => import('@/pages/HomePage').then(m => m.HomePage),
+      ),
+      page(
+        '/calculator',
+        {
           titleKey: 'nav.standard',
           descriptionKey: 'seo.description.standard',
         },
