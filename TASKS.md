@@ -34,6 +34,10 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] IMCL-18 required CIF fields: Cost (> 0), Freight (Standard only, 0 allowed), Insurance or Premium; form-level check so old links with Cost 0 still open
 - [x] IMCL-17 Guides as documentation: sticky TOC + scroll-spy + #module-N anchors, import-flow diagram, personal-import table, chargeable-weight SVG, tax cascade, engine-computed sample cost chart, document thumbnails, tip/note/warning callouts with links, category badges
 
+### Home + nav batch (2026-10-15)
+- [x] IMCL-21 Websites page: `/websites` route in header/menu/footer/sitemap; Guides tabs now Guides · Presentation · Terms (Gallery + Websites removed); `?tab=websites` redirects, `?tab=gallery` falls back to Guides; module 5 document thumbnails open the Lightbox with download
+- [ ] IMCL-22 Home landing page at `/` (hero + CTA, features, how it works, guides/websites teaser); Standard calculator moves to `/calculator`
+
 - [ ] IMCL-11 site redesign (design flow; `.design/site-redesign/`): brief, IA, tokens, task list done; Foundation T1–T3 + Core UI T4–T11 + Interactions T12–T16 (History, Guides, info pages + Settings theme + 404, SEO kit, export brand header) and Polish T17–T19 (responsive/RTL, a11y + reduced motion, perf) done; merged --no-ff into develop (62f7c22), main pending owner test + deploy. Initial JS 195 KiB gz (budget 214), CLS < 0.07
 
 - [ ] Owner: replace the About Us "who built it" draft paragraph (src/locales/*.json `pages.about.who_body`)

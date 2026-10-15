@@ -14,6 +14,7 @@ export const INDEXABLE_PATHS = [
   '/',
   '/air-shipment',
   '/guides',
+  '/websites',
   '/about',
   '/contact',
   '/privacy',

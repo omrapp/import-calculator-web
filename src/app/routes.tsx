@@ -51,6 +51,14 @@ export const routes: RouteObject[] = [
         { titleKey: 'nav.guides', descriptionKey: 'seo.description.guides' },
         () => import('@/pages/GuidesPage').then(m => m.GuidesPage),
       ),
+      page(
+        '/websites',
+        {
+          titleKey: 'nav.websites',
+          descriptionKey: 'seo.description.websites',
+        },
+        () => import('@/pages/WebsitesPage').then(m => m.WebsitesPage),
+      ),
       page('/settings', { titleKey: 'nav.settings' }, () =>
         import('@/pages/SettingsPage').then(m => m.SettingsPage),
       ),

@@ -36,6 +36,7 @@ describe('routes', () => {
     ['/result', 'Result'],
     ['/history', 'History'],
     ['/guides', 'Guides'],
+    ['/websites', 'Trading Websites'],
     ['/settings', 'Settings'],
     ['/about', 'About Us'],
     ['/contact', 'Contact Us'],

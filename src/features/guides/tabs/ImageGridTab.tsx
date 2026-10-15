@@ -5,7 +5,7 @@ import { type LightboxItem, Lightbox } from '../Lightbox';
 import { Picture } from '../Picture';
 import { EmptyState } from './EmptyState';
 
-/** Card grid of images that open in the Lightbox (Presentation and Gallery). */
+/** Card grid of images that open in the Lightbox (Presentation). */
 export function ImageGridTab({
   items,
   numbered = false,

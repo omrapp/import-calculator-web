@@ -59,14 +59,14 @@ describe('Lightbox', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 
-  it('offers the full-size file in the document gallery', () => {
+  it('offers the full-size file for the documents in the guides', () => {
     const router = createMemoryRouter(
       [{ path: '/guides', element: <GuidesView /> }],
-      { initialEntries: ['/guides?tab=gallery'] },
+      { initialEntries: ['/guides'] },
     );
     render(<RouterProvider router={router} />);
     fireEvent.click(
-      screen.getByRole('button', { name: /Certificate of Origin/ }),
+      screen.getAllByRole('button', { name: /Certificate of Origin/ })[0],
     );
     expect(screen.getByRole('link', { name: 'Download' })).toHaveAttribute(
       'href',

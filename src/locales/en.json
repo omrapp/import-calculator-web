@@ -46,7 +46,8 @@
     "guides_short": "Guides",
     "home": "Import Calculator home",
     "tools": "Tools",
-    "information": "Information"
+    "information": "Information",
+    "websites": "Websites"
   },
   "pages": {
     "not_found": "Page not found",
@@ -257,8 +258,6 @@
     "title_websites": "Trading Websites",
     "title_gallery": "Document Gallery",
     "tab_guides": "Guides",
-    "tab_websites": "Websites",
-    "tab_gallery": "Gallery",
     "tab_terms": "Terms",
     "tab_presentation": "Presentation",
     "search_placeholder": "Search...",
@@ -278,7 +277,7 @@
     "previous": "Previous",
     "next": "Next",
     "close": "Close",
-    "lead": "Rules, documents, trade terms and trusted suppliers for importing into Israel, in one place.",
+    "lead": "Rules, documents and trade terms for importing into Israel, in one place.",
     "websites": {
       "categories": "Website categories",
       "category": {
@@ -299,7 +298,9 @@
         "research": "Learn the trade and check demand before you buy.",
         "payments": "Pay suppliers abroad and manage currency costs.",
         "tools": "Everyday helpers for talking to suppliers and doing the math."
-      }
+      },
+      "lead": "Trusted websites for sourcing, shipping, paying and checking the rules, grouped by category.",
+      "search_label": "Search websites"
     },
     "docs": {
       "on_this_page": "On this page",
@@ -381,7 +382,7 @@
         "expenses": "Local expenses",
         "vat": "VAT"
       },
-      "documents_caption": "Certificates of origin you may need. Open one to view it full size in the Gallery.",
+      "documents_caption": "Certificates of origin you may need. Open one to view it full size.",
       "module": {
         "1": {
           "callout": "Limits and VAT rates change (VAT has been 18% since 2025). Check the Tax Authority under <websites>Websites</websites> before you order."
@@ -396,7 +397,7 @@
           "callout": "Apply for licenses and approvals before the goods ship. Goods waiting at the port for approval pay storage fees."
         },
         "5": {
-          "callout": "A valid certificate of origin can cut or cancel the Customs Duty under a trade agreement. See the samples in the <gallery>Gallery</gallery>."
+          "callout": "A valid certificate of origin can cut or cancel the Customs Duty under a trade agreement. See the samples above."
         },
         "6": {
           "callout": "Counterfeit and prohibited goods are seized at customs and can lead to fines. When in doubt, ask before you order."
@@ -514,9 +515,10 @@
       "standard": "Free import cost calculator for Israel. Enter cost, freight and duty rates to get CIF, customs duty, purchase tax, VAT and the full landed cost.",
       "air": "Air shipment calculator for imports into Israel: freight from carton sizes and weights, then duty, purchase tax, VAT and landed cost.",
       "history": "Your saved import cost calculations, kept in this browser, with export and import for backups.",
-      "guides": "Import and export guides for Israel: personal import rules, Incoterms, trade terms, document examples and trusted trading websites.",
+      "guides": "Import and export guides for Israel: personal import rules, Incoterms, trade terms and document examples.",
       "about": "About Import Calculator: a free tool that estimates the landed cost of importing goods into Israel, in English, Hebrew and Arabic.",
-      "contact": "Contact the Import Calculator team with questions, ideas or a correction."
+      "contact": "Contact the Import Calculator team with questions, ideas or a correction.",
+      "websites": "Trusted websites for importing into Israel: customs and government, sourcing marketplaces, trade fairs, shipping, research, payments and tools."
     }
   },
   "calculation_meta": {

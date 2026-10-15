@@ -1,10 +1,11 @@
-import type { ReactNode } from 'react';
+import { type ReactNode, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 import { useLanguage } from '@/features/i18n';
 
 import { galleryItems } from '../data/gallery';
+import { Lightbox } from '../Lightbox';
 import { Picture } from '../Picture';
 import { Callout, type CalloutKind } from './Callout';
 import { ChargeableWeightDiagram, TaxCascadeDiagram } from './diagrams';
@@ -14,7 +15,7 @@ import { SampleCostChart } from './SampleCostChart';
 const linkClass =
   'font-medium text-primary underline underline-offset-4 hover:text-primary/80';
 
-/** Callout text with <calc>, <air>, <websites>, <terms>, <gallery> links. */
+/** Callout text with <calc>, <air>, <websites>, <terms> links. */
 function CalloutText({ id }: { id: string }) {
   return (
     <Trans
@@ -22,9 +23,8 @@ function CalloutText({ id }: { id: string }) {
       components={{
         calc: <Link to="/" className={linkClass} />,
         air: <Link to="/air-shipment" className={linkClass} />,
-        websites: <Link to="/guides?tab=websites" className={linkClass} />,
+        websites: <Link to="/websites" className={linkClass} />,
         terms: <Link to="/guides?tab=terms" className={linkClass} />,
-        gallery: <Link to="/guides?tab=gallery" className={linkClass} />,
       }}
     />
   );
@@ -33,30 +33,45 @@ function CalloutText({ id }: { id: string }) {
 function DocumentThumbnails() {
   const { t } = useTranslation();
   const { language } = useLanguage();
+  const [open, setOpen] = useState<number | null>(null);
+  const items = galleryItems.map(item => ({
+    id: item.id,
+    image: item.image,
+    title: item.title[language],
+    description: item.description[language],
+  }));
   return (
     <div className="flex flex-col gap-2">
       <ul className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-        {galleryItems.map(item => (
+        {items.map((item, i) => (
           <li key={item.id}>
-            <Link
-              to="/guides?tab=gallery"
-              className="group flex flex-col gap-1.5 text-xs"
+            <button
+              type="button"
+              onClick={() => setOpen(i)}
+              className="group flex w-full flex-col gap-1.5 rounded-lg text-start text-xs outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <span className="block aspect-[3/4] overflow-hidden rounded-lg border bg-muted">
                 <Picture
                   image={item.image}
-                  alt={item.title[language]}
+                  alt={item.title}
                   sizes="120px"
                   className="size-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                 />
               </span>
               <span className="line-clamp-2 text-muted-foreground group-hover:text-foreground">
-                {item.title[language]}
+                {item.title}
               </span>
-            </Link>
+            </button>
           </li>
         ))}
       </ul>
+      <Lightbox
+        items={items}
+        index={open}
+        onIndexChange={setOpen}
+        onClose={() => setOpen(null)}
+        downloadable
+      />
       <p className="text-xs text-muted-foreground">
         {t('guides.docs.documents_caption')}
       </p>

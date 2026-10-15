@@ -1,6 +1,5 @@
 import type { Language } from '@/features/i18n';
 
-import type { GalleryItem } from './data/gallery';
 import type { LearningModule } from './data/learning-modules';
 import type { PresentationSlide } from './data/presentation';
 import type { TradeTerm } from './data/terms';
@@ -31,12 +30,6 @@ export const searchTerms = (
   lang: Language,
 ) =>
   items.filter(t => matcher(query)(t.term, t.name[lang], t.description[lang]));
-
-export const searchGallery = (
-  items: GalleryItem[],
-  query: string,
-  lang: Language,
-) => items.filter(g => matcher(query)(g.title[lang], g.description[lang]));
 
 export const searchWebsites = (
   items: TradingWebsite[],

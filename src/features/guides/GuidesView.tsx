@@ -1,9 +1,7 @@
 import {
   BookA,
   BookOpen,
-  Globe,
   GraduationCap,
-  Images,
   type LucideIcon,
   Presentation,
   Search,
@@ -11,7 +9,7 @@ import {
 import * as m from 'motion/react-m';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'react-router';
+import { Navigate, useSearchParams } from 'react-router';
 
 import { PageHeader } from '@/components/page';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -20,30 +18,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useLanguage } from '@/features/i18n';
 import { duration, ease, spring } from '@/lib/motion';
 
-import { galleryItems } from './data/gallery';
 import { presentationSlides } from './data/presentation';
 import { tradeTerms } from './data/terms';
-import { searchGallery, searchSlides } from './search';
+import { searchSlides } from './search';
 import { ImageGridTab } from './tabs/ImageGridTab';
 import { ModulesTab } from './tabs/ModulesTab';
 import { TermsTab } from './tabs/TermsTab';
-import { WebsitesTab } from './tabs/WebsitesTab';
 
-const TABS = [
-  'guides',
-  'presentation',
-  'terms',
-  'gallery',
-  'websites',
-] as const;
+const TABS = ['guides', 'presentation', 'terms'] as const;
 type Tab = (typeof TABS)[number];
 
 const ICONS: Record<Tab, LucideIcon> = {
   guides: GraduationCap,
   presentation: Presentation,
   terms: BookA,
-  gallery: Images,
-  websites: Globe,
 };
 
 const isTab = (value: string | null): value is Tab =>
@@ -85,6 +73,9 @@ export function GuidesView() {
     setQuery('');
     setParams({ tab: value }, { replace: true });
   };
+
+  // Websites moved to its own page; keep old tab links working.
+  if (param === 'websites') return <Navigate to="/websites" replace />;
 
   return (
     <section className="flex flex-col gap-6">
@@ -171,24 +162,6 @@ export function GuidesView() {
         <TabsContent value="terms">
           <Pane>
             <TermsTab query={query} />
-          </Pane>
-        </TabsContent>
-        <TabsContent value="gallery">
-          <Pane>
-            <ImageGridTab
-              downloadable
-              items={searchGallery(galleryItems, query, language).map(item => ({
-                id: item.id,
-                image: item.image,
-                title: item.title[language],
-                description: item.description[language],
-              }))}
-            />
-          </Pane>
-        </TabsContent>
-        <TabsContent value="websites">
-          <Pane>
-            <WebsitesTab query={query} />
           </Pane>
         </TabsContent>
       </Tabs>

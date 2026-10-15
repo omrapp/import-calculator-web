@@ -3,10 +3,14 @@ import { createMemoryRouter, RouterProvider } from 'react-router';
 import { describe, expect, it } from 'vitest';
 
 import { GuidesView } from './GuidesView';
+import { WebsitesView } from './WebsitesView';
 
 function renderGuides(path = '/guides') {
   const router = createMemoryRouter(
-    [{ path: '/guides', element: <GuidesView /> }],
+    [
+      { path: '/guides', element: <GuidesView /> },
+      { path: '/websites', element: <WebsitesView /> },
+    ],
     { initialEntries: [path] },
   );
   render(<RouterProvider router={router} />);
@@ -37,9 +41,31 @@ describe('GuidesView', () => {
   it('switching tabs updates the URL and clears the search', async () => {
     const router = renderGuides();
     search('import');
-    await openTab('Websites');
-    expect(router.state.location.search).toBe('?tab=websites');
+    await openTab('Terms');
+    expect(router.state.location.search).toBe('?tab=terms');
     expect(screen.getByRole('searchbox')).toHaveValue('');
+  });
+
+  it('has no Gallery or Websites tabs', () => {
+    renderGuides();
+    expect(screen.getAllByRole('tab').map(tab => tab.textContent)).toEqual([
+      'Guides',
+      'Presentation',
+      'Terms',
+    ]);
+  });
+
+  it('sends the old Websites tab link to the Websites page', () => {
+    const router = renderGuides('/guides?tab=websites');
+    expect(router.state.location.pathname).toBe('/websites');
+  });
+
+  it('falls back to the guides for the old Gallery tab link', () => {
+    renderGuides('/guides?tab=gallery');
+    expect(screen.getByRole('tab', { name: 'Guides' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
   });
 
   it('filters the active tab and shows an empty state', () => {
@@ -84,33 +110,5 @@ describe('GuidesView', () => {
     expect(
       screen.getAllByRole('link', { name: 'calculator' })[0],
     ).toHaveAttribute('href', '/');
-  });
-
-  it('opens websites in a new tab without opener access', () => {
-    renderGuides('/guides?tab=websites');
-    const link = within(screen.getByText('WeChat').closest('li')!).getByRole(
-      'link',
-      { name: /Visit Website/ },
-    );
-    expect(link).toHaveAttribute('href', 'https://www.wechat.com/');
-    expect(link).toHaveAttribute('target', '_blank');
-    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-  });
-
-  it('groups websites by category and filters by one', () => {
-    renderGuides('/guides?tab=websites');
-    expect(
-      screen.getByRole('heading', { level: 2, name: 'Government & Customs' }),
-    ).toBeInTheDocument();
-    fireEvent.click(
-      screen.getByRole('button', { name: /^Shipping & Logistics/ }),
-    );
-    expect(
-      screen.getByRole('button', { name: /^Shipping & Logistics/ }),
-    ).toHaveAttribute('aria-pressed', 'true');
-    expect(
-      screen.queryByRole('heading', { level: 2, name: 'Government & Customs' }),
-    ).not.toBeInTheDocument();
-    expect(screen.getByText('Tevel Logistics')).toBeInTheDocument();
   });
 });
