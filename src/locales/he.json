@@ -159,6 +159,23 @@
     "total_including_vat": "סה״כ כולל מע״מ",
     "saved_to_history": "נשמר בהיסטוריה",
     "share_error": "ייצוא PDF נכשל",
+    "charts": {
+      "title": "סיכום חזותי",
+      "composition": "ממה מורכב הסכום",
+      "composition_note": "חלקו של כל רכיב מתוך הסה״כ כולל מע״מ.",
+      "build_up": "איך הסכום מצטבר",
+      "build_up_note": "כל שלב מתווסף לסכום המצטבר, לפי הסדר שבו החישוב מחיל אותו.",
+      "weight": "איזה משקל מחויב",
+      "weight_note": "חברות הובלה אווירית גובות לפי הגבוה מבין המשקל בפועל והמשקל הנפחי.",
+      "billed": "מחויב",
+      "parts": {
+        "cif": "ערך CIF",
+        "customsDuty": "מכס",
+        "purchaseTax": "מס קנייה",
+        "expenses": "הוצאות מקומיות",
+        "vat": "מע״מ"
+      }
+    },
     "steps": {
       "cif_calculation": "חישוב CIF",
       "cost": "עלות",

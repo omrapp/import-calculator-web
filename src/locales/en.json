@@ -159,6 +159,23 @@
     "total_including_vat": "Total Including VAT",
     "saved_to_history": "Saved to History",
     "share_error": "Failed to export PDF",
+    "charts": {
+      "title": "Visual summary",
+      "composition": "What makes up the total",
+      "composition_note": "Each part as a share of the Total Including VAT.",
+      "build_up": "How the total builds up",
+      "build_up_note": "Each step adds to the running total, in the order the calculation applies it.",
+      "weight": "Which weight is billed",
+      "weight_note": "Air carriers charge by the higher of the actual and volumetric weight.",
+      "billed": "Billed",
+      "parts": {
+        "cif": "CIF value",
+        "customsDuty": "Customs Duty",
+        "purchaseTax": "Purchase Tax",
+        "expenses": "Local expenses",
+        "vat": "VAT"
+      }
+    },
     "steps": {
       "cif_calculation": "CIF Calculation",
       "cost": "Cost",
