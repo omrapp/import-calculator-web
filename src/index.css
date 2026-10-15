@@ -71,6 +71,11 @@
   --color-footer-muted: var(--footer-muted);
   --color-footer-border: var(--footer-border);
 
+  /* Section tones (IMCL-24): resolved per element from [data-tone] */
+  --color-tone: var(--tone);
+  --color-tone-soft: var(--tone-soft);
+  --color-tone-ink: var(--tone-ink);
+
   /* Typography: Inter (Latin) → Noto Sans Hebrew → IBM Plex Sans Arabic, per-glyph fallback */
   --font-sans:
     'Inter Variable', 'Noto Sans Hebrew Variable', 'Noto Sans Hebrew',
@@ -305,6 +310,85 @@
   --sidebar-accent-foreground: oklch(0.86 0.07 205);
   --sidebar-border: oklch(0.32 0.035 262);
   --sidebar-ring: oklch(0.78 0.12 200);
+}
+
+/*
+ * Section tones (IMCL-24): one bright pastel hue per calculation part, shared by
+ * the Calculator sections, the Result breakdown and the charts so a part keeps
+ * its color everywhere. Set `data-tone="…"` on an element, then use
+ * `bg-tone` (vivid fill), `bg-tone-soft` (pastel tint), `text-tone-ink`
+ * (readable text on the tint), `border-tone`, or `bg-tone-gloss`.
+ * Lightness levels switch per theme; hue and chroma come from the tone.
+ */
+:root {
+  --tone-l: 0.74;
+  --tone-soft-l: 0.965;
+  --tone-soft-c: 0.032;
+  --tone-ink-l: 0.45;
+}
+
+.dark {
+  --tone-l: 0.8;
+  --tone-soft-l: 0.29;
+  --tone-soft-c: 0.05;
+  --tone-ink-l: 0.88;
+}
+
+[data-tone] {
+  --tone: oklch(var(--tone-l) var(--tone-c) var(--tone-h));
+  --tone-soft: oklch(var(--tone-soft-l) var(--tone-soft-c) var(--tone-h));
+  --tone-ink: oklch(var(--tone-ink-l) calc(var(--tone-c) * 0.85) var(--tone-h));
+}
+
+/* Customs value (CIF): sky */
+[data-tone='cif'] {
+  --tone-h: 232;
+  --tone-c: 0.13;
+}
+/* Customs Duty: violet */
+[data-tone='duty'] {
+  --tone-h: 295;
+  --tone-c: 0.15;
+}
+/* Purchase Tax: amber (needs more light to stay bright) */
+[data-tone='ptax'] {
+  --tone-h: 72;
+  --tone-c: 0.15;
+  --tone-l: 0.82;
+}
+/* Expenses: teal */
+[data-tone='expenses'] {
+  --tone-h: 178;
+  --tone-c: 0.12;
+}
+/* VAT: pink */
+[data-tone='vat'] {
+  --tone-h: 350;
+  --tone-c: 0.16;
+}
+/* Exchange rates: green */
+[data-tone='rates'] {
+  --tone-h: 150;
+  --tone-c: 0.14;
+}
+/* Air Shipment: indigo */
+[data-tone='air'] {
+  --tone-h: 268;
+  --tone-c: 0.13;
+}
+/* Factors and totals: brand teal */
+[data-tone='factors'] {
+  --tone-h: 205;
+  --tone-c: 0.11;
+}
+
+/* Glossy fill: a lighter top edge over the tone, for bars and chips. */
+@utility bg-tone-gloss {
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--tone) 55%, white) 0%,
+    var(--tone) 70%
+  );
 }
 
 /* Dot-grid backdrop for the hero; the glow sits at the inline-end side. */

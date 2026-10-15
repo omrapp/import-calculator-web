@@ -163,11 +163,22 @@
       "title": "Visual summary",
       "composition": "What makes up the total",
       "composition_note": "Each part as a share of the Total Including VAT.",
-      "build_up": "How the total builds up",
       "build_up_note": "Each step adds to the running total, in the order the calculation applies it.",
       "weight": "Which weight is billed",
       "weight_note": "Air carriers charge by the higher of the actual and volumetric weight.",
       "billed": "Billed",
+      "chart_views": "Chart views",
+      "legend": "Cost parts",
+      "bars_note": "Each part side by side: the taller the column, the bigger the cost.",
+      "line_note": "The running total after each cost is added, from zero to the Total Including VAT.",
+      "start": "Start",
+      "tabs": {
+        "donut": "Pie",
+        "bars": "Bars",
+        "line": "Line",
+        "build_up": "Build-up",
+        "share": "Share"
+      },
       "parts": {
         "cif": "CIF value",
         "customsDuty": "Customs Duty",

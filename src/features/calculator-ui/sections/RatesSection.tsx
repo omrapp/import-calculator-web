@@ -37,6 +37,7 @@ export function RatesSection({
 
   return (
     <Section
+      tone="rates"
       icon={<ArrowLeftRight />}
       title={t('home.exchange_rates')}
       action={

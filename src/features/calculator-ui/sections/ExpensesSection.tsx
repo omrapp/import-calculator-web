@@ -28,7 +28,7 @@ export function ExpensesSection() {
   });
 
   return (
-    <Section icon={<Wallet />} title={t('home.expenses')}>
+    <Section tone="expenses" icon={<Wallet />} title={t('home.expenses')}>
       <p className="text-xs text-muted-foreground">
         {t('calculator.hints.percent_expense')}
       </p>

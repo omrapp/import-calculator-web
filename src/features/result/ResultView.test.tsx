@@ -120,12 +120,36 @@ describe('ResultView', () => {
     );
     expect(
       charts.getAllByRole('heading', { level: 3 }).map(h => h.textContent),
-    ).toEqual(['What makes up the total', 'How the total builds up']);
+    ).toEqual(['What makes up the total']);
+    expect(
+      within(charts.getByRole('tablist', { name: 'Chart views' }))
+        .getAllByRole('tab')
+        .map(tab => tab.textContent),
+    ).toEqual(['Pie', 'Bars', 'Line', 'Build-up', 'Share']);
+    expect(screen.getByTestId('donut')).toBeInTheDocument();
+    const legend = within(charts.getByRole('list', { name: 'Cost parts' }));
+    expect(legend.getAllByRole('listitem')).toHaveLength(5);
+    expect(screen.queryByTestId('weight-chart')).not.toBeInTheDocument();
+  });
+
+  it.each([
+    ['Bars', 'columns'],
+    ['Line', 'line'],
+    ['Share', 'share-bar'],
+  ])('switches to the %s view', (tab, testId) => {
+    renderResult(`?c=${linkFor(fixture('everything combined'))}`);
+    fireEvent.mouseDown(screen.getByRole('tab', { name: tab }));
+    expect(screen.getByTestId(testId)).toBeInTheDocument();
+    expect(screen.queryByTestId('donut')).not.toBeInTheDocument();
+  });
+
+  it('shows the build-up from CIF to the Total Including VAT', () => {
+    renderResult(`?c=${linkFor(fixture('everything combined'))}`);
+    fireEvent.mouseDown(screen.getByRole('tab', { name: 'Build-up' }));
     const buildUp = within(screen.getByTestId('build-up'));
     expect(buildUp.getByText('Landed Cost')).toBeInTheDocument();
     expect(buildUp.getByText('₪111,999.89')).toBeInTheDocument();
     expect(buildUp.getByText('₪132,159.87')).toBeInTheDocument();
-    expect(screen.queryByTestId('weight-chart')).not.toBeInTheDocument();
   });
 
   it('charts which Air Shipment weight is billed', () => {

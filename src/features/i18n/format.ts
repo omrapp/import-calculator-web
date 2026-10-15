@@ -30,6 +30,20 @@ export function formatMoney(
   }).format(amount);
 }
 
+/** Short money for tight chart labels, e.g. `₪112K`. */
+export function formatCompactMoney(
+  amount: number,
+  currency: Currency,
+  language: Language,
+): string {
+  return new Intl.NumberFormat(locale(language), {
+    style: 'currency',
+    currency,
+    notation: 'compact',
+    maximumFractionDigits: 1,
+  }).format(amount);
+}
+
 export function formatDate(iso: string, language: Language): string {
   return new Intl.DateTimeFormat(locale(language), {
     dateStyle: 'medium',

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { formatMoney, formatNumber } from './format';
+import { formatCompactMoney, formatMoney, formatNumber } from './format';
 import { SUPPORTED_LANGUAGES } from './languages';
 
 describe('format', () => {
@@ -13,5 +13,14 @@ describe('format', () => {
     expect(formatMoney(10, 'ILS', 'en')).toContain('₪');
     expect(formatMoney(10, 'USD', 'en')).toContain('$');
     expect(formatMoney(10, 'EUR', 'en')).toContain('€');
+  });
+
+  it.each(SUPPORTED_LANGUAGES)('shortens chart labels in %s', language => {
+    const compact = formatCompactMoney(132159.87, 'ILS', language);
+    expect(compact).toContain('₪');
+    expect(compact).toMatch(/132/);
+    expect(compact.length).toBeLessThan(
+      formatMoney(132159.87, 'ILS', language).length,
+    );
   });
 });
