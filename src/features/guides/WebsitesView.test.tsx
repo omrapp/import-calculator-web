@@ -52,4 +52,41 @@ describe('WebsitesView', () => {
       screen.getByText('Nothing matches your search.'),
     ).toBeInTheDocument();
   });
+
+  it('filters by a tag chip, matches tags in search and clears the tag', () => {
+    renderWebsites();
+    const card = screen.getByText('IndiaMART').closest('li')!;
+    fireEvent.click(within(card).getByRole('button', { name: 'India' }));
+    expect(screen.getByText('IndiaMART')).toBeInTheDocument();
+    expect(screen.queryByText('Alibaba.com')).not.toBeInTheDocument();
+    expect(screen.getByText('Filtered by tag: India')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Clear tag filter' }));
+    expect(screen.getByText('Alibaba.com')).toBeInTheDocument();
+
+    fireEvent.change(
+      screen.getByRole('searchbox', { name: 'Search websites' }),
+      {
+        target: { value: 'dropshipping' },
+      },
+    );
+    expect(screen.getByText('Wholesale2B')).toBeInTheDocument();
+    expect(screen.getByText('ZIK Analytics')).toBeInTheDocument();
+    expect(screen.queryByText('Alibaba.com')).not.toBeInTheDocument();
+  });
+
+  it('shows a homepage screenshot when one was captured, else the generated art', () => {
+    renderWebsites();
+    const wechat = screen.getByText('WeChat').closest('li')!;
+    expect(wechat.querySelector('img[src="/sites/2.webp"]')).not.toBeNull();
+    // gov.il blocks headless capture, so this card keeps the category art.
+    const guide = screen.getByText('Personal Import Guide').closest('li')!;
+    expect(guide.querySelector('img[src^="/sites/"]')).toBeNull();
+    expect(
+      wechat.querySelector('img[src*="google.com/s2/favicons"]'),
+    ).toHaveAttribute('referrerpolicy', 'no-referrer');
+    // No favicon for ExpoExpo anywhere, so its card shows the monogram.
+    const expo = screen.getByText('ExpoExpo').closest('li')!;
+    expect(expo.querySelector('img[src*="favicons"]')).toBeNull();
+    expect(within(expo).getByText('E')).toBeInTheDocument();
+  });
 });

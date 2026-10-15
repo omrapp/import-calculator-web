@@ -3,7 +3,7 @@ import type { Language } from '@/features/i18n';
 import type { LearningModule } from './data/learning-modules';
 import type { PresentationSlide } from './data/presentation';
 import type { TradeTerm } from './data/terms';
-import type { TradingWebsite } from './data/websites';
+import type { TradingWebsite, WebsiteTag } from './data/websites';
 
 // Same matching as the app: case-insensitive substring per tab's fields.
 const matcher = (query: string) => {
@@ -31,8 +31,13 @@ export const searchTerms = (
 ) =>
   items.filter(t => matcher(query)(t.term, t.name[lang], t.description[lang]));
 
+/** Also matches tags, by their label in the current language. */
 export const searchWebsites = (
   items: TradingWebsite[],
   query: string,
   lang: Language,
-) => items.filter(w => matcher(query)(w.title[lang], w.description[lang]));
+  tagLabel: (tag: WebsiteTag) => string = tag => tag,
+) =>
+  items.filter(w =>
+    matcher(query)(w.title[lang], w.description[lang], ...w.tags.map(tagLabel)),
+  );

@@ -48,4 +48,15 @@ describe('guides search', () => {
       searchWebsites(tradingWebsites, 'china', 'en').map(w => w.url),
     ).toContain('https://www.wechat.com/');
   });
+
+  it('matches websites by tag label in the current language', () => {
+    const labels: Record<string, string> = { calculator: 'מחשבון' };
+    const found = searchWebsites(
+      tradingWebsites,
+      'מחשבון',
+      'he',
+      tag => labels[tag] ?? tag,
+    ).map(w => w.id);
+    expect(found).toEqual(['34', '35', '37']);
+  });
 });
