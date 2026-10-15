@@ -176,7 +176,7 @@ export function HomeView() {
           </m.ul>
         </m.div>
 
-        <Reveal className="min-w-0 [&_figure]:shadow-md">
+        <Reveal className="min-w-0 text-foreground [&_figure]:shadow-md">
           <SampleCostChart />
         </Reveal>
       </section>
