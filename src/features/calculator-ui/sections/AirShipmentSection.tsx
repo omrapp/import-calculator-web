@@ -61,7 +61,11 @@ export function AirShipmentSection() {
   const preview = useAirFreightPreview();
 
   return (
-    <Section icon={<Plane />} title={t('home.labels.air_freight_details')}>
+    <Section
+      tone="air"
+      icon={<Plane />}
+      title={t('home.labels.air_freight_details')}
+    >
       {fields.map((carton, index) => (
         <fieldset key={carton.id} className="rounded-md border p-3">
           <div className="mb-2 flex items-center justify-between">
