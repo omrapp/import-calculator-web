@@ -9,6 +9,11 @@ export const headerNav = [
   },
   { path: '/history', titleKey: 'nav.history', activeOn: ['/history'] },
   { path: '/guides', titleKey: 'nav.guides_short', activeOn: ['/guides'] },
+  {
+    path: '/examples',
+    titleKey: 'nav.examples_short',
+    activeOn: ['/examples'],
+  },
   { path: '/websites', titleKey: 'nav.websites', activeOn: ['/websites'] },
 ] as const;
 
@@ -19,6 +24,7 @@ export const primaryNav = [
   { path: '/air-shipment', titleKey: 'nav.air_shipment' },
   { path: '/history', titleKey: 'nav.history' },
   { path: '/guides', titleKey: 'nav.guides' },
+  { path: '/examples', titleKey: 'nav.examples' },
   { path: '/websites', titleKey: 'nav.websites' },
 ] as const;
 

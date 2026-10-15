@@ -15,6 +15,7 @@ export const INDEXABLE_PATHS = [
   '/calculator',
   '/air-shipment',
   '/guides',
+  '/examples',
   '/websites',
   '/about',
   '/contact',
