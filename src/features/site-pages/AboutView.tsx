@@ -15,6 +15,7 @@ import { Link } from 'react-router';
 
 import { RevealGroup, RevealItem } from '@/components/motion';
 import { PageHeader } from '@/components/page';
+import { Photo } from '@/components/photo';
 import { Button } from '@/components/ui/button';
 
 const FEATURES: [string, LucideIcon][] = [
@@ -34,6 +35,7 @@ export function AboutView() {
     <article className="mx-auto flex max-w-3xl flex-col gap-10">
       <PageHeader
         icon={<Info />}
+        photo="container-terminal"
         title={t('nav.about')}
         description={t('settings.about.description')}
       />
@@ -60,11 +62,18 @@ export function AboutView() {
         </RevealGroup>
       </section>
 
-      <section className="flex max-w-prose-tight flex-col gap-3">
-        <h2 className="text-xl font-semibold">{t('pages.about.who')}</h2>
-        <p className="leading-relaxed text-muted-foreground">
-          {t('pages.about.who_body')}
-        </p>
+      <section className="grid items-center gap-6 sm:grid-cols-[1fr_1.1fr]">
+        <div className="flex flex-col gap-3">
+          <h2 className="text-xl font-semibold">{t('pages.about.who')}</h2>
+          <p className="leading-relaxed text-muted-foreground">
+            {t('pages.about.who_body')}
+          </p>
+        </div>
+        <Photo
+          name="port-at-night"
+          sizes="(min-width: 640px) 400px, 100vw"
+          className="aspect-[4/3] w-full rounded-2xl shadow-sm"
+        />
       </section>
 
       <div className="flex flex-wrap items-center gap-4 border-t pt-6">

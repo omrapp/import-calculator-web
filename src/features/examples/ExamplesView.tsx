@@ -32,6 +32,7 @@ export function ExamplesView() {
     <section className="mx-auto flex max-w-form flex-col gap-8">
       <PageHeader
         icon={<SquareSigma />}
+        photo="port-aerial"
         title={t('examples.title')}
         description={t('examples.lead')}
         meta={

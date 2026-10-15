@@ -98,6 +98,7 @@ export function GuidesView() {
       />
       <PageHeader
         icon={<BookOpen />}
+        photo="container-yard-aerial"
         title={t('nav.guides')}
         description={t('guides.lead')}
         actions={

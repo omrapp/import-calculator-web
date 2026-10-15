@@ -640,6 +640,37 @@
     "final": {
       "title": "Ready to price your next shipment?",
       "body": "It takes a minute, and nothing leaves your browser."
+    },
+    "modes": {
+      "overline": "Sea & air freight",
+      "title": "Ship it by sea or fly it in",
+      "lead": "Two calculators for the two ways goods reach Israel.",
+      "sea": {
+        "title": "Sea freight & any shipment",
+        "body": "Containers into Haifa, Ashdod or Eilat: enter the freight you were quoted and get the full landed cost.",
+        "cta": "Open the calculator"
+      },
+      "air": {
+        "title": "Air cargo",
+        "body": "Cartons into Ben Gurion: chargeable weight from sizes and weights, then duty, tax and VAT.",
+        "cta": "Calculate air shipment"
+      }
+    },
+    "map": {
+      "overline": "Global routes",
+      "title": "From any port in the world to Israel",
+      "lead": "Asia through Suez, India up the Red Sea to Eilat, Europe and the Americas across the Mediterranean, and air cargo into Ben Gurion. The cost math is the same for all of them.",
+      "aria": "World map of the main sea and air freight routes into Israel",
+      "sea": "Sea freight lanes",
+      "air": "Air cargo",
+      "ports": "Haifa · Ashdod · Eilat · Ben Gurion",
+      "israel": "Israel",
+      "origins": {
+        "shanghai": "Shanghai",
+        "mumbai": "Mumbai",
+        "rotterdam": "Rotterdam",
+        "new_york": "New York"
+      }
     }
   },
   "examples": {
