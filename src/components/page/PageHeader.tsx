@@ -1,6 +1,7 @@
 import * as m from 'motion/react-m';
 import type { ReactNode } from 'react';
 
+import { Photo, type PhotoName } from '@/components/photo';
 import { cn } from '@/lib/utils';
 import { fadeUp, staggerChildren } from '@/lib/motion';
 
@@ -11,6 +12,7 @@ export function PageHeader({
   description,
   meta,
   actions,
+  photo,
   className,
 }: {
   title: string;
@@ -21,6 +23,8 @@ export function PageHeader({
   meta?: ReactNode;
   /** End-side controls; wrap under the title on small screens. */
   actions?: ReactNode;
+  /** Full-bleed shipping photo behind the header, with light text on a scrim. */
+  photo?: PhotoName;
   className?: string;
 }) {
   return (
@@ -28,11 +32,25 @@ export function PageHeader({
       initial="hidden"
       animate="visible"
       variants={staggerChildren}
+      data-photo={photo ? '' : undefined}
       className={cn(
         'flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between',
+        photo &&
+          'relative isolate min-h-56 overflow-hidden rounded-3xl px-5 pt-16 pb-7 text-white shadow-md sm:min-h-64 sm:px-8 sm:pb-8',
         className,
       )}
     >
+      {photo && (
+        <>
+          <Photo
+            name={photo}
+            eager
+            sizes="(min-width: 1280px) 1280px, 100vw"
+            className="absolute inset-0 -z-20 size-full"
+          />
+          <div aria-hidden className="absolute inset-0 -z-10 bg-photo-scrim" />
+        </>
+      )}
       <div className="flex min-w-0 items-start gap-4">
         {icon && (
           <m.span
@@ -50,7 +68,10 @@ export function PageHeader({
           {description && (
             <m.div
               variants={fadeUp}
-              className="max-w-prose text-muted-foreground"
+              className={cn(
+                'max-w-prose',
+                photo ? 'text-white/85' : 'text-muted-foreground',
+              )}
             >
               {description}
             </m.div>
@@ -58,7 +79,10 @@ export function PageHeader({
           {meta && (
             <m.div
               variants={fadeUp}
-              className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm text-muted-foreground"
+              className={cn(
+                'flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm',
+                photo ? 'text-white/75' : 'text-muted-foreground',
+              )}
             >
               {meta}
             </m.div>

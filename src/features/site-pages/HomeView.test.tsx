@@ -34,4 +34,24 @@ describe('Home', () => {
       screen.getByRole('link', { name: /Browse websites/ }),
     ).toHaveAttribute('href', '/websites');
   });
+
+  it('shows the sea and air cards, the routes map and shipping photos', () => {
+    const { container } = render(<HomeView />, { wrapper: MemoryRouter });
+    expect(
+      screen.getByRole('link', { name: /Sea freight & any shipment/ }),
+    ).toHaveAttribute('href', '/calculator');
+    expect(screen.getByRole('link', { name: /Air cargo/ })).toHaveAttribute(
+      'href',
+      '/air-shipment',
+    );
+    expect(
+      screen.getByRole('img', { name: /main sea and air freight routes/ }),
+    ).toBeInTheDocument();
+    const hero = container.querySelector<HTMLImageElement>(
+      'img[src="/photos/ship-entering-port-1600.webp"]',
+    );
+    expect(hero).toHaveAttribute('loading', 'eager');
+    // Photos are decorative; the text over them carries the meaning.
+    expect(hero).toHaveAttribute('alt', '');
+  });
 });
