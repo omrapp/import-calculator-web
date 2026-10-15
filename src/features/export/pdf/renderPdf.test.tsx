@@ -79,3 +79,30 @@ describe('renderPdf', () => {
     20_000,
   );
 });
+
+describe('buildPdfModel currency', () => {
+  it('puts every amount in the chosen currency and drops formulas', async () => {
+    const i18n = i18next.createInstance();
+    await i18n.init({
+      lng: 'en',
+      resources: { en: { translation: en } },
+      interpolation: { escapeValue: false },
+    });
+    const link = { v: 1 as const, input, rates: { source: 'manual' as const } };
+    const t = i18n.t.bind(i18n);
+    const shekel = buildPdfModel(link, calculate(input), 'en', t);
+    const euro = buildPdfModel(link, calculate(input), 'en', t, 'EUR');
+
+    expect(shekel.summary[0].value).toBe('₪132,159.87');
+    expect(euro.summary[0].value).toBe(
+      `€${(calculate(input).totals.totalIncludingVat / input.rates.EUR).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+    );
+    const rows = euro.sections.flatMap(s => s.rows);
+    expect(rows.every(row => !/[₪$]/.test(row.value))).toBe(true);
+    expect(rows.every(row => row.formula === undefined)).toBe(true);
+    expect(euro.ratesNote).toContain('Amounts shown in Euro');
+    expect(shekel.sections.flatMap(s => s.rows).some(r => r.formula)).toBe(
+      true,
+    );
+  });
+});

@@ -6,6 +6,7 @@ import type { Step } from '@/features/calc-engine';
 import { useLanguage } from '@/features/i18n';
 import { cn } from '@/lib/utils';
 
+import { displayStepValue, useDisplayMoney } from './currency';
 import { formatStepValue } from './format';
 import { Formula } from './Formula';
 import { stepLabelText, toBreakdownSections } from './sections';
@@ -14,6 +15,10 @@ import { sectionTone } from './tones';
 export function Breakdown({ steps }: { steps: Step[] }) {
   const { t } = useTranslation();
   const { language } = useLanguage();
+  const { currency, rates } = useDisplayMoney();
+  // Formulas only add up in their own units (e.g. $ × rate = ₪), so they
+  // show in the ₪ view only.
+  const showFormulas = currency === 'ILS';
 
   return (
     <section
@@ -21,6 +26,16 @@ export function Breakdown({ steps }: { steps: Step[] }) {
       className="flex flex-col gap-4 [counter-reset:breakdown]"
     >
       <h2 className="mt-2 text-xl font-semibold">{t('result.breakdown')}</h2>
+      {!showFormulas && (
+        <p
+          data-testid="converted-note"
+          className="-mt-2 text-sm text-muted-foreground"
+        >
+          {t('result.currency.converted_note', {
+            currency: t(`result.currency.${currency}`),
+          })}
+        </p>
+      )}
       {toBreakdownSections(steps, t).map(section => (
         <Reveal
           key={section.title}
@@ -49,10 +64,14 @@ export function Breakdown({ steps }: { steps: Step[] }) {
                 <div className="flex items-baseline justify-between gap-4">
                   <span>{stepLabelText(step.label, t)}</span>
                   <bdi dir="ltr" className="shrink-0 tabular-nums">
-                    {formatStepValue(step.value, language, t)}
+                    {formatStepValue(
+                      displayStepValue(step.value, currency, rates),
+                      language,
+                      t,
+                    )}
                   </bdi>
                 </div>
-                {step.formula && (
+                {showFormulas && step.formula && (
                   <span
                     className={cn(
                       'text-xs',
