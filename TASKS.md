@@ -39,6 +39,8 @@ Module index: [CAPABILITY-MAP.md](./CAPABILITY-MAP.md). Shared rules: [SPEC.md](
 - [x] IMCL-22 Home landing page at `/` (hero + CTAs + trust chips + engine-computed sample cost, 6 features, 3-step how it works, Guides/Websites cards, closing CTA band) in header/menu/footer; Standard calculator moves to `/calculator` (links, Edit/Recalculate, sitemap updated). New copy under `landing.*` in en/he/ar — owner review
 - [ ] Owner: check header nav fit at 768–1024px with 5 items (Home · Calculator · History · Guides · Websites) in all 3 languages
 - [ ] Owner: old bookmarks of `/` now open Home, not the calculator (no redirect by design)
+- [x] IMCL-23 Result charts ("Visual summary" between Summary and Breakdown): cost composition 100% bar + legend with shares, build-up waterfall (each part from the running total, Landed Cost and Total rows), Air Shipment actual vs volumetric weight with the billed one marked. Pure mapper `result/chartData.ts` reads engine totals/steps as-is (no engine change); hand-rolled CSS bars like the Guides sample chart, no new dependency. Copy under `result.charts.*` in en/he/ar — owner review
+- [ ] Owner: browser check of IMCL-23 charts at phone width and in he/ar (RTL); not verified in a browser (extension not connected). PDF export does not include the charts
 
 - [ ] IMCL-11 site redesign (design flow; `.design/site-redesign/`): brief, IA, tokens, task list done; Foundation T1–T3 + Core UI T4–T11 + Interactions T12–T16 (History, Guides, info pages + Settings theme + 404, SEO kit, export brand header) and Polish T17–T19 (responsive/RTL, a11y + reduced motion, perf) done; merged --no-ff into develop (62f7c22), main pending owner test + deploy. Initial JS 195 KiB gz (budget 214), CLS < 0.07
 

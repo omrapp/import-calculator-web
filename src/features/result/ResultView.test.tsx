@@ -96,8 +96,11 @@ describe('ResultView', () => {
     const summary = within(screen.getByRole('region', { name: 'Summary' }));
     expect(summary.getByText('₪111,999.89')).toBeInTheDocument();
     expect(summary.getByText('₪132,159.87')).toBeInTheDocument();
+    const breakdown = within(
+      screen.getByRole('region', { name: 'Step-by-step breakdown' }),
+    );
     expect(
-      screen.getAllByRole('heading', { level: 3 }).map(h => h.textContent),
+      breakdown.getAllByRole('heading', { level: 3 }).map(h => h.textContent),
     ).toEqual([
       'CIF Calculation',
       'Customs Duty',
@@ -108,6 +111,31 @@ describe('ResultView', () => {
     ]);
     expect(screen.getByText('Forklift')).toBeInTheDocument();
     expect(screen.getAllByText('Import Factor').length).toBeGreaterThan(0);
+  });
+
+  it('charts the cost parts with the same figures as the totals', () => {
+    renderResult(`?c=${linkFor(fixture('everything combined'))}`);
+    const charts = within(
+      screen.getByRole('region', { name: 'Visual summary' }),
+    );
+    expect(
+      charts.getAllByRole('heading', { level: 3 }).map(h => h.textContent),
+    ).toEqual(['What makes up the total', 'How the total builds up']);
+    const buildUp = within(screen.getByTestId('build-up'));
+    expect(buildUp.getByText('Landed Cost')).toBeInTheDocument();
+    expect(buildUp.getByText('₪111,999.89')).toBeInTheDocument();
+    expect(buildUp.getByText('₪132,159.87')).toBeInTheDocument();
+    expect(screen.queryByTestId('weight-chart')).not.toBeInTheDocument();
+  });
+
+  it('charts which Air Shipment weight is billed', () => {
+    renderResult(
+      `?c=${linkFor(fixture('air: multi carton, volumetric wins'))}`,
+    );
+    const weight = within(screen.getByTestId('weight-chart'));
+    const billed = weight.getByText('Billed').closest('li')!;
+    expect(billed).toHaveTextContent('Volumetric Weight');
+    expect(billed).toHaveTextContent('104.29 kg');
   });
 
   it('shows Air Shipment cards and per-Carton rows', () => {

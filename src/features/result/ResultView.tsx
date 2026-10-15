@@ -27,6 +27,7 @@ import { calculatorPath, useOpenInCalculator } from '@/features/calculator-ui';
 import { formatDate, formatNumber, useLanguage } from '@/features/i18n';
 
 import { Breakdown } from './Breakdown';
+import { CostCharts } from './CostCharts';
 import { SummaryCards } from './SummaryCards';
 import { useCalculationFromUrl } from './useCalculationFromUrl';
 
@@ -195,6 +196,7 @@ export function ResultView({ actions }: { actions?: ResultActions }) {
         {actions?.({ link, result, content })}
       </Actions>
       <SummaryCards totals={result.totals} />
+      <CostCharts result={result} />
       <Breakdown steps={result.steps} />
     </article>
   );
