@@ -23,3 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Private project docs (kept locally, not published)
+*.md
+!/README.md
+SPEC/
+docs/
+.design/
