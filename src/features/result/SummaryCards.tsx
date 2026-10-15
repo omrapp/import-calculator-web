@@ -4,19 +4,28 @@ import { AnimatedNumber, RevealGroup, RevealItem } from '@/components/motion';
 
 import type { CalculationTotals } from '@/features/calc-engine';
 import { formatMoney, formatNumber, useLanguage } from '@/features/i18n';
+import type { Tone } from '@/lib/tone';
+
+import { useDisplayMoney } from './currency';
 
 export function SummaryCards({ totals }: { totals: CalculationTotals }) {
   const { t } = useTranslation();
   const { language } = useLanguage();
-  const money = (amount: number) => formatMoney(amount, 'ILS', language);
+  const { currency, convert } = useDisplayMoney();
+  const money = (amount: number) => formatMoney(amount, currency, language);
 
-  const cards: { label: string; value: string }[] = [
-    { label: t('result.landed_cost'), value: money(totals.landedCost) },
+  const cards: { label: string; value: string; tone: Tone }[] = [
+    {
+      label: t('result.landed_cost'),
+      value: money(convert(totals.landedCost)),
+      tone: 'factors',
+    },
     ...(totals.importFactor !== null
       ? [
           {
             label: t('result.steps.import_factor'),
             value: formatNumber(totals.importFactor, language, 4),
+            tone: 'cif' as const,
           },
         ]
       : []),
@@ -25,6 +34,7 @@ export function SummaryCards({ totals }: { totals: CalculationTotals }) {
           {
             label: t('result.steps.shekel_per_unit_factor'),
             value: formatNumber(totals.shekelPerUnitFactor, language, 4),
+            tone: 'rates' as const,
           },
         ]
       : []),
@@ -33,6 +43,7 @@ export function SummaryCards({ totals }: { totals: CalculationTotals }) {
           {
             label: t('home.labels.chargeable_weight'),
             value: `${formatNumber(totals.chargeableWeight, language)} ${t('common.kg')}`,
+            tone: 'air' as const,
           },
         ]
       : []),
@@ -40,7 +51,12 @@ export function SummaryCards({ totals }: { totals: CalculationTotals }) {
       ? [
           {
             label: t('result.steps.total_air_freight'),
-            value: formatMoney(totals.airFreightUsd, 'USD', language),
+            // In the ₪ view the $ total stays in $, as the carrier bills it.
+            value:
+              currency === 'ILS'
+                ? formatMoney(totals.airFreightUsd, 'USD', language)
+                : money(convert(totals.airFreightUsd, 'USD')),
+            tone: 'air' as const,
           },
         ]
       : []),
@@ -56,6 +72,10 @@ export function SummaryCards({ totals }: { totals: CalculationTotals }) {
           />
           <div
             aria-hidden
+            className="absolute inset-x-0 top-0 -z-10 h-1/2 bg-linear-to-b from-white/12 to-transparent"
+          />
+          <div
+            aria-hidden
             className="absolute inset-0 -z-10 bg-[radial-gradient(70%_120%_at_100%_0%,color-mix(in_oklab,var(--highlight)_35%,transparent),transparent_70%)] rtl:bg-[radial-gradient(70%_120%_at_0%_0%,color-mix(in_oklab,var(--highlight)_35%,transparent),transparent_70%)]"
           />
           <dt className="text-sm font-medium text-white/80">
@@ -64,7 +84,7 @@ export function SummaryCards({ totals }: { totals: CalculationTotals }) {
           <dd className="mt-1 text-figure tabular-nums">
             <bdi dir="ltr">
               <AnimatedNumber
-                value={totals.totalIncludingVat}
+                value={convert(totals.totalIncludingVat)}
                 format={money}
                 countUp
               />
@@ -77,9 +97,16 @@ export function SummaryCards({ totals }: { totals: CalculationTotals }) {
           {cards.map(card => (
             <RevealItem
               key={card.label}
-              className="rounded-xl border bg-card p-4 shadow-xs"
+              data-tone={card.tone}
+              className="relative overflow-hidden rounded-xl border border-tone/40 bg-tone-soft p-4 shadow-xs"
             >
-              <dt className="text-xs text-muted-foreground">{card.label}</dt>
+              <div
+                aria-hidden
+                className="absolute inset-x-0 top-0 h-1 bg-tone-gloss"
+              />
+              <dt className="text-xs font-medium text-tone-ink">
+                {card.label}
+              </dt>
               <dd className="mt-1 text-lg font-semibold tracking-tight tabular-nums">
                 <bdi dir="ltr">{card.value}</bdi>
               </dd>

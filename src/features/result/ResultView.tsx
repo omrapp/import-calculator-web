@@ -5,6 +5,7 @@ import {
   FileWarning,
   Plus,
   Share2,
+  SquareSigma,
 } from 'lucide-react';
 import { type ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,12 +22,20 @@ import { Button } from '@/components/ui/button';
 import {
   type CalculationLink,
   type CalculationResult,
+  type Currency,
   encodeCalculation,
 } from '@/features/calc-engine';
 import { calculatorPath, useOpenInCalculator } from '@/features/calculator-ui';
 import { formatDate, formatNumber, useLanguage } from '@/features/i18n';
 
 import { Breakdown } from './Breakdown';
+import { CostCharts } from './CostCharts';
+import {
+  DisplayCurrencyContext,
+  urlWithCurrency,
+  useDisplayCurrencyParam,
+} from './currency';
+import { CurrencySwitch } from './CurrencySwitch';
 import { SummaryCards } from './SummaryCards';
 import { useCalculationFromUrl } from './useCalculationFromUrl';
 
@@ -59,22 +68,27 @@ export type ResultActions = (args: {
   result: CalculationResult;
   /** The rendered Result, for image export; null before mount. */
   content: HTMLElement | null;
+  /** The currency the Result is shown in. */
+  currency: Currency;
 }) => ReactNode;
 
 function Actions({
   shareTitle,
+  currency,
   children,
 }: {
   shareTitle: string;
+  currency: Currency;
   children?: ReactNode;
 }) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const canShare = typeof navigator.share === 'function';
+  const shareUrl = () => urlWithCurrency(window.location.href, currency);
 
   const copyLink = async () => {
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(shareUrl());
       setCopied(true);
     } catch {
       setCopied(false);
@@ -97,7 +111,7 @@ function Actions({
           variant="outline"
           onClick={() =>
             void navigator
-              .share({ title: shareTitle, url: window.location.href })
+              .share({ title: shareTitle, url: shareUrl() })
               .catch(() => undefined)
           }
         >
@@ -142,6 +156,7 @@ export function ResultView({ actions }: { actions?: ResultActions }) {
   const { t } = useTranslation();
   const calculation = useCalculationFromUrl();
   const [, setSearchParams] = useSearchParams();
+  const [currency, setCurrency] = useDisplayCurrencyParam();
   const [content, setContent] = useState<HTMLElement | null>(null);
 
   if (calculation.status === 'invalid') {
@@ -152,7 +167,7 @@ export function ResultView({ actions }: { actions?: ResultActions }) {
           icon={<FileWarning />}
           action={
             <Button asChild>
-              <Link to="/">{t('pages.back_to_calculator')}</Link>
+              <Link to="/calculator">{t('pages.back_to_calculator')}</Link>
             </Button>
           }
         >
@@ -185,17 +200,36 @@ export function ResultView({ actions }: { actions?: ResultActions }) {
         onSave={meta =>
           // The title travels in the link, so editing it updates the URL.
           setSearchParams(
-            { c: encodeCalculation({ ...link, meta }) },
+            prev => {
+              const params = new URLSearchParams(prev);
+              params.set('c', encodeCalculation({ ...link, meta }));
+              return params;
+            },
             { replace: true },
           )
         }
         className="rounded-2xl border bg-card px-5 py-4 shadow-xs sm:px-6"
       />
-      <Actions shareTitle={link.meta?.title ?? t('result.title')}>
-        {actions?.({ link, result, content })}
+      <Actions
+        shareTitle={link.meta?.title ?? t('result.title')}
+        currency={currency}
+      >
+        {actions?.({ link, result, content, currency })}
       </Actions>
-      <SummaryCards totals={result.totals} />
-      <Breakdown steps={result.steps} />
+      <CurrencySwitch value={currency} onChange={setCurrency} />
+      <DisplayCurrencyContext value={{ currency, rates: link.input.rates }}>
+        <SummaryCards totals={result.totals} />
+        <CostCharts result={result} />
+        <Breakdown steps={result.steps} />
+      </DisplayCurrencyContext>
+      <Link
+        to="/examples"
+        data-export-ignore
+        className="inline-flex w-fit items-center gap-1.5 rounded-sm text-sm font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring print:hidden"
+      >
+        <SquareSigma aria-hidden className="size-4" />
+        {t('examples.see_examples')}
+      </Link>
     </article>
   );
 }

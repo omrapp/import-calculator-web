@@ -7,4 +7,5 @@ export {
   toCalculationMeta,
   toFormValues,
 } from './formValues';
+export { TrustChip } from './hero/TrustChip';
 export { calculatorPath, useOpenInCalculator } from './openInCalculator';

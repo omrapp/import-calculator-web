@@ -6,7 +6,7 @@ import { saveDraft } from './draft';
 import { toFormValues } from './formValues';
 
 export const calculatorPath = (mode: CalculationLink['input']['mode']) =>
-  mode === 'standard' ? '/' : '/air-shipment';
+  mode === 'standard' ? '/calculator' : '/air-shipment';
 
 /** Opens a Calculation's inputs in its calculator form for editing. */
 export function useOpenInCalculator() {

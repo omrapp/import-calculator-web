@@ -1,0 +1,30 @@
+{
+  "sizes": {
+    "ship-entering-port": [1600, 1068],
+    "container-yard-aerial": [1600, 1063],
+    "ship-at-berth-aerial": [1600, 899],
+    "cargo-plane": [1600, 1200],
+    "packing-box": [1600, 1067],
+    "calculator-dollars": [1600, 1067],
+    "container-rows-aerial": [1600, 899],
+    "port-aerial": [1600, 1066],
+    "port-at-night": [1600, 1078],
+    "container-terminal": [1600, 1066],
+    "ship-and-cranes": [1600, 1067],
+    "ship-at-sunset": [1600, 1063]
+  },
+  "credits": {
+    "ship-entering-port": "https://www.pexels.com/photo/3840441/",
+    "container-yard-aerial": "https://www.pexels.com/photo/3063470/",
+    "ship-at-berth-aerial": "https://www.pexels.com/photo/1554646/",
+    "cargo-plane": "https://www.pexels.com/photo/912050/",
+    "packing-box": "https://www.pexels.com/photo/4246120/",
+    "calculator-dollars": "https://www.pexels.com/photo/4386339/",
+    "container-rows-aerial": "https://www.pexels.com/photo/1427107/",
+    "port-aerial": "https://www.pexels.com/photo/2226458/",
+    "port-at-night": "https://www.pexels.com/photo/753331/",
+    "container-terminal": "https://www.pexels.com/photo/2231742/",
+    "ship-and-cranes": "https://www.pexels.com/photo/906982/",
+    "ship-at-sunset": "https://www.pexels.com/photo/799091/"
+  }
+}

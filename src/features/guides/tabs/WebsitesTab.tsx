@@ -8,6 +8,7 @@ import {
   Store,
   Ticket,
   Wrench,
+  X,
 } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +22,9 @@ import {
   tradingWebsites,
   WEBSITE_CATEGORIES,
   type WebsiteCategory,
+  type WebsiteTag,
 } from '../data/websites';
+import siteShots from '../data/site-shots.json';
 import { searchWebsites } from '../search';
 import { EmptyState } from './EmptyState';
 
@@ -69,6 +72,9 @@ const CATEGORY_STYLE: Record<
 
 const hostname = (url: string) => new URL(url).hostname.replace(/^www\./, '');
 
+/** Sites with a homepage screenshot in /public/sites (scripts/capture-site-shots.ts). */
+const SHOTS = new Set<string>(siteShots);
+
 /** Up to two letters from the site's (Latin) name or domain. */
 function monogram(site: TradingWebsite): string {
   const words = site.title.en.match(/[A-Za-z0-9]+/g) ?? [hostname(site.url)];
@@ -79,7 +85,51 @@ function monogram(site: TradingWebsite): string {
     .toUpperCase();
 }
 
-function WebsiteCard({ site }: { site: TradingWebsite }) {
+/**
+ * The site's favicon via Google's favicon service, or its monogram when the
+ * data says there is no icon or the request fails.
+ */
+function SiteIcon({ site, tint }: { site: TradingWebsite; tint: string }) {
+  const [failed, setFailed] = useState(false);
+  const host =
+    site.iconHost === undefined ? new URL(site.url).hostname : site.iconHost;
+  const showIcon = host !== null && !failed;
+  return (
+    <span
+      className={cn(
+        'absolute inset-s-5 bottom-0 z-10 grid size-12 translate-y-1/2 place-items-center rounded-xl border text-base font-bold shadow-sm',
+        // Logos are drawn for light backgrounds, so they keep a white tile.
+        showIcon ? 'bg-white' : 'bg-card',
+        tint,
+      )}
+    >
+      {showIcon ? (
+        <img
+          src={`https://www.google.com/s2/favicons?domain=${host}&sz=64`}
+          alt=""
+          width={28}
+          height={28}
+          loading="lazy"
+          referrerPolicy="no-referrer"
+          onError={() => setFailed(true)}
+          className="size-7 rounded-sm"
+        />
+      ) : (
+        monogram(site)
+      )}
+    </span>
+  );
+}
+
+function WebsiteCard({
+  site,
+  activeTag,
+  onTag,
+}: {
+  site: TradingWebsite;
+  activeTag: WebsiteTag | null;
+  onTag: (tag: WebsiteTag) => void;
+}) {
   const { t } = useTranslation();
   const { language } = useLanguage();
   const style = CATEGORY_STYLE[site.category];
@@ -87,33 +137,43 @@ function WebsiteCard({ site }: { site: TradingWebsite }) {
 
   return (
     <li className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-xs transition-shadow duration-150 hover:shadow-md">
-      {/* Generated hero: category gradient, dot grid, icon watermark, monogram.
-          The monogram sits outside the clipped art layer so it can overlap
-          the card body without being cut in half. */}
-      <div aria-hidden className="relative h-24">
+      {/* Banner: the site's homepage screenshot, or generated category art
+          (gradient, dot grid, icon watermark) when there is none. The icon
+          badge sits outside the clipped layer so it can overlap the body. */}
+      <div aria-hidden className="relative h-36">
         <div
           className={cn(
-            'absolute inset-0 isolate overflow-hidden bg-linear-to-br',
+            'absolute inset-0 isolate overflow-hidden border-b bg-linear-to-br',
             style.hero,
           )}
         >
-          <div className="absolute inset-0 -z-10 bg-dot-grid opacity-60 mask-b-from-10% mask-b-to-100%" />
-          <Icon
-            className={cn(
-              'absolute -end-3 -bottom-5 size-28 opacity-15 transition-transform duration-300 group-hover:scale-105',
-              style.tint,
-            )}
-            strokeWidth={1.25}
-          />
-        </div>
-        <span
-          className={cn(
-            'absolute inset-s-5 bottom-0 z-10 grid size-12 translate-y-1/2 place-items-center rounded-xl border bg-card text-base font-bold shadow-sm',
-            style.tint,
+          {SHOTS.has(site.id) ? (
+            <picture>
+              <source type="image/avif" srcSet={`/sites/${site.id}.avif`} />
+              <img
+                src={`/sites/${site.id}.webp`}
+                alt=""
+                width={640}
+                height={400}
+                loading="lazy"
+                decoding="async"
+                className="size-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+            </picture>
+          ) : (
+            <>
+              <div className="absolute inset-0 -z-10 bg-dot-grid opacity-60 mask-b-from-10% mask-b-to-100%" />
+              <Icon
+                className={cn(
+                  'absolute -end-3 -bottom-5 size-28 opacity-15 transition-transform duration-300 group-hover:scale-105',
+                  style.tint,
+                )}
+                strokeWidth={1.25}
+              />
+            </>
           )}
-        >
-          {monogram(site)}
-        </span>
+        </div>
+        <SiteIcon site={site} tint={style.tint} />
       </div>
 
       <div className="flex flex-1 flex-col items-start gap-3 px-5 pt-9 pb-5">
@@ -128,6 +188,31 @@ function WebsiteCard({ site }: { site: TradingWebsite }) {
         <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
           {site.description[language]}
         </p>
+        <ul
+          aria-label={t('guides.websites.tags_label')}
+          className="flex flex-wrap gap-1.5"
+        >
+          {site.tags.map(tag => {
+            const selected = tag === activeTag;
+            return (
+              <li key={tag}>
+                <button
+                  type="button"
+                  aria-pressed={selected}
+                  onClick={() => onTag(tag)}
+                  className={cn(
+                    'rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
+                    selected
+                      ? 'border-primary bg-primary text-primary-foreground'
+                      : 'bg-muted/50 text-muted-foreground hover:bg-accent hover:text-accent-foreground',
+                  )}
+                >
+                  {t(`guides.websites.tag.${tag}`)}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
         <Button asChild variant="outline" size="sm">
           <a href={site.url} target="_blank" rel="noopener noreferrer">
             {t('guides.visit_website')}
@@ -143,15 +228,50 @@ export function WebsitesTab({ query }: { query: string }) {
   const { t } = useTranslation();
   const { language } = useLanguage();
   const [active, setActive] = useState<WebsiteCategory | 'all'>('all');
-  const websites = searchWebsites(tradingWebsites, query, language);
-  if (websites.length === 0) return <EmptyState />;
+  const [tag, setTag] = useState<WebsiteTag | null>(null);
+  const tagLabel = (key: WebsiteTag) => t(`guides.websites.tag.${key}`);
+  const websites = searchWebsites(
+    tradingWebsites,
+    query,
+    language,
+    tagLabel,
+  ).filter(site => tag === null || site.tags.includes(tag));
+  const toggleTag = (next: WebsiteTag) =>
+    setTag(current => (current === next ? null : next));
+
+  const tagFilter = tag && (
+    <div className="flex items-center gap-2 text-sm">
+      <span className="text-muted-foreground">
+        {t('guides.websites.tag_filter', { tag: tagLabel(tag) })}
+      </span>
+      <Button
+        type="button"
+        size="icon"
+        variant="ghost"
+        className="size-7 rounded-full"
+        aria-label={t('guides.websites.clear_tag')}
+        onClick={() => setTag(null)}
+      >
+        <X />
+      </Button>
+    </div>
+  );
+  if (websites.length === 0)
+    return (
+      <div className="flex flex-col gap-4">
+        {tagFilter}
+        <EmptyState />
+      </div>
+    );
 
   const groups = WEBSITE_CATEGORIES.map(category => ({
     category,
     sites: websites.filter(site => site.category === category),
   })).filter(group => group.sites.length > 0);
+  // A tag can empty the chosen category; fall back to All instead of nothing.
+  const current = groups.some(g => g.category === active) ? active : 'all';
   const shown =
-    active === 'all' ? groups : groups.filter(g => g.category === active);
+    current === 'all' ? groups : groups.filter(g => g.category === current);
 
   return (
     <div className="flex flex-col gap-8">
@@ -163,7 +283,7 @@ export function WebsitesTab({ query }: { query: string }) {
           ({ category, sites }) => {
             const Icon =
               category === 'all' ? null : CATEGORY_STYLE[category].icon;
-            const selected = active === category;
+            const selected = current === category;
             return (
               <Button
                 key={category}
@@ -189,6 +309,7 @@ export function WebsitesTab({ query }: { query: string }) {
           },
         )}
       </nav>
+      {tagFilter}
 
       {shown.map(({ category, sites }) => {
         const { icon: Icon, tint } = CATEGORY_STYLE[category];
@@ -222,7 +343,12 @@ export function WebsitesTab({ query }: { query: string }) {
             </div>
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {sites.map(site => (
-                <WebsiteCard key={site.id} site={site} />
+                <WebsiteCard
+                  key={site.id}
+                  site={site}
+                  activeTag={tag}
+                  onTag={toggleTag}
+                />
               ))}
             </ul>
           </section>

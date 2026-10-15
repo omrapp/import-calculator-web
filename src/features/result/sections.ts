@@ -3,7 +3,12 @@ import type { Step, StepLabel } from '@/features/calc-engine';
 type T = (key: string, params?: Record<string, unknown>) => string;
 
 export type ValueStep = Extract<Step, { value: unknown }>;
-export type BreakdownSection = { title: string; steps: ValueStep[] };
+export type BreakdownSection = {
+  title: string;
+  /** The header's i18n key, e.g. `result.steps.vat_calculation`. */
+  key?: string;
+  steps: ValueStep[];
+};
 
 /** Translated text of a step label; Custom Expenses keep the user's name. */
 export function stepLabelText(label: StepLabel, t: T): string {
@@ -18,7 +23,11 @@ export function toBreakdownSections(steps: Step[], t: T): BreakdownSection[] {
   const sections: BreakdownSection[] = [];
   for (const step of steps) {
     if (step.kind === 'header')
-      sections.push({ title: stepLabelText(step.label, t), steps: [] });
+      sections.push({
+        title: stepLabelText(step.label, t),
+        key: 'key' in step.label ? step.label.key : undefined,
+        steps: [],
+      });
     else if (step.kind !== 'divider') sections.at(-1)?.steps.push(step);
   }
   return sections.filter(section => section.steps.length > 0);

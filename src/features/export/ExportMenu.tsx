@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import type {
   CalculationLink,
   CalculationResult,
+  Currency,
 } from '@/features/calc-engine';
 import { useLanguage } from '@/features/i18n';
 
@@ -19,10 +20,13 @@ export function ExportMenu({
   link,
   result,
   content,
+  currency = 'ILS',
 }: {
   link: CalculationLink;
   result: CalculationResult;
   content: HTMLElement | null;
+  /** Amounts in the PDF follow the currency shown on the Result. */
+  currency?: Currency;
 }) {
   const { t } = useTranslation();
   const { language } = useLanguage();
@@ -50,7 +54,7 @@ export function ExportMenu({
   const exportPdf = () =>
     run('pdf', async () => {
       const { renderPdf } = await import('./pdf/renderPdf');
-      const model = buildPdfModel(link, result, language, t);
+      const model = buildPdfModel(link, result, language, t, currency);
       downloadBlob(await renderPdf(model), datedFilename('pdf'));
     });
 

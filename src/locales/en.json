@@ -46,7 +46,11 @@
     "guides_short": "Guides",
     "home": "Import Calculator home",
     "tools": "Tools",
-    "information": "Information"
+    "information": "Information",
+    "websites": "Websites",
+    "home_link": "Home",
+    "examples": "Calculation Examples",
+    "examples_short": "Examples"
   },
   "pages": {
     "not_found": "Page not found",
@@ -157,6 +161,41 @@
     "total_including_vat": "Total Including VAT",
     "saved_to_history": "Saved to History",
     "share_error": "Failed to export PDF",
+    "currency": {
+      "label": "Show amounts in",
+      "ILS": "Shekel",
+      "USD": "Dollar",
+      "EUR": "Euro",
+      "converted_note": "Amounts shown in {{currency}}, converted at this calculation's exchange rates. Switch to Shekel to see the formulas."
+    },
+    "charts": {
+      "title": "Visual summary",
+      "composition": "What makes up the total",
+      "composition_note": "Each part as a share of the Total Including VAT.",
+      "build_up_note": "Each step adds to the running total, in the order the calculation applies it.",
+      "weight": "Which weight is billed",
+      "weight_note": "Air carriers charge by the higher of the actual and volumetric weight.",
+      "billed": "Billed",
+      "chart_views": "Chart views",
+      "legend": "Cost parts",
+      "bars_note": "Each part side by side: the taller the column, the bigger the cost.",
+      "line_note": "The running total after each cost is added, from zero to the Total Including VAT.",
+      "start": "Start",
+      "tabs": {
+        "donut": "Pie",
+        "bars": "Bars",
+        "line": "Line",
+        "build_up": "Build-up",
+        "share": "Share"
+      },
+      "parts": {
+        "cif": "CIF value",
+        "customsDuty": "Customs Duty",
+        "purchaseTax": "Purchase Tax",
+        "expenses": "Local expenses",
+        "vat": "VAT"
+      }
+    },
     "steps": {
       "cif_calculation": "CIF Calculation",
       "cost": "Cost",
@@ -257,8 +296,6 @@
     "title_websites": "Trading Websites",
     "title_gallery": "Document Gallery",
     "tab_guides": "Guides",
-    "tab_websites": "Websites",
-    "tab_gallery": "Gallery",
     "tab_terms": "Terms",
     "tab_presentation": "Presentation",
     "search_placeholder": "Search...",
@@ -278,7 +315,7 @@
     "previous": "Previous",
     "next": "Next",
     "close": "Close",
-    "lead": "Rules, documents, trade terms and trusted suppliers for importing into Israel, in one place.",
+    "lead": "Rules, documents and trade terms for importing into Israel, in one place.",
     "websites": {
       "categories": "Website categories",
       "category": {
@@ -299,7 +336,48 @@
         "research": "Learn the trade and check demand before you buy.",
         "payments": "Pay suppliers abroad and manage currency costs.",
         "tools": "Everyday helpers for talking to suppliers and doing the math."
-      }
+      },
+      "lead": "Trusted websites for sourcing, shipping, paying and checking the rules, grouped by category.",
+      "search_label": "Search websites",
+      "tag": {
+        "china": "China",
+        "india": "India",
+        "turkey": "Turkey",
+        "europe": "Europe",
+        "usa": "USA",
+        "israel": "Israel",
+        "global": "Worldwide",
+        "customs": "Customs",
+        "tax": "Taxes",
+        "hs_code": "HS codes",
+        "standards": "Standards",
+        "personal_import": "Personal import",
+        "licenses": "Licenses",
+        "agreements": "Trade agreements",
+        "guide": "Guide",
+        "suppliers": "Suppliers",
+        "b2b": "B2B",
+        "wholesale": "Wholesale",
+        "dropshipping": "Dropshipping",
+        "exhibitions": "Exhibitions",
+        "sea_freight": "Sea freight",
+        "air_freight": "Air freight",
+        "freight_rates": "Freight rates",
+        "tracking": "Tracking",
+        "incoterms": "Incoterms",
+        "market_research": "Market research",
+        "statistics": "Statistics",
+        "payments": "Payments",
+        "currency": "Currency",
+        "translation": "Translation",
+        "communication": "Communication",
+        "calculator": "Calculator",
+        "units": "Units",
+        "free": "Free"
+      },
+      "tags_label": "Tags",
+      "tag_filter": "Filtered by tag: {{tag}}",
+      "clear_tag": "Clear tag filter"
     },
     "docs": {
       "on_this_page": "On this page",
@@ -381,7 +459,7 @@
         "expenses": "Local expenses",
         "vat": "VAT"
       },
-      "documents_caption": "Certificates of origin you may need. Open one to view it full size in the Gallery.",
+      "documents_caption": "Certificates of origin you may need. Open one to view it full size.",
       "module": {
         "1": {
           "callout": "Limits and VAT rates change (VAT has been 18% since 2025). Check the Tax Authority under <websites>Websites</websites> before you order."
@@ -396,7 +474,7 @@
           "callout": "Apply for licenses and approvals before the goods ship. Goods waiting at the port for approval pay storage fees."
         },
         "5": {
-          "callout": "A valid certificate of origin can cut or cancel the Customs Duty under a trade agreement. See the samples in the <gallery>Gallery</gallery>."
+          "callout": "A valid certificate of origin can cut or cancel the Customs Duty under a trade agreement. See the samples above."
         },
         "6": {
           "callout": "Counterfeit and prohibited goods are seized at customs and can lead to fines. When in doubt, ask before you order."
@@ -514,9 +592,12 @@
       "standard": "Free import cost calculator for Israel. Enter cost, freight and duty rates to get CIF, customs duty, purchase tax, VAT and the full landed cost.",
       "air": "Air shipment calculator for imports into Israel: freight from carton sizes and weights, then duty, purchase tax, VAT and landed cost.",
       "history": "Your saved import cost calculations, kept in this browser, with export and import for backups.",
-      "guides": "Import and export guides for Israel: personal import rules, Incoterms, trade terms, document examples and trusted trading websites.",
+      "guides": "Import and export guides for Israel: personal import rules, Incoterms, trade terms and document examples.",
       "about": "About Import Calculator: a free tool that estimates the landed cost of importing goods into Israel, in English, Hebrew and Arabic.",
-      "contact": "Contact the Import Calculator team with questions, ideas or a correction."
+      "contact": "Contact the Import Calculator team with questions, ideas or a correction.",
+      "websites": "Trusted websites for importing into Israel: customs and government, sourcing marketplaces, trade fairs, shipping, research, payments and tools.",
+      "home": "Free import cost calculator for Israel: customs duty, purchase tax, VAT and landed cost with live Bank of Israel rates, plus import guides and trusted websites.",
+      "examples": "Worked import cost examples for Israel: sea and air freight, with and without customs duty, purchase tax and VAT, explained step by step."
     }
   },
   "calculation_meta": {
@@ -527,5 +608,248 @@
     "description": "Description",
     "description_placeholder": "Add a note: supplier, product, order number…",
     "add_description": "Add a description"
+  },
+  "landing": {
+    "page_title": "Import Cost Calculator for Israel",
+    "overline": "Import cost calculator for Israel",
+    "title": "Know your landed cost before you import.",
+    "lead": "Customs duty, purchase tax, VAT and local expenses for goods you bring into Israel, worked out step by step with live Bank of Israel rates.",
+    "cta_start": "Start calculating",
+    "cta_air": "Air shipment",
+    "features": {
+      "overline": "Features",
+      "title": "Everything you need to price an import",
+      "lead": "Free, in your browser, with no account.",
+      "standard": {
+        "title": "Standard Calculation",
+        "body": "Enter the freight you already know, for sea or any shipment."
+      },
+      "air": {
+        "title": "Air Shipment Calculation",
+        "body": "Chargeable weight and freight worked out from carton sizes and weights."
+      },
+      "rates": {
+        "title": "Live exchange rates",
+        "body": "USD and EUR from the Bank of Israel, or your own rates."
+      },
+      "history": {
+        "title": "History",
+        "body": "Save calculations in this browser and back them up to a file."
+      },
+      "export": {
+        "title": "Share and export",
+        "body": "Share a link, download an image or PDF, or print."
+      },
+      "languages": {
+        "title": "Three languages",
+        "body": "English, Hebrew and Arabic, right-to-left where it should be."
+      }
+    },
+    "how": {
+      "overline": "How it works",
+      "title": "From invoice to landed cost in three steps",
+      "step1": {
+        "title": "Enter your shipment",
+        "body": "Goods cost, freight, insurance and the duty rates for your product."
+      },
+      "step2": {
+        "title": "See every charge",
+        "body": "CIF, Customs Duty, Purchase Tax, VAT and expenses, each with its formula."
+      },
+      "step3": {
+        "title": "Save or share",
+        "body": "Keep it in History, send a link, or export a PDF for your records."
+      }
+    },
+    "learn": {
+      "overline": "Learn",
+      "title": "Learn before you ship",
+      "lead": "Plain-language guides and the websites importers actually use.",
+      "guides": {
+        "title": "Import & Export Guides",
+        "body": "Personal import rules, Incoterms, trade terms and document examples.",
+        "cta": "Read the guides"
+      },
+      "websites": {
+        "title": "Trading Websites",
+        "body": "Customs, sourcing, trade fairs, shipping, payments and tools, by category.",
+        "cta": "Browse websites"
+      }
+    },
+    "final": {
+      "title": "Ready to price your next shipment?",
+      "body": "It takes a minute, and nothing leaves your browser."
+    },
+    "modes": {
+      "overline": "Sea & air freight",
+      "title": "Ship it by sea or fly it in",
+      "lead": "Two calculators for the two ways goods reach Israel.",
+      "sea": {
+        "title": "Sea freight & any shipment",
+        "body": "Containers into Haifa, Ashdod or Eilat: enter the freight you were quoted and get the full landed cost.",
+        "cta": "Open the calculator"
+      },
+      "air": {
+        "title": "Air cargo",
+        "body": "Cartons into Ben Gurion: chargeable weight from sizes and weights, then duty, tax and VAT.",
+        "cta": "Calculate air shipment"
+      }
+    },
+    "map": {
+      "overline": "Global routes",
+      "title": "From any port in the world to Israel",
+      "lead": "Asia through Suez, India up the Red Sea to Eilat, Europe and the Americas across the Mediterranean, and air cargo into Ben Gurion. The cost math is the same for all of them.",
+      "aria": "World map of the main sea and air freight routes into Israel",
+      "sea": "Sea freight lanes",
+      "air": "Air cargo",
+      "ports": "Haifa · Ashdod · Eilat · Ben Gurion",
+      "israel": "Israel",
+      "origins": {
+        "shanghai": "Shanghai",
+        "mumbai": "Mumbai",
+        "rotterdam": "Rotterdam",
+        "new_york": "New York"
+      }
+    }
+  },
+  "examples": {
+    "title": "Calculation Examples",
+    "lead": "Nine worked imports, from a simple sea shipment to air cargo billed by volume. Each one runs through the same calculator you use, so every number here is exactly what the calculator gives.",
+    "rates_note": "All examples use fixed exchange rates:",
+    "number": "Example {{n}}",
+    "see_examples": "See calculation examples",
+    "index_title": "Pick a scenario",
+    "lesson": "Takeaway:",
+    "open_picture": "Open picture: {{title}}",
+    "from_guides": "From the guides: {{title}}",
+    "tabs": {
+      "steps": "Step by step",
+      "charts": "Charts"
+    },
+    "actions": {
+      "open_result": "Open as a full Result",
+      "try_calculator": "Try it in the calculator"
+    },
+    "compare": {
+      "title": "What changes from Example {{n}} ({{title}})",
+      "total": "Total Including VAT:"
+    },
+    "inputs": {
+      "title": "What we enter",
+      "from_cartons": "Calculated from the cartons",
+      "premium": "From a {{percent}} premium",
+      "percent_of_total": "{{percent}} of the running total"
+    },
+    "carton": {
+      "title": "Measuring the cartons",
+      "size": "Size (L × W × H)",
+      "weight_each": "Weight per carton",
+      "aria": "Carton {{length}} × {{width}} × {{height}} cm"
+    },
+    "tags": {
+      "sea": "Sea freight",
+      "air": "Air freight",
+      "duty_percent": "Duty {{percent}}%",
+      "duty_none": "No customs duty",
+      "duty_compound": "Compound duty",
+      "purchase_tax_yes": "Purchase tax",
+      "purchase_tax_no": "No purchase tax",
+      "vat": "VAT {{percent}}%",
+      "vat_none": "No VAT",
+      "currency_USD": "Priced in $",
+      "currency_EUR": "Priced in €",
+      "currency_ILS": "Priced in ₪",
+      "expenses_fixed": "Fixed expenses",
+      "expenses_percent": "Percentage expenses"
+    },
+    "flow": {
+      "title": "How every calculation works",
+      "lead": "The calculator always goes in the same order. Each step adds to a running total, and later steps are charged on that total, so one tax can be charged on top of another.",
+      "cif": {
+        "title": "CIF value",
+        "formula": "Cost + Insurance + Freight, in ₪"
+      },
+      "duty": {
+        "title": "Customs Duty",
+        "formula": "CIF × duty rate"
+      },
+      "purchase_tax": {
+        "title": "Purchase Tax",
+        "formula": "(CIF + Duty + Tama) × rate"
+      },
+      "expenses": {
+        "title": "Expenses",
+        "formula": "Fixed ₪, or % of the running total"
+      },
+      "vat": {
+        "title": "VAT",
+        "formula": "Everything so far × 18%"
+      },
+      "total": {
+        "title": "Total",
+        "formula": "Landed cost + VAT"
+      },
+      "sea_note": "Sea (standard) freight: you enter the freight price you were quoted.",
+      "air_note": "Air freight: the calculator works out the freight from the size and weight of the cartons, then carries on the same way."
+    },
+    "cta": {
+      "title": "Ready to run your own numbers?",
+      "body": "Open a calculator, or press “Try it in the calculator” on any example to start from its numbers."
+    },
+    "items": {
+      "sea_standard": {
+        "title": "Electronics by sea: the base case",
+        "story": "You buy electronics for $10,000 from a supplier abroad. Sea freight costs $1,200 and insurance $100. The goods carry 12% customs duty, no purchase tax and the standard 18% VAT. In Israel you pay ₪900 for the truck from the port and ₪1,500 to the customs broker.",
+        "lesson": "Duty is charged on CIF, not on the price of the goods alone, so freight and insurance are taxed too. VAT comes last and is charged on everything before it, including the duty and your local expenses."
+      },
+      "duty_free": {
+        "title": "Same goods, no customs duty",
+        "story": "The same shipment as Example 1, but the goods are made in a country with a free trade agreement with Israel, such as the EU or the US. With valid proof of origin, such as an EUR.1 certificate, the customs duty is 0%.",
+        "change": "Customs Duty drops from 12% to 0%. Everything else stays the same.",
+        "lesson": "Removing the duty saves more than the duty itself: VAT is charged on a smaller total, so you also save the 18% VAT on that duty. Keep the proof of origin; without it, customs charges the full rate."
+      },
+      "compound_duty": {
+        "title": "Shoes with a compound duty",
+        "story": "The goods are now {{pairs}} pairs of shoes. Their tariff item has a compound duty: 12% of CIF or {{perPair}} per pair, whichever is higher. Option I is 12% × {{cif}} = {{optionI}}. Option II is {{pairs}} × {{perPair}} = {{optionII}}.",
+        "change": "Instead of a flat 12%, the duty is the higher of two options, and the per-pair option wins.",
+        "lesson": "With “Higher of two”, cheap goods often hit the fixed per-unit amount. Work out both options, enter them as ₪ amounts, and the calculator picks the right one."
+      },
+      "purchase_tax": {
+        "title": "With Tama and purchase tax",
+        "story": "The same shipment as Example 1, but the product also carries 15% purchase tax, as items such as appliances or cosmetics often do. Customs adds a 10% Tama uplift to the base before charging the purchase tax.",
+        "change": "Tama 10% and purchase tax 15% are added. The duty, expenses and VAT stay the same.",
+        "lesson": "Tama only enlarges the base for purchase tax. It is not paid on its own and is not part of the landed cost. Purchase tax is charged on CIF + Duty + Tama, and VAT is then charged on top of the purchase tax too."
+      },
+      "vat_free": {
+        "title": "No VAT (Eilat free trade zone)",
+        "story": "The same shipment as Example 1, but the goods go to the Eilat free trade zone, where imports are exempt from VAT, so VAT is set to 0%.",
+        "change": "VAT drops from 18% to 0%. The landed cost stays the same; only the final total changes.",
+        "lesson": "VAT is the very last step, so removing it lowers the total but leaves CIF, duty, expenses and the landed cost exactly as they were. A business that reclaims VAT usually looks at the landed cost, not the total with VAT."
+      },
+      "euro_premium": {
+        "title": "Priced in euros, insurance from a premium",
+        "story": "This time the goods cost €8,000 with €700 freight, and the duty is 8%. You have no insurance quote, so you enter a 0.5% premium. The calculator works out the insurance as (Cost + Freight) × 110% × 0.5%.",
+        "change": "Prices are in euros, the insurance comes from a premium instead of a fixed amount, and the duty is 8%.",
+        "lesson": "Every foreign amount is converted to shekels first, at its own rate. The 110% in the insurance formula is the usual insured value: the goods plus 10% for expected profit."
+      },
+      "percent_expenses": {
+        "title": "Expenses as a percentage",
+        "story": "The same shipment as Example 1, but the customs broker charges 1.5% and the bank 0.5%. You also add ₪450 for port storage as your own expense.",
+        "change": "The broker and bank fees are percentages instead of fixed amounts, and a custom expense is added.",
+        "lesson": "A percentage expense is charged on the running total at that point, which already includes CIF, duty and any earlier expenses. That is why the order of the expenses matters.",
+        "custom_name": "Port storage"
+      },
+      "air_volumetric": {
+        "title": "Air freight billed by volume",
+        "story": "You fly in $6,000 of light, bulky goods: 10 cartons of 60 × 40 × 40 cm at 12 kg each, and 4 cartons of 50 × 50 × 30 cm at 18 kg each. The airline charges $4.20 per kg, a $0.90 per kg fuel surcharge and a $75 handling fee.",
+        "lesson": "Airlines bill the higher of the actual weight and the volumetric weight (L × W × H ÷ 6,000 for each carton). These cartons weigh 192 kg but take up the space of 210 kg, so you pay for 210 kg. Smaller or fuller boxes cut the bill."
+      },
+      "air_actual": {
+        "title": "Air freight billed by actual weight",
+        "story": "Now the goods are small and heavy: 20 cartons of 40 × 30 × 30 cm at 25 kg each, worth $4,000, with 6% duty. The airline prices are the same as in Example 8.",
+        "change": "Heavy, compact cartons instead of light, bulky ones, so the actual weight is higher than the volumetric weight.",
+        "lesson": "Here the volumetric weight is only 120 kg, but the cartons really weigh 500 kg, so the airline bills 500 kg. For heavy goods, sea freight is often much cheaper."
+      }
+    }
   }
 }

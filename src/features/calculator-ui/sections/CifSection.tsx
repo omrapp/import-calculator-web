@@ -11,7 +11,7 @@ export function CifSection({ mode }: { mode: CalculationInput['mode'] }) {
   const { t } = useTranslation();
 
   return (
-    <Section icon={<Package />} title={t('home.cif_calculation')}>
+    <Section tone="cif" icon={<Package />} title={t('home.cif_calculation')}>
       <AmountField
         path="cif.cost"
         unitKey="currency"

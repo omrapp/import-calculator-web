@@ -22,6 +22,14 @@ export const routes: RouteObject[] = [
       page(
         '/',
         {
+          titleKey: 'landing.page_title',
+          descriptionKey: 'seo.description.home',
+        },
+        () => import('@/pages/HomePage').then(m => m.HomePage),
+      ),
+      page(
+        '/calculator',
+        {
           titleKey: 'nav.standard',
           descriptionKey: 'seo.description.standard',
         },
@@ -50,6 +58,22 @@ export const routes: RouteObject[] = [
         '/guides',
         { titleKey: 'nav.guides', descriptionKey: 'seo.description.guides' },
         () => import('@/pages/GuidesPage').then(m => m.GuidesPage),
+      ),
+      page(
+        '/examples',
+        {
+          titleKey: 'nav.examples',
+          descriptionKey: 'seo.description.examples',
+        },
+        () => import('@/pages/ExamplesPage').then(m => m.ExamplesPage),
+      ),
+      page(
+        '/websites',
+        {
+          titleKey: 'nav.websites',
+          descriptionKey: 'seo.description.websites',
+        },
+        () => import('@/pages/WebsitesPage').then(m => m.WebsitesPage),
       ),
       page('/settings', { titleKey: 'nav.settings' }, () =>
         import('@/pages/SettingsPage').then(m => m.SettingsPage),

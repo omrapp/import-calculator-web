@@ -35,7 +35,7 @@ describe('seo site data', () => {
     expect(xml).toContain(
       'hreflang="x-default" href="https://example.com/terms"',
     );
-    expect(xml.match(/<url>/g)).toHaveLength(7 * 3);
+    expect(xml.match(/<url>/g)).toHaveLength(10 * 3);
     expect(xml).not.toContain('/result');
     expect(xml).not.toContain('/history');
   });

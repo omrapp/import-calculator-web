@@ -13,9 +13,10 @@ export function ContactView() {
   const { t } = useTranslation();
 
   return (
-    <section className="mx-auto flex max-w-prose-tight flex-col gap-6">
+    <section className="mx-auto flex max-w-3xl flex-col gap-6">
       <PageHeader
         icon={<MessageSquare />}
+        photo="ship-and-cranes"
         title={t('nav.contact')}
         description={t('pages.contact.intro')}
       />

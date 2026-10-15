@@ -12,8 +12,11 @@ export const LANGUAGE_PARAM = 'lang';
 /** Routes worth a search result. History and Settings are per-browser. */
 export const INDEXABLE_PATHS = [
   '/',
+  '/calculator',
   '/air-shipment',
   '/guides',
+  '/examples',
+  '/websites',
   '/about',
   '/contact',
   '/privacy',

@@ -10,7 +10,7 @@ import { spring } from '@/lib/motion';
 const MODES = [
   {
     mode: 'standard',
-    path: '/',
+    path: '/calculator',
     labelKey: 'hero.mode.standard',
     Icon: Container,
   },
