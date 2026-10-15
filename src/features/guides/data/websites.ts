@@ -14,18 +14,65 @@ export const WEBSITE_CATEGORIES = [
 
 export type WebsiteCategory = (typeof WEBSITE_CATEGORIES)[number];
 
+/** Search and filter tags; labels live in `guides.websites.tag.<tag>`. */
+export const WEBSITE_TAGS = [
+  'china',
+  'india',
+  'turkey',
+  'europe',
+  'usa',
+  'israel',
+  'global',
+  'customs',
+  'tax',
+  'hs_code',
+  'standards',
+  'personal_import',
+  'licenses',
+  'agreements',
+  'guide',
+  'suppliers',
+  'b2b',
+  'wholesale',
+  'dropshipping',
+  'exhibitions',
+  'sea_freight',
+  'air_freight',
+  'freight_rates',
+  'tracking',
+  'incoterms',
+  'market_research',
+  'statistics',
+  'payments',
+  'currency',
+  'translation',
+  'communication',
+  'calculator',
+  'units',
+  'free',
+] as const;
+
+export type WebsiteTag = (typeof WEBSITE_TAGS)[number];
+
 export interface TradingWebsite {
   id: string;
   category: WebsiteCategory;
+  tags: WebsiteTag[];
   title: LocalizedString; // Often just the URL or a specific name
   description: LocalizedString;
   url: string;
+  /**
+   * Host to ask the favicon service for, when the URL's own host has no
+   * icon there (checked 2026-10-15); `null` shows the monogram instead.
+   */
+  iconHost?: string | null;
 }
 
 export const tradingWebsites: TradingWebsite[] = [
   {
     id: '1',
     category: 'trade_fairs',
+    tags: ['exhibitions', 'global', 'free'],
     title: {
       en: 'ExpoExpo',
       he: 'ExpoExpo',
@@ -37,10 +84,12 @@ export const tradingWebsites: TradingWebsite[] = [
       ar: 'نظام للبحث عن المعارض والمؤتمرات العالمية في مختلف المجالات.',
     },
     url: 'https://www.expoexpo.com/',
+    iconHost: null,
   },
   {
     id: '2',
     category: 'tools',
+    tags: ['china', 'communication', 'free'],
     title: {
       en: 'WeChat',
       he: 'WeChat',
@@ -56,6 +105,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '3',
     category: 'research',
+    tags: ['israel', 'market_research', 'free'],
     title: {
       en: 'Tel Aviv Chamber of Commerce',
       he: 'לשכת המסחר תל-אביב והמרכז',
@@ -71,6 +121,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '4',
     category: 'government',
+    tags: ['israel', 'agreements', 'customs'],
     title: {
       en: 'Bilateral Agreements Search',
       he: 'חיפוש הסכמים בילטרליים',
@@ -86,6 +137,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '5',
     category: 'government',
+    tags: ['israel', 'guide', 'customs'],
     title: {
       en: 'Import Guide for Beginners',
       he: 'מדריך יבוא למתחילים',
@@ -101,6 +153,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '6',
     category: 'government',
+    tags: ['israel', 'personal_import', 'guide'],
     title: {
       en: 'Personal Import Guide',
       he: 'מדריך יבוא אישי',
@@ -116,6 +169,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '7',
     category: 'government',
+    tags: ['israel', 'personal_import', 'standards'],
     title: {
       en: 'Personal Import Status',
       he: 'סטטוס יבוא אישי',
@@ -127,10 +181,12 @@ export const tradingWebsites: TradingWebsite[] = [
       ar: 'نظام للبحث عن معلومات حول متطلبات الاستيراد الشخصي للمنتجات.',
     },
     url: 'https://apps.economy.gov.il/Apps/PersonalImport/',
+    iconHost: 'economy.gov.il',
   },
   {
     id: '8',
     category: 'government',
+    tags: ['israel', 'tax', 'customs'],
     title: {
       en: 'Israel Tax Authority',
       he: 'רשות המסים בישראל',
@@ -146,6 +202,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '9',
     category: 'government',
+    tags: ['israel', 'licenses', 'personal_import'],
     title: {
       en: 'Path System',
       he: 'מערכת מסלול',
@@ -161,6 +218,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '10',
     category: 'shipping',
+    tags: ['israel', 'sea_freight', 'air_freight'],
     title: {
       en: 'Yam Yabasha',
       he: 'ים יבשה',
@@ -176,6 +234,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '11',
     category: 'shipping',
+    tags: ['israel', 'sea_freight', 'air_freight'],
     title: {
       en: 'Tevel Logistics',
       he: 'תבל לוגיסטיקה',
@@ -191,6 +250,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '12',
     category: 'trade_fairs',
+    tags: ['china', 'exhibitions', 'suppliers'],
     title: {
       en: 'Canton Fair',
       he: 'יריד קנטון',
@@ -206,6 +266,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '13',
     category: 'research',
+    tags: ['market_research', 'global', 'free'],
     title: {
       en: 'Google Trends',
       he: 'Google Trends',
@@ -221,6 +282,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '14',
     category: 'research',
+    tags: ['market_research', 'dropshipping'],
     title: {
       en: 'ZIK Analytics',
       he: 'ZIK Analytics',
@@ -236,6 +298,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '15',
     category: 'sourcing',
+    tags: ['usa', 'dropshipping', 'wholesale'],
     title: {
       en: 'Wholesale2B',
       he: 'Wholesale2B',
@@ -251,6 +314,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '16',
     category: 'government',
+    tags: ['israel', 'customs', 'tax', 'hs_code'],
     title: {
       en: 'Israel Customs Tariff (Shaar Olami)',
       he: 'התעריף המכסי – שער עולמי',
@@ -262,10 +326,12 @@ export const tradingWebsites: TradingWebsite[] = [
       ar: 'ابحث عن الرسوم الجمركية وضريبة الشراء حسب رمز HS قبل الاستيراد.',
     },
     url: 'https://shaarolami-query.customs.mof.gov.il/CustomspilotWeb/en/CustomsBook/Import/Doubt',
+    iconHost: 'mof.gov.il',
   },
   {
     id: '17',
     category: 'government',
+    tags: ['israel', 'standards'],
     title: {
       en: 'Standards Institution of Israel (SII)',
       he: 'מכון התקנים הישראלי',
@@ -281,6 +347,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '18',
     category: 'shipping',
+    tags: ['israel', 'air_freight', 'tracking'],
     title: {
       en: 'Maman (Ben Gurion air cargo)',
       he: 'ממן – מטענים בנתב"ג',
@@ -296,6 +363,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '19',
     category: 'sourcing',
+    tags: ['china', 'suppliers', 'b2b', 'wholesale'],
     title: { en: 'Alibaba.com', he: 'Alibaba.com', ar: 'Alibaba.com' },
     description: {
       en: 'Find Chinese manufacturers and wholesale suppliers, request quotes, compare MOQs and prices.',
@@ -307,6 +375,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '20',
     category: 'sourcing',
+    tags: ['china', 'suppliers', 'b2b'],
     title: {
       en: 'Made-in-China.com',
       he: 'Made-in-China.com',
@@ -322,6 +391,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '21',
     category: 'sourcing',
+    tags: ['india', 'suppliers', 'b2b'],
     title: { en: 'IndiaMART', he: 'IndiaMART', ar: 'IndiaMART' },
     description: {
       en: 'Indian B2B marketplace for textiles, machinery, chemicals and building materials.',
@@ -333,6 +403,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '22',
     category: 'sourcing',
+    tags: ['europe', 'suppliers', 'b2b'],
     title: { en: 'Europages', he: 'Europages', ar: 'Europages' },
     description: {
       en: 'European B2B directory to find verified European suppliers and request quotes.',
@@ -344,6 +415,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '23',
     category: 'trade_fairs',
+    tags: ['europe', 'exhibitions'],
     title: {
       en: 'Messe Frankfurt',
       he: 'Messe Frankfurt',
@@ -355,10 +427,12 @@ export const tradingWebsites: TradingWebsite[] = [
       ar: 'منظم معارض تجارية ألماني كبير؛ تصفح قوائم العارضين لأفكار التوريد من أوروبا.',
     },
     url: 'https://www.messefrankfurt.com/frankfurt/en.html',
+    iconHost: null,
   },
   {
     id: '24',
     category: 'trade_fairs',
+    tags: ['exhibitions', 'global', 'free'],
     title: { en: 'TradeFairDates', he: 'TradeFairDates', ar: 'TradeFairDates' },
     description: {
       en: 'Searchable calendar of trade fairs worldwide, filterable by industry and country.',
@@ -370,6 +444,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '25',
     category: 'shipping',
+    tags: ['freight_rates', 'sea_freight', 'air_freight'],
     title: { en: 'Freightos', he: 'Freightos', ar: 'Freightos' },
     description: {
       en: 'Compare live ocean and air freight rates and book shipments from China, Turkey and Europe.',
@@ -381,6 +456,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '26',
     category: 'shipping',
+    tags: ['freight_rates', 'sea_freight'],
     title: {
       en: 'Drewry World Container Index',
       he: 'מדד המכולות העולמי של Drewry',
@@ -396,6 +472,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '27',
     category: 'shipping',
+    tags: ['incoterms', 'guide'],
     title: {
       en: 'ICC Incoterms 2020 Rules',
       he: 'כללי Incoterms 2020 של ICC',
@@ -411,6 +488,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '28',
     category: 'shipping',
+    tags: ['tracking', 'sea_freight', 'free'],
     title: { en: 'VesselFinder', he: 'VesselFinder', ar: 'VesselFinder' },
     description: {
       en: 'Track vessels and port calls to estimate when your container ship arrives.',
@@ -422,6 +500,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '29',
     category: 'research',
+    tags: ['hs_code', 'customs', 'global'],
     title: {
       en: 'WCO Harmonized System (HS)',
       he: 'שיטת ההרמוניזציה (HS) של ארגון המכס העולמי',
@@ -437,6 +516,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '30',
     category: 'research',
+    tags: ['europe', 'customs', 'tax'],
     title: {
       en: 'EU Access2Markets',
       he: 'Access2Markets של האיחוד האירופי',
@@ -448,10 +528,12 @@ export const tradingWebsites: TradingWebsite[] = [
       ar: 'بوابة الاتحاد الأوروبي للتعريفات وقواعد المنشأ ومتطلبات البضائع الأوروبية المنشأ.',
     },
     url: 'https://trade.ec.europa.eu/access-to-markets/en/home',
+    iconHost: 'ec.europa.eu',
   },
   {
     id: '31',
     category: 'research',
+    tags: ['turkey', 'statistics', 'suppliers'],
     title: {
       en: 'Turkish Exporters Assembly (TIM)',
       he: 'איגוד היצואנים הטורקי (TIM)',
@@ -467,6 +549,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '32',
     category: 'payments',
+    tags: ['payments', 'currency'],
     title: { en: 'Wise', he: 'Wise', ar: 'Wise' },
     description: {
       en: 'Low-fee international transfers and multi-currency account for paying foreign suppliers.',
@@ -478,6 +561,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '33',
     category: 'payments',
+    tags: ['payments', 'b2b'],
     title: { en: 'Payoneer', he: 'Payoneer', ar: 'Payoneer' },
     description: {
       en: 'Send and receive B2B payments worldwide with local-currency accounts.',
@@ -489,6 +573,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '34',
     category: 'tools',
+    tags: ['currency', 'calculator', 'free'],
     title: {
       en: 'XE Currency Converter',
       he: 'XE ממיר מטבעות',
@@ -504,6 +589,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '35',
     category: 'tools',
+    tags: ['units', 'calculator', 'free'],
     title: {
       en: 'UnitConverters.net',
       he: 'UnitConverters.net',
@@ -519,6 +605,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '36',
     category: 'tools',
+    tags: ['translation', 'communication'],
     title: { en: 'DeepL Translator', he: 'DeepL מתרגם', ar: 'DeepL المترجم' },
     description: {
       en: 'Translate supplier emails, contracts and specs from Chinese, Turkish or German.',
@@ -530,6 +617,7 @@ export const tradingWebsites: TradingWebsite[] = [
   {
     id: '37',
     category: 'tools',
+    tags: ['calculator', 'sea_freight', 'free'],
     title: { en: 'CBM Calculator', he: 'מחשבון CBM', ar: 'حاسبة CBM' },
     description: {
       en: 'Calculate cubic meters, volumetric weight and 20ft/40ft container fit.',
