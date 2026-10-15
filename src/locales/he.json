@@ -159,6 +159,13 @@
     "total_including_vat": "סה״כ כולל מע״מ",
     "saved_to_history": "נשמר בהיסטוריה",
     "share_error": "ייצוא PDF נכשל",
+    "currency": {
+      "label": "הצג סכומים ב־",
+      "ILS": "שקל",
+      "USD": "דולר",
+      "EUR": "אירו",
+      "converted_note": "הסכומים מוצגים ב{{currency}}, לפי שערי החליפין של חישוב זה. עברו לשקל כדי לראות את הנוסחאות."
+    },
     "charts": {
       "title": "סיכום חזותי",
       "composition": "ממה מורכב הסכום",

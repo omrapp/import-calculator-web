@@ -1,6 +1,7 @@
 import type {
   CalculationLink,
   CalculationResult,
+  Currency,
 } from '@/features/calc-engine';
 import {
   directionOf,
@@ -10,6 +11,8 @@ import {
   type Language,
 } from '@/features/i18n';
 import {
+  convertMoney,
+  displayStepValue,
   formatFormula,
   formatStepValue,
   toBreakdownSections,
@@ -48,10 +51,19 @@ export function buildPdfModel(
   result: CalculationResult,
   language: Language,
   t: T,
+  currency: Currency = 'ILS',
   now = new Date(),
 ): PdfModel {
   const { totals } = result;
-  const money = (amount: number) => formatMoney(amount, 'ILS', language);
+  const { rates } = link.input;
+  const money = (amount: number, from: Currency = 'ILS') =>
+    formatMoney(
+      convertMoney(amount, from, currency, rates),
+      currency,
+      language,
+    );
+  // Formulas only add up in their own units, so the ₪ PDF alone has them.
+  const showFormulas = currency === 'ILS';
   const { source, lastUpdate } = link.rates;
   const rateSource =
     source === 'manual' || !lastUpdate
@@ -90,7 +102,11 @@ export function buildPdfModel(
   if (totals.airFreightUsd !== undefined)
     summary.push({
       label: t('result.steps.total_air_freight'),
-      value: formatMoney(totals.airFreightUsd, 'USD', language),
+      // In the ₪ view the $ total stays in $, as the carrier bills it.
+      value:
+        currency === 'ILS'
+          ? formatMoney(totals.airFreightUsd, 'USD', language)
+          : money(totals.airFreightUsd, 'USD'),
     });
 
   return {
@@ -102,15 +118,26 @@ export function buildPdfModel(
     subtitle: t(
       link.input.mode === 'standard' ? 'nav.standard' : 'nav.air_shipment',
     ),
-    ratesNote: `${rateSource} · ${ratesUsed}`,
+    ratesNote: showFormulas
+      ? `${rateSource} · ${ratesUsed}`
+      : `${rateSource} · ${ratesUsed} · ${t('result.currency.converted_note', {
+          currency: t(`result.currency.${currency}`),
+        })}`,
     createdOn: formatDate(now.toISOString(), language),
     summary,
     sections: toBreakdownSections(result.steps, t).map(section => ({
       title: section.title,
       rows: section.steps.map(step => ({
         label: stepLabelText(step.label, t),
-        value: formatStepValue(step.value, language, t),
-        formula: step.formula && formatFormula(step.formula, language, t),
+        value: formatStepValue(
+          displayStepValue(step.value, currency, rates),
+          language,
+          t,
+        ),
+        formula:
+          showFormulas && step.formula
+            ? formatFormula(step.formula, language, t)
+            : undefined,
         emphasis: step.kind === 'row' ? undefined : step.kind,
       })),
     })),

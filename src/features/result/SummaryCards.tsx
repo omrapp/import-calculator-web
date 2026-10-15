@@ -6,15 +6,18 @@ import type { CalculationTotals } from '@/features/calc-engine';
 import { formatMoney, formatNumber, useLanguage } from '@/features/i18n';
 import type { Tone } from '@/lib/tone';
 
+import { useDisplayMoney } from './currency';
+
 export function SummaryCards({ totals }: { totals: CalculationTotals }) {
   const { t } = useTranslation();
   const { language } = useLanguage();
-  const money = (amount: number) => formatMoney(amount, 'ILS', language);
+  const { currency, convert } = useDisplayMoney();
+  const money = (amount: number) => formatMoney(amount, currency, language);
 
   const cards: { label: string; value: string; tone: Tone }[] = [
     {
       label: t('result.landed_cost'),
-      value: money(totals.landedCost),
+      value: money(convert(totals.landedCost)),
       tone: 'factors',
     },
     ...(totals.importFactor !== null
@@ -48,7 +51,11 @@ export function SummaryCards({ totals }: { totals: CalculationTotals }) {
       ? [
           {
             label: t('result.steps.total_air_freight'),
-            value: formatMoney(totals.airFreightUsd, 'USD', language),
+            // In the ₪ view the $ total stays in $, as the carrier bills it.
+            value:
+              currency === 'ILS'
+                ? formatMoney(totals.airFreightUsd, 'USD', language)
+                : money(convert(totals.airFreightUsd, 'USD')),
             tone: 'air' as const,
           },
         ]
@@ -77,7 +84,7 @@ export function SummaryCards({ totals }: { totals: CalculationTotals }) {
           <dd className="mt-1 text-figure tabular-nums">
             <bdi dir="ltr">
               <AnimatedNumber
-                value={totals.totalIncludingVat}
+                value={convert(totals.totalIncludingVat)}
                 format={money}
                 countUp
               />

@@ -159,6 +159,13 @@
     "total_including_vat": "Total Including VAT",
     "saved_to_history": "Saved to History",
     "share_error": "Failed to export PDF",
+    "currency": {
+      "label": "Show amounts in",
+      "ILS": "Shekel",
+      "USD": "Dollar",
+      "EUR": "Euro",
+      "converted_note": "Amounts shown in {{currency}}, converted at this calculation's exchange rates. Switch to Shekel to see the formulas."
+    },
     "charts": {
       "title": "Visual summary",
       "composition": "What makes up the total",

@@ -10,6 +10,7 @@ import { createMemoryRouter, RouterProvider } from 'react-router';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import {
+  calculate,
   type CalculationInput,
   type CalculationLink,
   decodeCalculation,
@@ -17,6 +18,9 @@ import {
 } from '@/features/calc-engine';
 import golden from '@/features/calc-engine/__fixtures__/rn-golden.json';
 import { CalculatorForm } from '@/features/calculator-ui';
+import { formatMoney } from '@/features/i18n';
+
+import { convertMoney, urlWithCurrency } from './currency';
 
 import { ResultView } from './ResultView';
 
@@ -235,7 +239,9 @@ describe('ResultView', () => {
     await act(async () => {
       fireEvent.click(screen.getByRole('button', { name: 'Copy link' }));
     });
-    expect(writeText).toHaveBeenCalledWith(window.location.href);
+    expect(writeText).toHaveBeenCalledWith(
+      urlWithCurrency(window.location.href, 'ILS'),
+    );
     expect(
       screen.getByRole('button', { name: 'Link copied' }),
     ).toBeInTheDocument();
@@ -260,5 +266,60 @@ describe('ResultView', () => {
       expect(screen.getByRole('status')).toHaveTextContent('Entered manually'),
     );
     expect(screen.getByDisplayValue('Port storage')).toBeInTheDocument();
+  });
+});
+
+describe('ResultView currency', () => {
+  const input = fixture('everything combined');
+  const { totals } = calculate(input);
+  const totalIn = (currency: 'USD' | 'EUR') =>
+    formatMoney(
+      convertMoney(totals.totalIncludingVat, 'ILS', currency, input.rates),
+      currency,
+      'en',
+    );
+  const summary = () => within(screen.getByRole('region', { name: 'Summary' }));
+
+  it('switches every amount to Dollar, keeps it in the link and remembers it', async () => {
+    const router = renderResult(`?c=${linkFor(input)}`);
+    expect(summary().getByText('₪132,159.87')).toBeInTheDocument();
+    expect(screen.queryByTestId('converted-note')).not.toBeInTheDocument();
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole('radio', { name: 'Dollar' }));
+    });
+
+    expect(summary().getByText(totalIn('USD'))).toBeInTheDocument();
+    expect(summary().queryByText(/₪/)).not.toBeInTheDocument();
+    const breakdown = within(
+      screen.getByRole('region', { name: 'Step-by-step breakdown' }),
+    );
+    expect(breakdown.queryByText(/₪/)).not.toBeInTheDocument();
+    expect(screen.getByTestId('converted-note')).toHaveTextContent(
+      'Amounts shown in Dollar',
+    );
+    const charts = within(
+      screen.getByRole('region', { name: 'Visual summary' }),
+    );
+    expect(charts.queryByText(/₪/)).not.toBeInTheDocument();
+    expect(new URLSearchParams(router.state.location.search).get('cur')).toBe(
+      'USD',
+    );
+    expect(localStorage.getItem('result-currency')).toBe('USD');
+  });
+
+  it('opens a shared link in its currency', () => {
+    renderResult(`?c=${linkFor(input)}&cur=EUR`);
+    expect(summary().getByText(totalIn('EUR'))).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: 'Euro' })).toHaveAttribute(
+      'aria-checked',
+      'true',
+    );
+  });
+
+  it('uses the remembered currency when the link has none', () => {
+    localStorage.setItem('result-currency', 'USD');
+    renderResult(`?c=${linkFor(input)}`);
+    expect(summary().getByText(totalIn('USD'))).toBeInTheDocument();
   });
 });

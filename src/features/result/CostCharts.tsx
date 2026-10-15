@@ -27,6 +27,7 @@ import {
   toWeightComparison,
   type WeightComparison,
 } from './chartData';
+import { useDisplayMoney } from './currency';
 import { PART_TONE } from './tones';
 
 const percentOf = (value: number, total: number) =>
@@ -34,9 +35,12 @@ const percentOf = (value: number, total: number) =>
 
 function useFormatters() {
   const { language } = useLanguage();
+  // Chart data stays in ₪ (shares and bar sizes don't change); only labels convert.
+  const { currency, convert } = useDisplayMoney();
   return {
-    money: (amount: number) => formatMoney(amount, 'ILS', language),
-    compact: (amount: number) => formatCompactMoney(amount, 'ILS', language),
+    money: (amount: number) => formatMoney(convert(amount), currency, language),
+    compact: (amount: number) =>
+      formatCompactMoney(convert(amount), currency, language),
     percent: (share: number) => `${formatNumber(share * 100, language, 1, 0)}%`,
     kg: (amount: number) => formatNumber(amount, language),
   };
